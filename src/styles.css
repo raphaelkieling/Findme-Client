@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body{
+    background: url('./assets/images/p6.png');
+}
+
+.purple{
+    background: #9b59b6 !important;
+}
+
+.nav-btn{
+    border-radius: 25px !important;
+}
+
+.icon-categoria{
+    font-size: 70px
+};
