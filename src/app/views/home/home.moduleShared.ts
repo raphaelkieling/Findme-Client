@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 // Materialize
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         NavbarModule,
         RouterModule,
         MatInputModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatStepperModule
     ],
     declarations: [
         HomeComponent,

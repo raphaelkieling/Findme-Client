@@ -15,3 +15,7 @@ body{
 .icon-categoria{
     font-size: 70px
 };
+
+.mat-step-icon {
+    background: red !important;
+}

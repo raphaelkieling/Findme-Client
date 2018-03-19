@@ -9,9 +9,9 @@
 
 <section class="container">
   <h4>Virar Profissional</h4>
-  <div class="card">
-    <div class="card-content">
-      <span class="card-title">Selecione sua categoria</span>
+  <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
+    <mat-step>
+      <ng-template matStepLabel>Selecione sua categoria</ng-template>
       <div class="row">
         <div class="col s6 m2">
           <div class="card-panel purple center">
@@ -50,65 +50,64 @@
         </div>
 
       </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <span class="card-title">Informações Pessoais</span>
+      <div>
+        <button mat-button matStepperNext class="btn purple right">Pronto!</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Informações Pessoais</ng-template>
       <form action="">
         <div class="row">
           <div class="input-field col s4">
-              <input>
-              <label class="active">Nome</label>
+            <input>
+            <label class="active">Nome</label>
           </div>
 
           <div class="input-field col s4">
-              <input>
-              <label class="active">Sobrenome</label>
+            <input>
+            <label class="active">Sobrenome</label>
           </div>
 
           <div class="input-field col s4">
-              <input type="date">
-              <label class="active">Nascimentp</label>
+            <input type="date">
+            <label class="active">Nascimentp</label>
           </div>
         </div>
 
         <div class="row">
           <div class="input-field col s12 m6">
-              <input>
-              <label class="active">CPF</label>
+            <input>
+            <label class="active">CPF</label>
           </div>
 
           <div class="input-field col s12 m6">
-              <input>
-              <label class="active">CNPJ</label>
+            <input>
+            <label class="active">CNPJ</label>
           </div>
         </div>
 
         <div class="row">
           <div class="input-field col s12 m4">
-              <input>
-              <label class="active">Telefone</label>
+            <input>
+            <label class="active">Telefone</label>
           </div>
 
           <div class="input-field col s12 m4">
-              <input>
-              <label class="active">Senha</label>
+            <input>
+            <label class="active">Senha</label>
           </div>
 
           <div class="input-field col s12 m4">
-              <input>
-              <label class="active">Digite a mesma senha</label>
+            <input>
+            <label class="active">Digite a mesma senha</label>
           </div>
         </div>
       </form>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <span class="card-title">Endereço</span>
+      <button mat-button matStepperPrevious class="btn white purple-text">Voltar</button>
+      <button mat-button matStepperNext class="btn purple right">Pronto!</button>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Endereço</ng-template>
       <form>
         <div class="row">
           <div class="input-field col s12 m6">
@@ -156,12 +155,25 @@
           </div>
         </div>
       </form>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col s12">
-      <button class="btn purple right">Vamos lá!</button>
-    </div>
-  </div>
+      <div>
+        <button mat-button matStepperPrevious class="btn white purple-text">Voltar</button>
+        <button mat-button class="btn purple right" (click)="finalizarCadastro()">Terminei!</button>
+      </div>
+    </mat-step>
+    <!-- <mat-step>
+      <ng-template matStepLabel>Localização</ng-template>
+      <div class="row">
+        <div class="col s12 center">
+          <i class="material-icons purple-text" style="font-size:160px">location_on</i>
+          <p class="center">
+            Precisamos que tu ative sua localização para terminar o cadastro
+          </p>
+        </div>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step> -->
+  </mat-horizontal-stepper>
 </section>
