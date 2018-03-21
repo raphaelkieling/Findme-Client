@@ -1,4 +1,3 @@
-import { Profissional } from './../../domain/profissional';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -12,7 +11,6 @@ import { AuthService } from '../../services/auth.service';
 export class EntrarComponent {
   form: FormGroup;
   loading = false;
-  profissional: Profissional = new Profissional();
 
   constructor(
     private loginS: LoginService,

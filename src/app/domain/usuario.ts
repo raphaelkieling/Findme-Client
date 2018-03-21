@@ -8,4 +8,9 @@ export class Usuario extends Base {
     permissoes: Array<Permissao | number>;
     pessoa: Pessoa;
     ativo: boolean;
+
+    constructor(){
+        super();
+        this.pessoa = new Pessoa();
+    }
 }

@@ -7,7 +7,7 @@ export class Pessoa extends Base {
     sobrenome: string;
     nascimento: string;
     cpf: string;
-    cpnj: string;
+    cnpj: string;
     telefone: string;
     tipo: string;
     categorias: Array<Categoria | number>;

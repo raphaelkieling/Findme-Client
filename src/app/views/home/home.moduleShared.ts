@@ -1,3 +1,10 @@
+import { EnderecoModule } from './../../components/endereco/endereco.module';
+import { UsuarioFormModule } from './../../components/usuario-form/usuario-form.module';
+import { InfoPessoalModule } from './../../components/info-pessoal/info-pessoal.module';
+import { ProfissionalService } from './../../services/core/profissional.service';
+import { FormsModule } from '@angular/forms';
+import { PreloaderModule } from './../../components/preloader/preloader.module';
+import { CategoriaService } from './../../services/core/categoria.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
@@ -19,12 +26,21 @@ import { MatStepperModule } from '@angular/material/stepper';
         RouterModule,
         MatInputModule,
         MatDatepickerModule,
-        MatStepperModule
+        MatStepperModule,
+        PreloaderModule,
+        FormsModule,
+        InfoPessoalModule,
+        UsuarioFormModule,
+        EnderecoModule
     ],
     declarations: [
         HomeComponent,
         CadastroProfissionalComponent,
         CadastroClienteComponent
+    ],
+    providers:[
+        CategoriaService,
+        ProfissionalService
     ]
 })
 export class HomeModuleShared { }

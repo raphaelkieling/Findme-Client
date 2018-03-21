@@ -7,160 +7,52 @@
   </li>
 </app-navbar>
 
-<section class="container">
+<section class="container animated fadeInUp">
   <h4>Virar Profissional</h4>
+  <br>
   <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
     <mat-step>
       <ng-template matStepLabel>Selecione sua categoria</ng-template>
+      <br>
       <div class="row">
-        <div class="col s6 m2">
-          <div class="card-panel purple center">
-            <i class="icon-categoria material-icons white-text">build</i>
-          </div>
-        </div>
-
-        <div class="col s6 m2">
-          <div class="card-panel center">
-            <i class="icon-categoria material-icons">explore</i>
-          </div>
-        </div>
-
-        <div class="col s6 m2">
-          <div class="card-panel center">
-            <i class="icon-categoria material-icons">build</i>
-          </div>
-        </div>
-
-        <div class="col s6 m2">
-          <div class="card-panel center">
-            <i class="icon-categoria material-icons">build</i>
-          </div>
-        </div>
-
-        <div class="col s6 m2">
-          <div class="card-panel center">
-            <i class="icon-categoria material-icons">build</i>
-          </div>
-        </div>
-
-        <div class="col s6 m2">
-          <div class="card-panel center">
-            <i class="icon-categoria material-icons">build</i>
-          </div>
+        <div class="col s12">
+          <app-preloader *ngIf="loadingCategorias;else categoriasTemplate"></app-preloader>
+          <ng-template #categoriasTemplate>
+            <div class="row">
+              <div class="col s6 m4 l2" *ngFor="let categoria of categorias">
+                <div class="card-panel center" (click)="selecionarCategoria(categoria.id)" [class.purple]="estaSelecionado(categoria.id)"
+                  [class.white]="!estaSelecionado(categoria.id)">
+                  <i class="icon-categoria material-icons" [class.white-text]="estaSelecionado(categoria.id)">{{categoria.foto}}</i>
+                </div>
+              </div>
+            </div>
+          </ng-template>
         </div>
 
       </div>
       <div>
-        <button mat-button matStepperNext class="btn purple right">Pronto!</button>
+        <button mat-button matStepperNext class="btn purple right">Próximo!</button>
       </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Informações Pessoais</ng-template>
-      <form action="">
-        <div class="row">
-          <div class="input-field col s4">
-            <input>
-            <label class="active">Nome</label>
-          </div>
-
-          <div class="input-field col s4">
-            <input>
-            <label class="active">Sobrenome</label>
-          </div>
-
-          <div class="input-field col s4">
-            <input type="date">
-            <label class="active">Nascimentp</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12 m6">
-            <input>
-            <label class="active">CPF</label>
-          </div>
-
-          <div class="input-field col s12 m6">
-            <input>
-            <label class="active">CNPJ</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12 m4">
-            <input>
-            <label class="active">Telefone</label>
-          </div>
-
-          <div class="input-field col s12 m4">
-            <input>
-            <label class="active">Senha</label>
-          </div>
-
-          <div class="input-field col s12 m4">
-            <input>
-            <label class="active">Digite a mesma senha</label>
-          </div>
-        </div>
-      </form>
-      <button mat-button matStepperPrevious class="btn white purple-text">Voltar</button>
-      <button mat-button matStepperNext class="btn purple right">Pronto!</button>
+      <br>
+      <app-info-pessoal [objeto]="profissional.pessoa"></app-info-pessoal>
+      <button mat-button matStepperNext class="btn purple right">Próximo!</button>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Usuário</ng-template>
+      <br>
+      <app-usuario-form [objeto]="profissional"></app-usuario-form>
+      <button mat-button matStepperNext class="btn purple right">Próximo!</button>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Endereço</ng-template>
-      <form>
-        <div class="row">
-          <div class="input-field col s12 m6">
-            <input>
-            <label class="active">CEP</label>
-          </div>
-
-          <div class="input-field col s12 m6">
-            <input>
-            <label class="active">Bairro</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12 m4">
-            <input>
-            <label class="active">Endereço</label>
-          </div>
-
-          <div class="input-field col s12 m4">
-            <input>
-            <label class="active">Número</label>
-          </div>
-
-          <div class="input-field col s12 m4">
-            <input>
-            <label class="active">Complemento</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12 m4">
-            <input>
-            <label class="active">Cidade</label>
-          </div>
-
-          <div class="input-field col s12 m4">
-            <input>
-            <label class="active">Estado</label>
-          </div>
-
-          <div class="input-field col s12 m4">
-            <input>
-            <label class="active">País</label>
-          </div>
-        </div>
-      </form>
-      <div>
-        <button mat-button matStepperPrevious class="btn white purple-text">Voltar</button>
-        <button mat-button class="btn purple right" (click)="finalizarCadastro()">Terminei!</button>
-      </div>
+      <br>
+      <app-endereco [objeto]="endereco"></app-endereco>
+      <button mat-button matStepperNext class="btn purple right">Próximo!</button>
     </mat-step>
-    <!-- <mat-step>
+    <mat-step>
       <ng-template matStepLabel>Localização</ng-template>
       <div class="row">
         <div class="col s12 center">
@@ -168,12 +60,9 @@
           <p class="center">
             Precisamos que tu ative sua localização para terminar o cadastro
           </p>
+          <button class="center btn purple" (click)="ativarGEO()">ativar</button>
         </div>
       </div>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step> -->
+    </mat-step>
   </mat-horizontal-stepper>
 </section>
