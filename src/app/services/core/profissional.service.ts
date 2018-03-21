@@ -23,6 +23,7 @@ export class ProfissionalService {
                 }
             }
         `;
+
         return this.apollo.mutate({
             mutation, 
             variables: {
