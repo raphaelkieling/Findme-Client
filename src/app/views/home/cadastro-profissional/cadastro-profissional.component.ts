@@ -4,7 +4,7 @@ import { Categoria } from './../../../domain/categoria';
 import { Profissional } from './../../../domain/profissional';
 import { Component, OnInit } from '@angular/core';
 import { ProfissionalService } from '../../../services/core/profissional.service';
-import { ativarGEOLOCATION } from '../../../utils/utils';
+import { ativarGEOLOCATION } from '../../../utils/geolocation';
 @Component({
   selector: 'app-cadastro-profissional',
   templateUrl: './cadastro-profissional.component.html',

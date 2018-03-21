@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class EnderecoService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: Http) { }
 
     pegaEnderecoPorCEP(cep:string){
-        this.http.get(`viacep.com.br/ws/${cep}/json/`);
+        return this.http.get(`https://viacep.com.br/ws/${cep}/json/`).map(res => JSON.parse(res['_body']));
     }
 
 }

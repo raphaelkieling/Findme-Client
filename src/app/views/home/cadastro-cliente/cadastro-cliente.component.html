@@ -1,12 +1,45 @@
 <app-navbar>
-  <li>
-    <a href="badges.html">Como funciona?</a>
-  </li>
-  <li>
-    <a [routerLink]="['/entrar']" class="nav-btn btn waves-effect waves-light purple">JÁ TENHO UMA CONTA</a>
-  </li>
-</app-navbar>
-
-<p>
-  cadastro-cliente works!
-</p>
+    <li>
+      <a href="badges.html">Como funciona?</a>
+    </li>
+    <li>
+      <a [routerLink]="['/entrar']" class="nav-btn btn waves-effect waves-light purple">JÁ TENHO UMA CONTA</a>
+    </li>
+  </app-navbar>
+  
+  <section class="container animated fadeInUp">
+    <h4>Virar Cliente</h4>
+    <br>
+    <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
+      <mat-step>
+        <ng-template matStepLabel>Informações Pessoais</ng-template>
+        <br>
+        <app-info-pessoal [objeto]="cliente.pessoa"></app-info-pessoal>
+        <button mat-button matStepperNext class="btn purple right">Próximo!</button>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Usuário</ng-template>
+        <br>
+        <app-usuario-form [objeto]="cliente"></app-usuario-form>
+        <button mat-button matStepperNext class="btn purple right">Próximo!</button>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Endereço</ng-template>
+        <br>
+        <app-endereco [objeto]="endereco"></app-endereco>
+        <button mat-button matStepperNext class="btn purple right">Próximo!</button>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Localização</ng-template>
+        <div class="row">
+          <div class="col s12 center">
+            <i class="material-icons purple-text" style="font-size:160px">location_on</i>
+            <p class="center">
+              Precisamos que tu ative sua localização para terminar o cadastro
+            </p>
+            <button class="center btn purple" (click)="ativarGEO()">ativar</button>
+          </div>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </section>

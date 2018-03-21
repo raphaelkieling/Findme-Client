@@ -1,3 +1,4 @@
+import { EnderecoService } from './../../services/core/endereco.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -7,11 +8,23 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class EnderecoComponent implements OnInit {
 
-  @Input() objeto:any;
+  @Input() objeto: any;
 
-  constructor() { }
+  constructor(private enderecoService: EnderecoService) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  pegaEnderecoPeloCep(cep: string) {
+    this.enderecoService
+      .pegaEnderecoPorCEP(cep)
+      .subscribe(res=>{
+        this.objeto.bairro = res['bairro']
+        this.objeto.cep = res['cep']
+        this.objeto.complemento = res['complemento']
+        this.objeto.cidade = res['localidade']
+        this.objeto.logradouro = res['logradouro']
+        this.objeto.estado = res['uf']
+      })
   }
 
 }

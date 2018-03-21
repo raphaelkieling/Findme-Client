@@ -12,6 +12,7 @@ export class Pessoa extends Base {
     tipo: string;
     categorias: Array<Categoria | number>;
     enderecos: Array<Endereco | number>;
+    observacao: string;
 
     constructor() {
         super();

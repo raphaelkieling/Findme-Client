@@ -1,7 +1,7 @@
 <form>
     <div class="row">
       <div class="input-field col s12 m6">
-        <input id="cep" name="cep" [(ngModel)]="objeto.cep">
+        <input id="cep" name="cep" [(ngModel)]="objeto.cep" (blur)="pegaEnderecoPeloCep(objeto.cep)">
         <label class="active">CEP</label>
       </div>
 
