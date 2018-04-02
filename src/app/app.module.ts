@@ -44,9 +44,7 @@ export class AppModule {
     httpLink: HttpLink
   ) {
     apollo.create({
-      // By default, this client will send queries to the
-      // `/graphql` endpoint on the same host
-      link: httpLink.create({ uri: 'http://localhost:3000/graphql' }),
+      link: httpLink.create({ uri: 'https://thawing-bastion-86753.herokuapp.com/graphql' }),
       cache: new InMemoryCache()
     });
   }

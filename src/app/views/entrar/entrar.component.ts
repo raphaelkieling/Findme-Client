@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-entrar',
@@ -15,7 +16,8 @@ export class EntrarComponent {
   constructor(
     private loginS: LoginService,
     private formB: FormBuilder,
-    private authS: AuthService
+    private authS: AuthService,
+    private router: Router
   ) {
     this.buildForm();
   }
@@ -32,7 +34,7 @@ export class EntrarComponent {
     this.loginS.login(this.form.value).subscribe((res) => {
       this.loading = false;
       this.authS.token = res.data.createToken.token;
-      console.log(this.authS.tokenDecoded);
+      this.router.navigate(['painel-controle']);
     }, err => {
       console.log('Não foi possível fazer login');
       this.loading = false;

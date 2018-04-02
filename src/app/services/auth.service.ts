@@ -12,6 +12,10 @@ export class AuthService {
     return sessionStorage.getItem('token_');
   }
 
+  public tokenRemove(){
+    sessionStorage.removeItem('token_');
+  }
+
   public get tokenDecoded() {
     const jwtH = new JwtHelper();
     return jwtH.decodeToken(this.token);

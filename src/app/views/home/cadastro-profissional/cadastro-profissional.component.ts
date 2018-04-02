@@ -13,38 +13,11 @@ import { ativarGEOLOCATION } from '../../../utils/geolocation';
   export class CadastroProfissionalComponent implements OnInit {
   profissional: Profissional = new Profissional();
   endereco: Endereco = new Endereco();
-  // Categorias
-  categorias: Categoria[] = [];
-  loadingCategorias = false;
-
   constructor(
-    public categoriaS: CategoriaService,
     private profissionalS: ProfissionalService
   ) { }
 
-  ngOnInit() {
-    this.loadCategorias();
-  }
-
-  loadCategorias() {
-    this.loadingCategorias = true;
-    this.categoriaS.getAll().subscribe((res) => {
-      this.loadingCategorias = false;
-      this.categorias = res.categorias;
-    })
-  }
-
-  estaSelecionado(id) {
-    return this.profissional.pessoa.categorias.filter(idCategoria => idCategoria === id).length > 0;
-  }
-
-  selecionarCategoria(id) {
-    if (this.profissional.pessoa.categorias.includes(id)) {
-      this.profissional.pessoa.categorias = this.profissional.pessoa.categorias.filter(idCategoria => idCategoria !== id);
-    } else {
-      this.profissional.pessoa.categorias.push(id);
-    }
-  }
+  ngOnInit() {}
 
   submit() {
     this.profissional.pessoa.enderecos.push(this.endereco);

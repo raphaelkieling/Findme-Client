@@ -1,0 +1,37 @@
+<div class="sidenav-container">
+  <!-- <img class="sidenav-image" src="https://media1.proteste.org.br/images/20AB74085120F0C9A855B3D35F5017D535F3A987/light.png" -->
+  <!-- alt=""> -->
+  <div [routerLink]="['principal']" routerLinkActive="active" class="sidenav-item">
+    <i class="material-icons">home</i>
+    <span class="text">Principal</span>
+  </div>
+  <div class="sidenav-item">
+    <i class="material-icons">view_list</i>
+    <span class="text">Pedidos</span>
+  </div>
+  <div class="sidenav-item">
+    <i class="material-icons">question_answer</i>
+    <span class="text">Conversar</span>
+  </div>
+  <div class="sidenav-item">
+      <i class="material-icons">view_module</i>
+    <span class="text">Categorias</span>
+  </div>
+  <div class="sidenav-item">
+    <i class="material-icons">info</i>
+    <span class="text">Tenho dúvidas</span>
+  </div>
+
+  <!-- Parte de baixo -->
+
+  <div class="jump-to-bottom">
+    <div class="sidenav-item">
+      <i class="material-icons">account_circle</i>
+      <span class="text">Conta</span>
+    </div>
+    <div class="sidenav-item" (click)="logout()">
+      <i class="material-icons">power_settings_new</i>
+      <span class="text">Sair</span>
+    </div>
+  </div>
+</div>

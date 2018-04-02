@@ -1,3 +1,4 @@
+import { CategoriasSelectModule } from './../../components/categorias-select/categorias-select.module';
 import { EnderecoModule } from './../../components/endereco/endereco.module';
 import { UsuarioFormModule } from './../../components/usuario-form/usuario-form.module';
 import { InfoPessoalModule } from './../../components/info-pessoal/info-pessoal.module';
@@ -31,7 +32,8 @@ import { MatStepperModule } from '@angular/material/stepper';
         FormsModule,
         InfoPessoalModule,
         UsuarioFormModule,
-        EnderecoModule
+        EnderecoModule,
+        CategoriasSelectModule
     ],
     declarations: [
         HomeComponent,

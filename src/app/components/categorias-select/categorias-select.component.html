@@ -1,0 +1,17 @@
+<div class="row">
+
+    <div class="col s12">
+      <app-preloader *ngIf="loadingCategorias;else categoriasTemplate"></app-preloader>
+      <ng-template #categoriasTemplate>
+        <div class="row">
+          <div class="col s6 m4 l2" *ngFor="let categoria of categorias">
+            <div class="card-panel center" (click)="selecionarCategoria(categoria.id)" [class.purple]="estaSelecionado(categoria.id)"
+              [class.white]="!estaSelecionado(categoria.id)">
+              <i class="icon-categoria material-icons" [class.white-text]="estaSelecionado(categoria.id)">{{categoria.foto}}</i>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+
+  </div>
