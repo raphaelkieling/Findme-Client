@@ -1,0 +1,23 @@
+<app-preloader *ngIf="loading;else usuarioTemplate"></app-preloader>
+
+<ng-template #usuarioTemplate>
+  <mat-card class="animated fadeIn">
+    {{usuario | json}}
+    <app-usuario-form [objeto]="usuario"></app-usuario-form>
+  </mat-card>
+  
+  <br>
+  
+  <mat-card class="animated fadeIn">
+    <app-info-pessoal [objeto]="usuario.pessoa"></app-info-pessoal>
+  </mat-card>
+  
+  <br>
+  
+  <mat-card class="animated fadeIn">
+    <app-endereco [objeto]="usuario.pessoa.enderecos[0]"></app-endereco>
+  </mat-card>
+  <br>
+  <button class="btn btn-primary purple right" (click)="submit()">Salvar</button>
+  <br>
+</ng-template>

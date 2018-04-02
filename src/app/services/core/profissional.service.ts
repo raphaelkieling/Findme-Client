@@ -25,9 +25,31 @@ export class ProfissionalService {
         `;
 
         return this.apollo.mutate({
-            mutation, 
+            mutation,
             variables: {
                 criarProfissionalInput: profissional
+            }
+        });
+    }
+
+    editarProfissional(profissional: Profissional): Observable<any> {
+        const mutation = gql`
+            mutation editarProfissional($editaProfissionalParams: editaProfissionalInput!){
+                editarProfissional(input: $editaProfissionalParams){
+                    usuario
+                    pessoa{
+                        nome
+                        sobrenome
+                    }
+                }
+            }
+
+        `;
+
+        return this.apollo.mutate({
+            mutation,
+            variables: {
+                editaProfissionalParams: profissional
             }
         });
     }

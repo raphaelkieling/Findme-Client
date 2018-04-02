@@ -13,6 +13,7 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { AuthService } from './services/auth.service';
 import { HttpModule } from '@angular/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HttpModule } from '@angular/http';
     HttpClientModule,
     ApolloModule,
     HttpLinkModule,
-    HttpModule
+    HttpModule,
+    MatSnackBarModule
   ],
   providers: [
     AuthService,
@@ -39,13 +41,17 @@ import { HttpModule } from '@angular/http';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
   constructor(
     apollo: Apollo,
     httpLink: HttpLink
   ) {
     apollo.create({
       link: httpLink.create({ uri: 'https://thawing-bastion-86753.herokuapp.com/graphql' }),
-      cache: new InMemoryCache()
+      cache: new InMemoryCache({
+        addTypename: false
+      }),
     });
   }
+
 }

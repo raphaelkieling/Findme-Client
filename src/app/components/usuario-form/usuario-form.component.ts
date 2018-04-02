@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Usuario } from '../../domain/usuario';
 
 @Component({
   selector: 'app-usuario-form',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class UsuarioFormComponent implements OnInit {
 
-  @Input() objeto: any;
+  @Input() objeto: Usuario;
   constructor() { }
 
   ngOnInit() {
