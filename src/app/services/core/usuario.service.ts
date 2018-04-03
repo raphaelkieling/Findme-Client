@@ -44,7 +44,12 @@ export class UsuarioService {
             }
         `;
 
-        return this.apollo.query({ query });
+        return this.apollo.watchQuery({
+            query,
+            fetchPolicy: 'network-only'
+        })
+            .valueChanges
+            .map((result: any) => result.data.me);
     }
 
 }

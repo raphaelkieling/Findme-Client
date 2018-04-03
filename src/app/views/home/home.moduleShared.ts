@@ -1,3 +1,4 @@
+import { MatCardModule } from '@angular/material/card';
 import { CategoriasSelectModule } from './../../components/categorias-select/categorias-select.module';
 import { EnderecoModule } from './../../components/endereco/endereco.module';
 import { UsuarioFormModule } from './../../components/usuario-form/usuario-form.module';
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatStepperModule } from '@angular/material/stepper';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
     imports: [
@@ -33,7 +35,9 @@ import { MatStepperModule } from '@angular/material/stepper';
         InfoPessoalModule,
         UsuarioFormModule,
         EnderecoModule,
-        CategoriasSelectModule
+        CategoriasSelectModule,
+        MatCardModule,
+        FlexModule
     ],
     declarations: [
         HomeComponent,

@@ -8,4 +8,6 @@ export class Endereco extends Base {
     numero: string;
     complemento: string;
     bairro: string;
+    cidade:string;
+    estado:string;
 }

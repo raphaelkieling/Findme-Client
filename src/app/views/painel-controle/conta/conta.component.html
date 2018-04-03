@@ -2,22 +2,24 @@
 
 <ng-template #usuarioTemplate>
   <mat-card class="animated fadeIn">
-    {{usuario | json}}
-    <app-usuario-form [objeto]="usuario"></app-usuario-form>
+    <mat-card-title>Usuário</mat-card-title>
+    <app-usuario-form [edit]="true" [objeto]="usuario"></app-usuario-form>
   </mat-card>
-  
+
   <br>
-  
+
   <mat-card class="animated fadeIn">
+    <mat-card-title>Informações</mat-card-title>
     <app-info-pessoal [objeto]="usuario.pessoa"></app-info-pessoal>
   </mat-card>
-  
+
   <br>
-  
+
   <mat-card class="animated fadeIn">
+    <mat-card-title>Endereço</mat-card-title>
     <app-endereco [objeto]="usuario.pessoa.enderecos[0]"></app-endereco>
   </mat-card>
   <br>
-  <button class="btn btn-primary purple right" (click)="submit()">Salvar</button>
+  <button mat-button class="purple white-text right" (click)="submit()">Salvar</button>
   <br>
 </ng-template>

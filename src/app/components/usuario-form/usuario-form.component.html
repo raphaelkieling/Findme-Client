@@ -1,16 +1,16 @@
-<form>
+<form [formGroup]="form">
   <div class="row">
-    <div class="input-field col s12 m4">
-      <input id="usuario" name="usuario" [(ngModel)]="objeto.usuario">
+    <div class="input-field col s12" [class.m4]="!edit">
+      <input id="usuario" formControlName="usuario" name="usuario" [(ngModel)]="objeto.usuario">
       <label class="active">Usuario</label>
     </div>
 
-    <div class="input-field col s12 m4">
-      <input type="text" id="senha" name="senha" [(ngModel)]="objeto.senha">
+    <div *ngIf="!edit" class="input-field col s12 m4">
+      <input type="text" id="senha" name="senha"  formControlName="senha" [(ngModel)]="objeto.senha">
       <label class="active">Senha</label>
     </div>
  
-    <div class="input-field col s12 m4">
+    <div *ngIf="!edit" class="input-field col s12 m4">
       <input>
       <label class="active">Digite a mesma senha</label>
     </div>

@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InfoPessoalComponent } from './info-pessoal.component';
@@ -8,7 +8,8 @@ import { MatInputModule } from '@angular/material/input';
   imports: [
     CommonModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [InfoPessoalComponent],
   exports: [InfoPessoalComponent]

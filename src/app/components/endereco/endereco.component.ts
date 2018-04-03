@@ -1,5 +1,7 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { Endereco } from './../../domain/endereco';
 import { EnderecoService } from './../../services/core/endereco.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-endereco',
@@ -8,16 +10,41 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class EnderecoComponent implements OnInit {
 
-  @Input() objeto: any;
+  @Input() objeto:Endereco;
+  form: FormGroup;
 
-  constructor(private enderecoService: EnderecoService) { }
+  constructor(
+    private enderecoService: EnderecoService,
+    private formB: FormBuilder
+  ) {
+    this.form = this.buildForm();
+    this.listenForm();
+  }
 
   ngOnInit() { }
+  
+  listenForm() {
+    this.form.valueChanges.subscribe(() => {
+    });
+  }
+
+
+  buildForm(): FormGroup {
+    return this.formB.group({
+      cep: [''],
+      bairro: [''],
+      logradouro: [''],
+      numero: [''],
+      complemento: [''],
+      cidade: [''],
+      estado: ['']
+    })
+  }
 
   pegaEnderecoPeloCep(cep: string) {
     this.enderecoService
       .pegaEnderecoPorCEP(cep)
-      .subscribe(res=>{
+      .subscribe(res => {
         this.objeto.bairro = res['bairro']
         this.objeto.cep = res['cep']
         this.objeto.complemento = res['complemento']

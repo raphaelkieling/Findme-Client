@@ -1,3 +1,4 @@
+import { CategoriaModalComponent } from './categoria/categoria-modal/categoria-modal.component';
 import { FormsModule } from '@angular/forms';
 import { CategoriaService } from './../../services/core/categoria.service';
 import { EnderecoModule } from './../../components/endereco/endereco.module';
@@ -13,6 +14,13 @@ import { MatCardModule } from '@angular/material/card';
 import { InfoPessoalModule } from '../../components/info-pessoal/info-pessoal.module';
 import { PreloaderModule } from '../../components/preloader/preloader.module';
 import { ProfissionalService } from '../../services/core/profissional.service';
+import { MatTableModule } from '@angular/material/table';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MzInputModule } from 'ng2-materialize'
 
 @NgModule({
   imports: [
@@ -25,9 +33,24 @@ import { ProfissionalService } from '../../services/core/profissional.service';
     MatCardModule,
     PreloaderModule,
     EnderecoModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    MzInputModule
   ],
-  declarations: [PainelControleComponent, PrincipalComponent, ContaComponent],
+  declarations: [
+    PainelControleComponent,
+    PrincipalComponent,
+    ContaComponent,
+    CategoriaComponent,
+    CategoriaModalComponent
+  ],
+  entryComponents: [
+    CategoriaModalComponent
+  ],
   providers: [CategoriaService, ProfissionalService]
 })
 export class PainelControleModuleShared { }

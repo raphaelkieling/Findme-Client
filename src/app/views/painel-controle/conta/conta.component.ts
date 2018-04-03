@@ -1,7 +1,9 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProfissionalService } from './../../../services/core/profissional.service';
 import { Usuario } from './../../../domain/usuario';
 import { UsuarioService } from './../../../services/core/usuario.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'apollo-client/util/Observable';
 
 @Component({
   selector: 'app-conta',
@@ -10,12 +12,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContaComponent implements OnInit {
 
-  usuario: Usuario = null;
+  usuario: any = {};
   loading = false;
+  usuarioSubscription: Subscription;
+  usuarioEditarSubscribe: Subscription;
 
   constructor(
     private usuarioS: UsuarioService,
-    private profissionalS: ProfissionalService
+    private profissionalS: ProfissionalService,
+    private snack: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -26,22 +31,36 @@ export class ContaComponent implements OnInit {
   private carregaUsuario() {
     this.loading = true;
 
-    this.usuarioS
+    this.usuarioSubscription = this.usuarioS
       .me()
-      .subscribe((res) => {
-        let { data } = res;
-        let { me }: { me: Usuario; } = data;
-
-        this.usuario = Object.assign({}, me);
+      .subscribe(res => {
+        this.usuario = JSON.parse(JSON.stringify(res));
         this.loading = false;
-      });
+        this.usuarioSubscription.unsubscribe();
+      },
+        err => {
+          const snack = this.snack.open('Não foi possível carregar o usuário', 'Tentar novamente', {
+            duration: 2000
+          });
+
+          snack.onAction().subscribe(() => {
+            this.carregaUsuario();
+          });
+
+          this.usuarioSubscription.unsubscribe();
+        });
   }
 
   submit() {
-    this.profissionalS
+    this.usuarioEditarSubscribe = this.profissionalS
       .editarProfissional(this.usuario)
       .subscribe((res) => {
-        console.log(res)
-      })
+        this.usuarioEditarSubscribe.unsubscribe();
+        this.snack.open('Usuário salvo com sucesso!', 'Uhul!');
+      },
+        err => {
+          this.usuarioEditarSubscribe.unsubscribe();
+          this.snack.open('Não foi possível salvar o usuário, tenta mais uma vez', 'Tentar');
+        })
   }
 }

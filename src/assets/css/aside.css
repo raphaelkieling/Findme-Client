@@ -6,7 +6,7 @@
     background:#9B59B6;
     color:white;
     left:0px;
-    z-index:10000;
+    z-index:999;
   }
 
   .sidenav-item.active{

@@ -1,0 +1,11 @@
+<form>
+  <mz-input-container>
+    <input mz-input [label]="'Nome'" id="nome" name="nome" type="text" [(ngModel)]="objeto.nome">
+  </mz-input-container>
+
+  <mz-input-container>
+    <input mz-input [label]="'Ícone'" id="foto" name="foto" type="text" [(ngModel)]="objeto.foto">
+  </mz-input-container>
+
+  <button mat-button class="purple white-text right" (click)="submit()">Salvar</button>
+</form>

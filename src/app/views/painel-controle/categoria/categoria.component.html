@@ -1,3 +1,38 @@
-<p>
-  categoria works!
-</p>
+<button mat-button class="purple white-text right" (click)="abrirAdicionarModal()">Adicionar</button>
+<br>
+<br>
+<mat-card style="padding-bottom:0 !important;">
+  <div class="input-field">
+    <input (keyup)="filter($event.target.value)">
+    <label class="active">Filtro</label>
+  </div>
+</mat-card>
+<br>
+<mat-card>
+  <app-preloader *ngIf="loadingCategorias;else table"></app-preloader>
+
+  <ng-template #table>
+    <mat-table [dataSource]="categorias">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nome">
+        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nome}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <i class="material-icons">edit</i>
+          <i class="material-icons">delete_forever</i>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
+    </mat-table>
+  </ng-template>
+</mat-card>

@@ -1,3 +1,4 @@
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { InterceptorService } from './services/interceptor.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,7 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { AuthService } from './services/auth.service';
 import { HttpModule } from '@angular/http';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ApolloModule,
     HttpLinkModule,
     HttpModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAhDpLlU6jqo4aWEP26jG3RE_-OFktIyvQ'
+    })
   ],
   providers: [
     AuthService,
@@ -41,7 +45,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
   constructor(
     apollo: Apollo,
     httpLink: HttpLink
