@@ -56,7 +56,9 @@ export class ContaComponent implements OnInit {
       .editarProfissional(this.usuario)
       .subscribe((res) => {
         this.usuarioEditarSubscribe.unsubscribe();
-        this.snack.open('Usuário salvo com sucesso!', 'Uhul!');
+        this.snack.open('Usuário salvo com sucesso!', 'Uhul!', {
+          duration: 3000
+        });
       },
         err => {
           this.usuarioEditarSubscribe.unsubscribe();
