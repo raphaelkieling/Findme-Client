@@ -31,3 +31,7 @@ body{
 agm-map {
     height: 300px;
 }
+
+.aux-pointer{
+    cursor: pointer;
+}
