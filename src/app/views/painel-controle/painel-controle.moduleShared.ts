@@ -1,3 +1,4 @@
+import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AgmCoreModule } from '@agm/core';
 import { DeleteModule } from './../../components/delete/delete.module';
 import { CategoriaModalComponent } from './categoria/categoria-modal/categoria-modal.component';
@@ -57,7 +58,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     PrincipalComponent,
     ContaComponent,
     CategoriaComponent,
-    CategoriaModalComponent
+    CategoriaModalComponent,
+    UsuariosComponent
   ],
   entryComponents: [
     CategoriaModalComponent,

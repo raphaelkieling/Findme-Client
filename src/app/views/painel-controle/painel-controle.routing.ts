@@ -4,6 +4,7 @@ import { PrincipalComponent } from './principal/principal.component';
 import { AsideComponent } from './../../components/aside/aside.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PainelControleComponent } from './painel-controle.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 const routes: Routes = [
     {
@@ -11,7 +12,8 @@ const routes: Routes = [
             { path: '', redirectTo: 'principal', pathMatch: 'full' },
             { path: 'principal', component: PrincipalComponent },
             { path: 'conta', component: ContaComponent },
-            { path: 'categorias', component: CategoriaComponent }
+            { path: 'categorias', component: CategoriaComponent },
+            { path: 'usuarios', component: UsuariosComponent }
         ]
     },
 ];

@@ -1,7 +1,6 @@
 <app-preloader *ngIf="loading;else usuarioTemplate"></app-preloader>
-
 <ng-template #usuarioTemplate>
-
+  {{usuario | json}}
   <mat-expansion-panel class="animated fadeInUp">
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -27,7 +26,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <app-categorias-select [preselects]="usuario.pessoa.categorias"></app-categorias-select>
+    <app-categorias-select [preselects]="usuario.pessoa.categorias" (selecteds)="usuario.pessoa.categorias = $event"></app-categorias-select>
   </mat-expansion-panel>
 
   <br>
