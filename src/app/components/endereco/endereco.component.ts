@@ -2,6 +2,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Endereco } from './../../domain/endereco';
 import { EnderecoService } from './../../services/core/endereco.service';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-endereco',
@@ -10,19 +11,20 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 })
 export class EnderecoComponent implements OnInit {
 
-  @Input() objeto:Endereco;
+  @Input() objeto: Endereco;
   form: FormGroup;
 
   constructor(
     private enderecoService: EnderecoService,
-    private formB: FormBuilder
+    private formB: FormBuilder,
+    private snack:MatSnackBar
   ) {
     this.form = this.buildForm();
     this.listenForm();
   }
 
   ngOnInit() { }
-  
+
   listenForm() {
     this.form.valueChanges.subscribe(() => {
     });
@@ -51,7 +53,12 @@ export class EnderecoComponent implements OnInit {
         this.objeto.cidade = res['localidade']
         this.objeto.logradouro = res['logradouro']
         this.objeto.estado = res['uf']
-      })
+      },
+        err => {
+          this.snack.open('Não achamos nenhum CEP correspondente :(', 'Aff!', {
+            duration: 6000
+          });
+        })
   }
 
 }

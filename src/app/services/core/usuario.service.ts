@@ -16,6 +16,7 @@ export class UsuarioService {
                 me{
                     usuario
                     pessoa{
+                      id
                       nome
                       sobrenome
                       nascimento

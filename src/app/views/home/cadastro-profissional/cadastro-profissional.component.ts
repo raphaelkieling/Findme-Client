@@ -30,7 +30,7 @@ export class CadastroProfissionalComponent implements OnInit {
       .criarProfissional(this.profissional)
       .subscribe(() => {
         this.snack.open('O cadastro ficou demais, que tal entrar agora?', 'SIM!', {
-          duration: 3000
+          duration: 6000
         });
 
         this.router.navigate(['/entrar']);

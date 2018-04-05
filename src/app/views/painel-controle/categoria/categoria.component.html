@@ -1,7 +1,9 @@
-<button mat-button class="purple white-text right" (click)="abrirAdicionarModal()">Adicionar</button>
+<button mat-button class="purple white-text right" (click)="abrirAdicionarModal()">
+    Adicionar <i class="material-icons">add</i>
+</button>
 <br>
 <br>
-<mat-card style="padding-bottom:0 !important;">
+<mat-card style="padding-bottom:0 !important;" class="animated fadeInDown">
   <div class="input-field">
     <input (keyup)="filter($event.target.value)">
     <label class="active">Filtro</label>
@@ -26,8 +28,8 @@
       <ng-container matColumnDef="acoes">
         <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <i class="material-icons">edit</i>
-          <i class="material-icons">delete_forever</i>
+          <i class="material-icons" (click)="abrirEditarModal(element)">edit</i>
+          <i class="material-icons" (click)="abrirDeleteModal(element)">delete_forever</i>
         </mat-cell>
       </ng-container>
 

@@ -12,7 +12,8 @@ export class CategoriasSelectComponent implements OnInit {
 
   categorias: Categoria[] = [];
   loadingCategorias = false;
-  categoriasSelecionadas: Categoria[] = []
+  @Input('preselects') categoriasSelecionadas: Categoria[] = []
+  
   @Output() selecteds = new EventEmitter<Categoria[]>();
 
   constructor(
@@ -20,6 +21,7 @@ export class CategoriasSelectComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.categoriasSelecionadas);
     this.loadCategorias();
   }
 
@@ -34,14 +36,16 @@ export class CategoriasSelectComponent implements OnInit {
   }
 
   estaSelecionado(id) {
-    return this.categoriasSelecionadas.filter(idCategoria => idCategoria === id).length > 0;
+    return this.categoriasSelecionadas.filter(categoria => categoria.id === id).length > 0;
   }
 
   selecionarCategoria(id) {
-    if (this.categoriasSelecionadas.includes(id)) {
-      this.categoriasSelecionadas = this.categoriasSelecionadas.filter(idCategoria => idCategoria !== id);
+    if (this.estaSelecionado(id)) {
+      this.categoriasSelecionadas = this.categoriasSelecionadas.filter(categoria => categoria.id !== id);
     } else {
-      this.categoriasSelecionadas.push(id);
+      let categoriaNova = new Categoria();
+      categoriaNova.id = id;
+      this.categoriasSelecionadas.push(categoriaNova);
     }
 
     this.selecteds.emit(this.categoriasSelecionadas);

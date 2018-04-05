@@ -1,25 +1,77 @@
 <app-preloader *ngIf="loading;else usuarioTemplate"></app-preloader>
 
 <ng-template #usuarioTemplate>
-  <mat-card class="animated fadeIn">
-    <mat-card-title>Usuário</mat-card-title>
+
+  <mat-expansion-panel class="animated fadeInUp">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Usuário
+      </mat-panel-title>
+      <mat-panel-description>
+        Informações do usuário
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
     <app-usuario-form [edit]="true" [objeto]="usuario"></app-usuario-form>
-  </mat-card>
+  </mat-expansion-panel>
 
   <br>
 
-  <mat-card class="animated fadeIn">
-    <mat-card-title>Informações</mat-card-title>
+  <mat-expansion-panel class="animated fadeInUp">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Categorias
+      </mat-panel-title>
+      <mat-panel-description>
+        Categorias utilizadas pelo seu usuário
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <app-categorias-select [preselects]="usuario.pessoa.categorias"></app-categorias-select>
+  </mat-expansion-panel>
+
+  <br>
+
+  <mat-expansion-panel class="animated fadeInUp">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Informações
+      </mat-panel-title>
+      <mat-panel-description>
+        Informações de pessoa
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
     <app-info-pessoal [objeto]="usuario.pessoa"></app-info-pessoal>
-  </mat-card>
+  </mat-expansion-panel>
 
   <br>
 
-  <mat-card class="animated fadeIn">
-    <mat-card-title>Endereço</mat-card-title>
+  <mat-expansion-panel class="animated fadeInUp">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Endereço
+      </mat-panel-title>
+      <mat-panel-description>
+        Endereço do usuário
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
     <app-endereco [objeto]="usuario.pessoa.enderecos[0]"></app-endereco>
-  </mat-card>
+
+    <br>
+
+    <agm-map 
+    [latitude]="usuario.pessoa.enderecos[0].latitude" 
+    [longitude]="usuario.pessoa.enderecos[0].longitude"
+    [zoom]="16"
+    >
+      <agm-marker 
+      [latitude]="usuario.pessoa.enderecos[0].latitude" 
+      [longitude]="usuario.pessoa.enderecos[0].longitude"
+      ></agm-marker>
+    </agm-map>
+  </mat-expansion-panel>
   <br>
-  <button mat-button class="purple white-text right" (click)="submit()">Salvar</button>
-  <br>
+  <button mat-button class="right purple white-text" (click)="submit()">Salvar</button>
 </ng-template>

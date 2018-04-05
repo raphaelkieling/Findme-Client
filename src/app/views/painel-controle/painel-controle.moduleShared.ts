@@ -1,3 +1,5 @@
+import { AgmCoreModule } from '@agm/core';
+import { DeleteModule } from './../../components/delete/delete.module';
 import { CategoriaModalComponent } from './categoria/categoria-modal/categoria-modal.component';
 import { FormsModule } from '@angular/forms';
 import { CategoriaService } from './../../services/core/categoria.service';
@@ -21,6 +23,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MzInputModule } from 'ng2-materialize'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DeleteComponent } from '../../components/delete/delete.component';
+import { CategoriasSelectModule } from '../../components/categorias-select/categorias-select.module';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   imports: [
@@ -39,7 +45,12 @@ import { MzInputModule } from 'ng2-materialize'
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
-    MzInputModule
+    MzInputModule,
+    MatProgressSpinnerModule,
+    DeleteModule,
+    CategoriasSelectModule,
+    MatExpansionModule,
+    AgmCoreModule
   ],
   declarations: [
     PainelControleComponent,
@@ -49,7 +60,8 @@ import { MzInputModule } from 'ng2-materialize'
     CategoriaModalComponent
   ],
   entryComponents: [
-    CategoriaModalComponent
+    CategoriaModalComponent,
+    DeleteComponent
   ],
   providers: [CategoriaService, ProfissionalService]
 })

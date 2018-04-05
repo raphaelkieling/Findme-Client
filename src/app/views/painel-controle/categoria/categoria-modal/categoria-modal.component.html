@@ -1,3 +1,6 @@
+<h2 mat-dialog-title>Categoria</h2>
+
+
 <form>
   <mz-input-container>
     <input mz-input [label]="'Nome'" id="nome" name="nome" type="text" [(ngModel)]="objeto.nome">
@@ -6,6 +9,9 @@
   <mz-input-container>
     <input mz-input [label]="'Ícone'" id="foto" name="foto" type="text" [(ngModel)]="objeto.foto">
   </mz-input-container>
-
-  <button mat-button class="purple white-text right" (click)="submit()">Salvar</button>
 </form>
+
+<mat-dialog-actions>
+  <button mat-button [disabled]="loading" class="purple white-text" (click)="submit()">Salvar</button>
+  <mat-progress-spinner mode="indeterminate" diameter="20" style="margin: 5px;" *ngIf="loading"></mat-progress-spinner>
+</mat-dialog-actions>
