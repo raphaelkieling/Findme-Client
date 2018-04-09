@@ -1,3 +1,4 @@
+import { ME_USUARIO } from './../../graphql/usuario.querie';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Injectable } from '@angular/core';
@@ -11,39 +12,7 @@ export class UsuarioService {
     ) { }
 
     me(): Observable<any> {
-        let query = gql`
-            query {
-                me{
-                    usuario
-                    pessoa{
-                      id
-                      nome
-                      sobrenome
-                      nascimento
-                      cpf
-                      cnpj
-                      telefone
-                      observacao
-                      categorias{
-                        id
-                      }
-                      enderecos{
-                        id
-                        cep
-                        numero
-                        latitude
-                        longitude
-                        logradouro
-                        numero
-                        complemento
-                        bairro
-                        cidade
-                        estado
-                      }
-                    }
-                  }
-            }
-        `;
+        let query = ME_USUARIO;
 
         return this.apollo.watchQuery({
             query,

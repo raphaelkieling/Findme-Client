@@ -1,4 +1,5 @@
-import { EDITAR_CATEGORIA, DELETAR_CATEGORIA } from './../../graphql/categoria.querie';
+import { GraphPolicy } from './../../domain/policy';
+import { EDITAR_CATEGORIA, DELETAR_CATEGORIA, ADICIONAR_CATEGORIA_PESSOA, RETIRA_CATEGORIA_PESSOA } from './../../graphql/categoria.querie';
 import { Categoria } from './../../domain/categoria';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
@@ -10,9 +11,12 @@ export class CategoriaService {
 
     constructor(private apollo: Apollo) { }
 
-    getAll(): Observable<any> {
+    getAll(fetchPolicy: GraphPolicy = GraphPolicy.NETWORK_ONLY): Observable<any> {
         const query = GET_ALL_CATEGORIAS;
-        return this.apollo.query({ query }).map((res: any) => res.data);
+        return this.apollo.query({
+            query,
+            fetchPolicy
+        }).map((res: any) => res.data);
     }
 
     createCategoria(categoria: Categoria) {
@@ -55,10 +59,32 @@ export class CategoriaService {
             variables: {
                 id
             },
-            update: (store, { data: { deletarCategoria:idDeletado } }) => {
+            update: (store, { data: { deletarCategoria: idDeletado } }) => {
                 const data = store.readQuery({ query: GET_ALL_CATEGORIAS })
-                data['categorias'] = data['categorias'].filter((categoria:Categoria) => categoria.id !== idDeletado);
+                data['categorias'] = data['categorias'].filter((categoria: Categoria) => categoria.id !== idDeletado);
                 store.writeQuery({ query: GET_ALL_CATEGORIAS, data });
+            }
+        }).map((res: any) => res.data);
+    }
+
+    adicionaCategoriaPessoa(idCategoria: any, idPessoa: any) {
+        const mutation = ADICIONAR_CATEGORIA_PESSOA;
+        return this.apollo.mutate({
+            mutation,
+            variables: {
+                idCategoria,
+                idPessoa
+            }
+        }).map((res: any) => res.data);
+    }
+
+    retiraCategoriaPessoa(idCategoria: any, idPessoa: any) {
+        const mutation = RETIRA_CATEGORIA_PESSOA;
+        return this.apollo.mutate({
+            mutation,
+            variables: {
+                idCategoria,
+                idPessoa
             }
         }).map((res: any) => res.data);
     }

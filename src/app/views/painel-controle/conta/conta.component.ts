@@ -12,7 +12,7 @@ import { Observable, Subscription } from 'apollo-client/util/Observable';
 })
 export class ContaComponent implements OnInit {
 
-  usuario: any = {};
+  usuario: Usuario;
   loading = false;
   usuarioSubscription: Subscription;
   usuarioEditarSubscribe: Subscription;
@@ -35,6 +35,7 @@ export class ContaComponent implements OnInit {
       .me()
       .subscribe(res => {
         this.usuario = JSON.parse(JSON.stringify(res));
+        this.usuario.pessoa.categorias = this.usuario.pessoa.categorias.map((categoria) => categoria.id);
         this.loading = false;
         this.usuarioSubscription.unsubscribe();
       },

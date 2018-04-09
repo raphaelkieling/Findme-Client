@@ -10,8 +10,8 @@ export class Pessoa extends Base {
     cnpj: string;
     telefone: string;
     tipo: string;
-    categorias: Array<Categoria | number>;
-    enderecos: Array<Endereco | number>;
+    categorias: Array<Categoria | any>;
+    enderecos: Array<Endereco>;
     observacao: string;
 
     constructor() {

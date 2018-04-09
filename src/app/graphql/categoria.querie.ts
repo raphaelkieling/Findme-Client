@@ -29,10 +29,22 @@ export const EDITAR_CATEGORIA =gql`
             foto
         }
     }
-`
+`;
 
 export const DELETAR_CATEGORIA = gql`
     mutation deletarCategoria($id:ID!){
         deletarCategoria(id:$id)
     }
-`
+`;
+
+export const ADICIONAR_CATEGORIA_PESSOA = gql`
+    mutation adicionaCategoriaPessoa($idCategoria:ID!,$idPessoa:ID!){
+        adicionaCategoriaPessoa(idCategoria:$idCategoria,idPessoa:$idPessoa)
+    }
+`;
+
+export const RETIRA_CATEGORIA_PESSOA = gql`
+    mutation retiraCategoriaPessoa($idCategoria:ID!,$idPessoa:ID!){
+        retiraCategoriaPessoa(idCategoria:$idCategoria,idPessoa:$idPessoa)
+    }
+`;

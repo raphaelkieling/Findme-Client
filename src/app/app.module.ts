@@ -49,12 +49,13 @@ export class AppModule {
     apollo: Apollo,
     httpLink: HttpLink
   ) {
-    // http://localhost:3000/graphql
+    // https://thawing-bastion-86753.herokuapp.com/graphql
     apollo.create({
-      link: httpLink.create({ uri: 'https://thawing-bastion-86753.herokuapp.com/graphql' }),
+      link: httpLink.create({ uri: 'http://localhost:3000/graphql' }),
       cache: new InMemoryCache({
         addTypename: false
       }),
+      connectToDevTools: true
     });
   }
 

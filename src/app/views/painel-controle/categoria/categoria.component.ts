@@ -1,3 +1,4 @@
+import { GraphPolicy } from './../../../domain/policy';
 import { Apollo } from 'apollo-angular';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteComponent } from './../../../components/delete/delete.component';
@@ -28,7 +29,7 @@ export class CategoriaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadCategorias();
+    this.loadCategorias(GraphPolicy.NETWORK_ONLY);
   }
 
   abrirAdicionarModal() {
@@ -76,12 +77,11 @@ export class CategoriaComponent implements OnInit {
     }
   }
 
-  loadCategorias() {
+  loadCategorias(policy:GraphPolicy = GraphPolicy.CACHE_ONLY) {
     this.loadingCategorias = true;
     this.categoriaS
-      .getAll()
+      .getAll(policy)
       .subscribe((res) => {
-        console.log(res);
         this.loadingCategorias = false;
         this.categorias = new MatTableDataSource(res.categorias);
       })
