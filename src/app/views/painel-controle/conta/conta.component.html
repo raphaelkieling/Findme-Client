@@ -1,5 +1,16 @@
 <app-preloader *ngIf="loading;else usuarioTemplate"></app-preloader>
+
 <ng-template #usuarioTemplate>
+  <div class="row center animated fadeInDown">
+    <div class="col-12 flex-center">
+      <div class="avatar-container">
+        <img [src]="imageUrl" alt="Imagem avatar" class="avatar">
+        <button mat-button class="btn-avatar" (click)="abrirCrooperFoto()">Editar Foto</button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
   <mat-expansion-panel class="animated fadeInUp">
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -25,10 +36,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <app-categorias-select 
-    [pessoaId]="usuario.pessoa.id"
-    [preselects]="usuario.pessoa.categorias" 
-    (selecteds)="usuario.pessoa.categorias = $event"></app-categorias-select>
+    <app-categorias-select [pessoaId]="usuario.pessoa.id" [preselects]="usuario.pessoa.categorias" (selecteds)="usuario.pessoa.categorias = $event"></app-categorias-select>
   </mat-expansion-panel>
 
   <br>
@@ -62,17 +70,35 @@
 
     <br>
 
-    <agm-map 
-    [latitude]="usuario.pessoa.enderecos[0].latitude" 
-    [longitude]="usuario.pessoa.enderecos[0].longitude"
-    [zoom]="16"
-    >
-      <agm-marker 
-      [latitude]="usuario.pessoa.enderecos[0].latitude" 
-      [longitude]="usuario.pessoa.enderecos[0].longitude"
-      ></agm-marker>
+    <agm-map [latitude]="usuario.pessoa.enderecos[0].latitude" [longitude]="usuario.pessoa.enderecos[0].longitude" [zoom]="16">
+      <agm-marker [latitude]="usuario.pessoa.enderecos[0].latitude" [longitude]="usuario.pessoa.enderecos[0].longitude"></agm-marker>
     </agm-map>
   </mat-expansion-panel>
+
   <br>
-  <button mat-button class="right purple white-text" (click)="submit()">Salvar</button>
+
+  <mat-expansion-panel class="animated fadeInUp">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Senha
+      </mat-panel-title>
+      <mat-panel-description>
+        Modifica senha
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <form>
+      <div class="input-field">
+        <input type="text" #senhaModificar>
+        <label class="active">Nova senha</label>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <button mat-button class="purple white-text right" (click)="modificarSenha(senhaModificar.value)">Modificar senha</button>
+        </div>
+      </div>
+    </form>
+  </mat-expansion-panel>
+  <br>
+  <button mat-button class="right purple white-text" (click)="modificarSenha()">Salvar</button>
 </ng-template>

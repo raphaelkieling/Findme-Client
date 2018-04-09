@@ -28,12 +28,13 @@ export class CategoriasSelectComponent implements OnInit {
   }
 
   loadCategorias() {
-    this.loadingCategorias = true;
     this.categoriaS
       .getAll()
-      .subscribe((res) => {
-        this.loadingCategorias = false;
-        this.categorias = res.categorias;
+      .subscribe(({ data, loading }) => {
+        this.loadingCategorias = loading;
+        if(!data) return;
+
+        this.categorias = data.categorias;
       })
   }
 
@@ -94,7 +95,7 @@ export class CategoriasSelectComponent implements OnInit {
         this.snack.open('Problema ao retirar categora, tenta mais tarde!', 'Aff', {
           duration: 3000
         });
-        
+
         this.adicionaCategoriaNaListagem(idCategoria);
       });
   }

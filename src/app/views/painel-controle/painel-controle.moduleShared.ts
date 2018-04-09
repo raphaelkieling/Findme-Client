@@ -1,3 +1,4 @@
+import { ImgCropperModule } from '../../components/img-cropper/img-cropper.module';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AgmCoreModule } from '@agm/core';
 import { DeleteModule } from './../../components/delete/delete.module';
@@ -28,6 +29,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { DeleteComponent } from '../../components/delete/delete.component';
 import { CategoriasSelectModule } from '../../components/categorias-select/categorias-select.module';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ImgCropperComponent } from '../../components/img-cropper/img-cropper.component';
 
 @NgModule({
   imports: [
@@ -51,7 +53,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     DeleteModule,
     CategoriasSelectModule,
     MatExpansionModule,
-    AgmCoreModule
+    AgmCoreModule,
+    ImgCropperModule
   ],
   declarations: [
     PainelControleComponent,
@@ -63,7 +66,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
   ],
   entryComponents: [
     CategoriaModalComponent,
-    DeleteComponent
+    DeleteComponent,
+    ImgCropperComponent
   ],
   providers: [CategoriaService, ProfissionalService]
 })

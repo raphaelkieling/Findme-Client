@@ -1,0 +1,8 @@
+<div class="flex-center">
+    <img-cropper [image]="dataImage" [settings]="cropperSettings"></img-cropper>
+</div>
+
+<mat-dialog-actions>
+    <button mat-button class="green white-text" (click)="salvar()">Salvar</button>
+    <button mat-button (click)="fechar()">Cancelar</button>
+</mat-dialog-actions>

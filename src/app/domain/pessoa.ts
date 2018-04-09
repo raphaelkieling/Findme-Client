@@ -1,3 +1,4 @@
+import { Foto } from './foto';
 import { Categoria } from './categoria';
 import { Endereco } from './endereco';
 import { Base } from './base';
@@ -13,6 +14,7 @@ export class Pessoa extends Base {
     categorias: Array<Categoria | any>;
     enderecos: Array<Endereco>;
     observacao: string;
+    avatar: Foto;
 
     constructor() {
         super();

@@ -6,17 +6,18 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { GET_ALL_CATEGORIAS, CRIA_CATEGORIA } from '../../graphql/categoria.querie';
+import { ME_USUARIO } from '../../graphql/usuario.querie';
 @Injectable()
 export class CategoriaService {
 
     constructor(private apollo: Apollo) { }
 
-    getAll(fetchPolicy: GraphPolicy = GraphPolicy.NETWORK_ONLY): Observable<any> {
+    getAll(): Observable<any> {
         const query = GET_ALL_CATEGORIAS;
-        return this.apollo.query({
+        return this.apollo.watchQuery({
             query,
-            fetchPolicy
-        }).map((res: any) => res.data);
+            fetchPolicy: GraphPolicy.CACHE_AND_NETWORK
+        }).valueChanges
     }
 
     createCategoria(categoria: Categoria) {
@@ -74,7 +75,8 @@ export class CategoriaService {
             variables: {
                 idCategoria,
                 idPessoa
-            }
+            },
+            refetchQueries: [{ query: ME_USUARIO }]
         }).map((res: any) => res.data);
     }
 
@@ -85,7 +87,8 @@ export class CategoriaService {
             variables: {
                 idCategoria,
                 idPessoa
-            }
+            },
+            refetchQueries: [{ query: ME_USUARIO }]
         }).map((res: any) => res.data);
     }
 }

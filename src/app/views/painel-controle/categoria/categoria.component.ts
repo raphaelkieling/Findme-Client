@@ -29,24 +29,17 @@ export class CategoriaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadCategorias(GraphPolicy.NETWORK_ONLY);
+    this.loadCategorias();
   }
 
   abrirAdicionarModal() {
     const modalCategoriaSalvar = this.dialog.open(CategoriaModalComponent);
-    modalCategoriaSalvar.afterClosed().subscribe(() => {
-      this.loadCategorias();
-    })
   }
 
   abrirEditarModal(elemento: Categoria) {
     const modalCategoriaEditar = this.dialog.open(CategoriaModalComponent, {
       data: elemento
     });
-
-    modalCategoriaEditar.afterClosed().subscribe(() => {
-      this.loadCategorias();
-    })
   }
 
   abrirDeleteModal(categoria: Categoria) {
@@ -65,8 +58,6 @@ export class CategoriaComponent implements OnInit {
           this.snack.open('Categoria deletada com sucesso!', 'Perfeito!', {
             duration: 3000
           });
-
-          this.loadCategorias();
         },
           err => {
             this.snack.open('Houve um problema ao deletar categoria', 'Aff', {
@@ -77,13 +68,15 @@ export class CategoriaComponent implements OnInit {
     }
   }
 
-  loadCategorias(policy:GraphPolicy = GraphPolicy.CACHE_ONLY) {
-    this.loadingCategorias = true;
+  loadCategorias() {
     this.categoriaS
-      .getAll(policy)
-      .subscribe((res) => {
-        this.loadingCategorias = false;
-        this.categorias = new MatTableDataSource(res.categorias);
+      .getAll()
+      .subscribe(({ data, loading }) => {
+        this.loadingCategorias = loading;
+        console.log(data);
+        if (!data) return;
+
+        this.categorias = new MatTableDataSource(data.categorias);
       })
   }
 

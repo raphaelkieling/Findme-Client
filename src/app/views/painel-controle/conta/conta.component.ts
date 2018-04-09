@@ -1,9 +1,11 @@
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProfissionalService } from './../../../services/core/profissional.service';
 import { Usuario } from './../../../domain/usuario';
 import { UsuarioService } from './../../../services/core/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'apollo-client/util/Observable';
+import { ImgCropperComponent } from '../../../components/img-cropper/img-cropper.component';
 
 @Component({
   selector: 'app-conta',
@@ -17,10 +19,13 @@ export class ContaComponent implements OnInit {
   usuarioSubscription: Subscription;
   usuarioEditarSubscribe: Subscription;
 
+  imageUrl = 'assets/images/avatar.jpg';
+
   constructor(
     private usuarioS: UsuarioService,
     private profissionalS: ProfissionalService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -29,15 +34,17 @@ export class ContaComponent implements OnInit {
 
 
   private carregaUsuario() {
-    this.loading = true;
 
     this.usuarioSubscription = this.usuarioS
       .me()
-      .subscribe(res => {
-        this.usuario = JSON.parse(JSON.stringify(res));
+      .subscribe(({ data, loading }) => {
+        this.loading = loading;
+        if (!data) return;
+
+        this.usuario = JSON.parse(JSON.stringify(data.me));
         this.usuario.pessoa.categorias = this.usuario.pessoa.categorias.map((categoria) => categoria.id);
+        this.imageUrl = this.usuario.pessoa.avatar.base64;
         this.loading = false;
-        this.usuarioSubscription.unsubscribe();
       },
         err => {
           const snack = this.snack.open('Não foi possível carregar o usuário', 'Tentar novamente', {
@@ -48,9 +55,43 @@ export class ContaComponent implements OnInit {
             this.carregaUsuario();
           });
 
-          this.usuarioSubscription.unsubscribe();
         });
   }
+
+  modificarSenha(novaSenha) {
+    this.usuarioS
+      .meSenhaNova(novaSenha)
+      .subscribe((res) => {
+        console.log(res);
+      })
+  }
+
+  abrirCrooperFoto() {
+    this.dialog.open(ImgCropperComponent, {
+      maxWidth: '500px',
+      data: {
+        fn: (base64) => new Promise((resolve, reject) => {
+          return this.profissionalS
+            .colocaAvatar(this.usuario.pessoa.id, base64)
+            .toPromise()
+            .then(({ data }) => {
+              this.imageUrl = data.adicionarFoto.base64;
+              this.snack.open('Foto editada com sucesso!', 'Uhul', {
+                duration: 3000
+              });
+              resolve()
+            })
+            .catch((err) => {
+              this.snack.open('Não foi possivel editar a foto, tente mais tarde!', 'Aff', {
+                duration: 3000
+              });
+              reject();
+            })
+        })
+      }
+    })
+  }
+
 
   submit() {
     this.usuarioEditarSubscribe = this.profissionalS
@@ -65,5 +106,9 @@ export class ContaComponent implements OnInit {
           this.usuarioEditarSubscribe.unsubscribe();
           this.snack.open('Não foi possível salvar o usuário, tenta mais uma vez', 'Tentar');
         })
+  }
+
+  ngOnDestroy() {
+    if (this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
   }
 }
