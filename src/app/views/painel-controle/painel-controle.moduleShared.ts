@@ -30,6 +30,8 @@ import { DeleteComponent } from '../../components/delete/delete.component';
 import { CategoriasSelectModule } from '../../components/categorias-select/categorias-select.module';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ImgCropperComponent } from '../../components/img-cropper/img-cropper.component';
+import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -54,7 +56,9 @@ import { ImgCropperComponent } from '../../components/img-cropper/img-cropper.co
     CategoriasSelectModule,
     MatExpansionModule,
     AgmCoreModule,
-    ImgCropperModule
+    ImgCropperModule,
+    PasswordStrengthBarModule,
+    MatIconModule
   ],
   declarations: [
     PainelControleComponent,

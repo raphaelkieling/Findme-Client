@@ -1,5 +1,5 @@
 import { GraphPolicy } from './../../domain/policy';
-import { ME_USUARIO, MODIFICA_SENHA } from './../../graphql/usuario.querie';
+import { ME_USUARIO, MODIFICA_SENHA, TODOS_USUARIOS } from './../../graphql/usuario.querie';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Injectable } from '@angular/core';
@@ -21,15 +21,24 @@ export class UsuarioService {
         }).valueChanges;
     }
 
-    meSenhaNova(senha):Observable<any>{
+    meSenhaNova(senha): Observable<any> {
         let mutation = MODIFICA_SENHA;
 
         return this.apollo.mutate({
             mutation,
-            variables:{
+            variables: {
                 senha
             }
         });
+    }
+
+    usuarios(): Observable<any> {
+        let query = TODOS_USUARIOS;
+
+        return this.apollo.watchQuery({
+            query,
+            fetchPolicy: GraphPolicy.CACHE_AND_NETWORK
+        }).valueChanges
     }
 
 }

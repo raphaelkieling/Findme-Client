@@ -89,12 +89,13 @@
 
     <form>
       <div class="input-field">
-        <input type="text" #senhaModificar>
+        <input type="password" [(ngModel)]="novaSenha" name="novaSenha">
         <label class="active">Nova senha</label>
+        <ng2-password-strength-bar [passwordToCheck]="novaSenha" [barLabel]="'Força da senha:'" [barColors]="coresSenhaForca"></ng2-password-strength-bar>
       </div>
       <div class="row">
         <div class="col s12">
-          <button mat-button class="purple white-text right" (click)="modificarSenha(senhaModificar.value)">Modificar senha</button>
+          <button mat-button [disabled]="novaSenha.length == 0" class="purple white-text right" (click)="modificarSenha(novaSenha)">Modificar senha</button>
         </div>
       </div>
     </form>

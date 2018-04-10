@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  constructor(
+    private snack: MatSnackBar
+  ) { }
+
+  ngOnInit() {
+    this.notificacaoCasoEstejaSemInternet();
+  }
+
+  private notificacaoCasoEstejaSemInternet() {
+    window.addEventListener('offline', () => {
+      this.snack.open('Você está offline, conecte-se novamente a internet', 'Beleza', {
+        duration: 3000
+      });
+    });
+
+    
+  }
 }

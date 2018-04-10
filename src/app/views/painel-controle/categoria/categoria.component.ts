@@ -73,7 +73,6 @@ export class CategoriaComponent implements OnInit {
       .getAll()
       .subscribe(({ data, loading }) => {
         this.loadingCategorias = loading;
-        console.log(data);
         if (!data) return;
 
         this.categorias = new MatTableDataSource(data.categorias);

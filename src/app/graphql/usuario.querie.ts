@@ -43,3 +43,15 @@ export const MODIFICA_SENHA = gql`
     editarSenha(senha:$senha)
   }
 `
+
+export const TODOS_USUARIOS = gql`
+  query{
+    usuarios{
+      id
+      usuario
+      pessoa{
+        nome
+      }
+    }
+  }
+`;

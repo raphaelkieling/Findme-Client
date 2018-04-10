@@ -14,12 +14,17 @@ import { ImgCropperComponent } from '../../../components/img-cropper/img-cropper
 })
 export class ContaComponent implements OnInit {
 
-  usuario: Usuario;
-  loading = false;
-  usuarioSubscription: Subscription;
-  usuarioEditarSubscribe: Subscription;
+  public coresSenhaForca = ['#DD2C00', '#FF6D00', '#FFD600', '#AEEA00', '#00C853'];
+  public novaSenha: string = '';
 
-  imageUrl = 'assets/images/avatar.jpg';
+  public usuario: Usuario;
+  public loading = false;
+
+  public usuarioSubscription: Subscription;
+  public usuarioEditarSubscribe: Subscription;
+  public usuarioSenhaEditaSubscribe: Subscription;
+
+  public imageUrl = 'assets/images/avatar.jpg';
 
   constructor(
     private usuarioS: UsuarioService,
@@ -59,11 +64,22 @@ export class ContaComponent implements OnInit {
   }
 
   modificarSenha(novaSenha) {
-    this.usuarioS
+    this.usuarioSenhaEditaSubscribe = this.usuarioS
       .meSenhaNova(novaSenha)
       .subscribe((res) => {
-        console.log(res);
-      })
+        this.snack.open('Senha alterada com sucesso!', 'Uhul!', {
+          duration: 3000
+        });
+      },
+        err => {
+          let snack = this.snack.open('Problema ao alterar a senha...!', 'Tentar novamente', {
+            duration: 4000
+          });
+
+          snack.onAction().subscribe(() => {
+            this.modificarSenha(novaSenha);
+          })
+        });
   }
 
   abrirCrooperFoto() {
@@ -110,5 +126,6 @@ export class ContaComponent implements OnInit {
 
   ngOnDestroy() {
     if (this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
+    if (this.usuarioSenhaEditaSubscribe) this.usuarioSenhaEditaSubscribe.unsubscribe();
   }
 }

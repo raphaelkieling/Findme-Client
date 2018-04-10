@@ -1,5 +1,6 @@
 <button mat-button class="purple white-text right" (click)="abrirAdicionarModal()">
-    Adicionar <i class="material-icons">add</i>
+  Adicionar
+  <i class="material-icons">add</i>
 </button>
 <br>
 <br>
@@ -28,8 +29,8 @@
       <ng-container matColumnDef="acoes">
         <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <i class="aux-pointer material-icons" (click)="abrirEditarModal(element)">edit</i>
-          <i class="aux-pointer material-icons" (click)="abrirDeleteModal(element)">delete_forever</i>
+          <mat-icon class="aux-pointer" (click)="abrirEditarModal(element)">edit</mat-icon>
+          <mat-icon class="aux-pointer" (click)="abrirDeleteModal(element)">delete_forever</mat-icon>
         </mat-cell>
       </ng-container>
 
