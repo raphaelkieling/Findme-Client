@@ -1,3 +1,4 @@
+import { PedidoComponent } from './pedido/pedido.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { ContaComponent } from './conta/conta.component';
 import { PrincipalComponent } from './principal/principal.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
             { path: 'principal', component: PrincipalComponent },
             { path: 'conta', component: ContaComponent },
             { path: 'categorias', component: CategoriaComponent },
-            { path: 'usuarios', component: UsuariosComponent }
+            { path: 'usuarios', component: UsuariosComponent },
+            { path: 'pedidos', component: PedidoComponent }
         ]
     },
 ];

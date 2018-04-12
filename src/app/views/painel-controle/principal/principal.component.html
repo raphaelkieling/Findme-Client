@@ -1,4 +1,45 @@
-<div class="row">
-    <button class="col s12 m4 btn btn-primary purple">Fazer um pedido</button>
+{{tipoPessoa}}
+<div [ngSwitch]="tipoPessoa">
+    <div *ngSwitchCase="'cliente'">
+        <div class="row">
+            <button mat-button class="col s12 m4 white-text purple" (click)="abrirModalPedido()">Fazer um pedido</button>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col m6 s12" *ngFor="let pedido of pedidos">
+                <mat-card class="animated fadeInDown">
+                    <mat-card-header>
+                        <div mat-card-avatar class="example-header-image">
+                            <mat-icon>{{pedido.categoria.foto}}</mat-icon>
+                        </div>
+                        <mat-card-title>{{pedido.categoria.nome}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>
+                            {{pedido.observacao}}
+                        </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button>
+                            <mat-icon>close</mat-icon>Cancelar</button>
+                        <button mat-button>
+                            <mat-icon>edit</mat-icon>Editar</button>
+                    </mat-card-actions>
+                </mat-card>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngSwitchCase="'profissional'" >
+        <agm-map #map [styles]="styles" [zoom]="7" class="full-map">
+            <agm-marker *ngFor="let pedido of pedidos" 
+            [title]="pedido.titulo" 
+            [markerClickable]="true" 
+            (markerClick)="markerClicked($event)"
+            [latitude]="pedido.latitude" 
+            [longitude]="pedido.longitude"></agm-marker>
+        </agm-map>
+    </div>
 </div>
-<br>

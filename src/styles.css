@@ -32,6 +32,17 @@ agm-map {
     height: 300px;
 }
 
+agm-map.full-map{
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    right: 0px;
+}
 .aux-pointer{
     cursor: pointer;
+}
+
+mat-card{
+    margin-bottom:20px
 }

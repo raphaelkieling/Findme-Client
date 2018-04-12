@@ -1,3 +1,4 @@
+import { Token } from './../domain/token';
 import { Injectable } from '@angular/core';
 import { JwtHelper } from 'angular2-jwt';
 @Injectable()
@@ -12,11 +13,11 @@ export class AuthService {
     return sessionStorage.getItem('token_');
   }
 
-  public tokenRemove(){
+  public tokenRemove() {
     sessionStorage.removeItem('token_');
   }
 
-  public get tokenDecoded() {
+  public get tokenDecoded(): Token {
     const jwtH = new JwtHelper();
     return jwtH.decodeToken(this.token);
   }

@@ -1,3 +1,4 @@
+import { ClienteService } from './../../services/core/cliente.service';
 import { MatCardModule } from '@angular/material/card';
 import { CategoriasSelectModule } from './../../components/categorias-select/categorias-select.module';
 import { EnderecoModule } from './../../components/endereco/endereco.module';
@@ -46,7 +47,8 @@ import { FlexModule } from '@angular/flex-layout';
     ],
     providers:[
         CategoriaService,
-        ProfissionalService
+        ProfissionalService,
+        ClienteService
     ]
 })
 export class HomeModuleShared { }

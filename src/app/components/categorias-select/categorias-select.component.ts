@@ -13,9 +13,12 @@ export class CategoriasSelectComponent implements OnInit {
 
   categorias: Categoria[] = [];
   loadingCategorias = false;
-  @Input() pessoaId;
 
-  @Input('preselects') categoriasSelecionadas: string[] = []
+  // Serve para retirar ou colocar uma categoria nesta pessoa pelo graphql
+  @Input() pessoaId;
+  @Input('preselects') categoriasSelecionadas: string[] = [];
+  // Retorna APENAS um 
+  @Input() apenasUm = false;
   @Output() selecteds = new EventEmitter<string[]>();
 
   constructor(
@@ -32,7 +35,7 @@ export class CategoriasSelectComponent implements OnInit {
       .getAll()
       .subscribe(({ data, loading }) => {
         this.loadingCategorias = loading;
-        if(!data) return;
+        if (!data) return;
 
         this.categorias = data.categorias;
       })
@@ -43,6 +46,10 @@ export class CategoriasSelectComponent implements OnInit {
   }
 
   selecionarCategoria(id) {
+    if (this.apenasUm) {
+      this.categoriasSelecionadas = [];
+    }
+
     if (this.estaSelecionado(id)) {
       if (this.pessoaId) {
         this.retiraCategoriaDaPessoa(id);
@@ -73,7 +80,7 @@ export class CategoriasSelectComponent implements OnInit {
     this.categoriaS
       .adicionaCategoriaPessoa(idCategoria, this.pessoaId)
       .subscribe(res => {
-        this.snack.open('Categoria adicionada com sucesso!', 'Uhul!', {
+        this.snack.open('Categoria adicionada com sucesso, sai da conta para surtir efeito nas notifcações!', 'Uhul!', {
           duration: 3000
         });
       }, err => {
@@ -88,7 +95,7 @@ export class CategoriasSelectComponent implements OnInit {
     this.categoriaS
       .retiraCategoriaPessoa(idCategoria, this.pessoaId)
       .subscribe(res => {
-        this.snack.open('Categoria retirada com sucesso!', 'Uhul!', {
+        this.snack.open('Categoria retirada com sucesso, sai da conta para surtir efeito nas notifcações!', 'Uhul!', {
           duration: 3000
         });
       }, err => {

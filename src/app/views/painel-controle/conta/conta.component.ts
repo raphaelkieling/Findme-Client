@@ -48,7 +48,7 @@ export class ContaComponent implements OnInit {
 
         this.usuario = JSON.parse(JSON.stringify(data.me));
         this.usuario.pessoa.categorias = this.usuario.pessoa.categorias.map((categoria) => categoria.id);
-        this.imageUrl = this.usuario.pessoa.avatar.base64;
+        this.imageUrl = this.usuario.pessoa.avatar ? this.usuario.pessoa.avatar.base64 : this.imageUrl;
         this.loading = false;
       },
         err => {

@@ -37,6 +37,7 @@ export class EntrarComponent {
     this.loginS.login(this.form.value).subscribe((res) => {
       this.loading = false;
       this.authS.token = res.data.createToken.token;
+      console.log(this.authS.tokenDecoded);
       this.router.navigate(['painel-controle']);
     }, err => {
       this.snack.open('Usuário ou senha incorretas','Tranquilo!');

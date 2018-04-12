@@ -1,3 +1,4 @@
+import { urlDomain } from './config';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { InterceptorService } from './services/interceptor.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,7 +16,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { AuthService } from './services/auth.service';
 import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
+const config: SocketIoConfig = { url: `${urlDomain}`, options: {} }
 @NgModule({
   declarations: [
     AppComponent
@@ -32,7 +35,8 @@ import { AgmCoreModule } from '@agm/core';
     MatSnackBarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAhDpLlU6jqo4aWEP26jG3RE_-OFktIyvQ'
-    })
+    }),
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     AuthService,
@@ -49,9 +53,8 @@ export class AppModule {
     apollo: Apollo,
     httpLink: HttpLink
   ) {
-    // https://thawing-bastion-86753.herokuapp.com/graphql
     apollo.create({
-      link: httpLink.create({ uri: 'http://localhost:3000/graphql' }),
+      link: httpLink.create({ uri: `${urlDomain}/graphql` }),
       cache: new InMemoryCache({
         addTypename: false
       }),

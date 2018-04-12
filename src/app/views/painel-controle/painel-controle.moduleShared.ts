@@ -1,3 +1,4 @@
+import { PedidoRegisterComponent } from './pedido/pedido-register/pedido-register.component';
 import { ImgCropperModule } from '../../components/img-cropper/img-cropper.module';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AgmCoreModule } from '@agm/core';
@@ -25,13 +26,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MzInputModule } from 'ng2-materialize'
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeleteComponent } from '../../components/delete/delete.component';
 import { CategoriasSelectModule } from '../../components/categorias-select/categorias-select.module';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { ImgCropperComponent } from '../../components/img-cropper/img-cropper.component';
 import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { PedidoService } from '../../services/core/pedido.service';
+import { PedidoComponent } from './pedido/pedido.component';
+import { MzDatepickerModule } from 'ng2-materialize'
 
 @NgModule({
   imports: [
@@ -58,7 +62,8 @@ import {MatIconModule} from '@angular/material/icon';
     AgmCoreModule,
     ImgCropperModule,
     PasswordStrengthBarModule,
-    MatIconModule
+    MatIconModule,
+    MzDatepickerModule
   ],
   declarations: [
     PainelControleComponent,
@@ -66,13 +71,16 @@ import {MatIconModule} from '@angular/material/icon';
     ContaComponent,
     CategoriaComponent,
     CategoriaModalComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    PedidoComponent,
+    PedidoRegisterComponent
   ],
   entryComponents: [
     CategoriaModalComponent,
     DeleteComponent,
-    ImgCropperComponent
+    ImgCropperComponent,
+    PedidoRegisterComponent
   ],
-  providers: [CategoriaService, ProfissionalService]
+  providers: [CategoriaService, ProfissionalService, PedidoService]
 })
 export class PainelControleModuleShared { }
