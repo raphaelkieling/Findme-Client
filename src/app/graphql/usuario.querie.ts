@@ -19,6 +19,7 @@ export const ME_USUARIO = gql`
             observacao
             categorias{
               id
+              nome
             }
             enderecos{
               id
