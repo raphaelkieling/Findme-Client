@@ -24,6 +24,8 @@ export class ProfissionalService {
     }
 
     editarProfissional(profissional: Profissional): Observable<any> {
+        delete profissional.pessoa.tipo;
+        
         const mutation = EDITAR_PROFISSIONAL;
 
         return this.apollo.mutate({

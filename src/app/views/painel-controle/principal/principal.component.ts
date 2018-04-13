@@ -41,18 +41,18 @@ export class PrincipalComponent implements OnInit {
 
   async ngOnInit() {
     this.defineEstiloMapa();
-    this.carregarPedidos();
     
     this.usuarioService
-      .me()
-      .subscribe(({ data, loading }) => {
-        if (!data) {
-          return;
-        }
-
-        this.tipoPessoa = data.me.pessoa.tipo;
-        this.centerLatitude = data.me.pessoa.enderecos[0].latitude
-        this.centerLongitude = data.me.pessoa.enderecos[0].longitude
+    .me()
+    .subscribe(({ data, loading }) => {
+      if (!data) {
+        return;
+      }
+      
+      this.tipoPessoa = data.me.pessoa.tipo;
+      this.centerLatitude = data.me.pessoa.enderecos[0].latitude
+      this.centerLongitude = data.me.pessoa.enderecos[0].longitude
+      this.carregarPedidos();
       });
       
 
@@ -82,12 +82,13 @@ export class PrincipalComponent implements OnInit {
 
   carregarPedidos() {
     let categoriasUsadas = this.authService.tokenDecoded.usuario.pessoa.categorias.map((categoria) => categoria.id);
-
+    
     switch (this.tipoPessoa) {
       case TipoUsuario.CLIENTE:
         this.pedidoService
           .pedidosCliente()
           .subscribe(({ data, loading }) => {
+            console.log(data);
             this.loadingPedidos = loading;
             this.pedidos = data['pedidosCliente'];
           });

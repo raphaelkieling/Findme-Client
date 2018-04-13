@@ -1,3 +1,4 @@
+import { PermissionModule } from './../../directives/permission.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AsideComponent } from './aside.component';
@@ -7,7 +8,8 @@ import { LoginService } from '../../services/login.service';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    PermissionModule
   ],
   declarations: [AsideComponent],
   exports: [AsideComponent],

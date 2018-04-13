@@ -1,3 +1,5 @@
+import { ClienteService } from './../../../services/core/cliente.service';
+import { TipoUsuario } from './../../../domain/tipo';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProfissionalService } from './../../../services/core/profissional.service';
@@ -30,7 +32,8 @@ export class ContaComponent implements OnInit {
     private usuarioS: UsuarioService,
     private profissionalS: ProfissionalService,
     private snack: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private clienteService: ClienteService
   ) { }
 
   ngOnInit() {
@@ -110,6 +113,18 @@ export class ContaComponent implements OnInit {
 
 
   submit() {
+    console.log(this.usuario);
+    switch (this.usuario.pessoa.tipo) {
+      case TipoUsuario.PROFISSIONAL:
+        this.editarProfissional();
+        break;
+      case TipoUsuario.CLIENTE:
+        this.editarCliente();
+        break;
+    }
+  }
+
+  private editarProfissional() {
     this.usuarioEditarSubscribe = this.profissionalS
       .editarProfissional(this.usuario)
       .subscribe((res) => {
@@ -117,11 +132,27 @@ export class ContaComponent implements OnInit {
         this.snack.open('Usuário salvo com sucesso!', 'Uhul!', {
           duration: 3000
         });
-      },
-        err => {
-          this.usuarioEditarSubscribe.unsubscribe();
-          this.snack.open('Não foi possível salvar o usuário, tenta mais uma vez', 'Tentar');
-        })
+      }, err => {
+        this.usuarioEditarSubscribe.unsubscribe();
+        this.snack.open('Não foi possível salvar o usuário, tenta mais uma vez', 'Tentar');
+      });
+  }
+
+  private editarCliente() {
+    this.snack.open('Editar cliente ainda não foi implementado', 'ok', {
+      duration: 3000
+    })
+    // this.usuarioEditarSubscribe = this.clienteService
+    //   .editarCliente(this.usuario)
+    //   .subscribe((res) => {
+    //     this.usuarioEditarSubscribe.unsubscribe();
+    //     this.snack.open('Usuário salvo com sucesso!', 'Uhul!', {
+    //       duration: 3000
+    //     });
+    //   }, err => {
+    //     this.usuarioEditarSubscribe.unsubscribe();
+    //     this.snack.open('Não foi possível salvar o usuário, tenta mais uma vez', 'Tentar');
+    //   });
   }
 
   ngOnDestroy() {

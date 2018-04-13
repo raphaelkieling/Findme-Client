@@ -24,9 +24,9 @@
     <app-usuario-form [edit]="true" [objeto]="usuario"></app-usuario-form>
   </mat-expansion-panel>
 
-  <br>
-
-  <mat-expansion-panel class="animated fadeInUp">
+  <br [permission]="'user_profissional'">
+  
+  <mat-expansion-panel class="animated fadeInUp" [permission]="'user_profissional'">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Categorias

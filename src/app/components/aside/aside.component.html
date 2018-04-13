@@ -5,26 +5,22 @@
     <i class="material-icons">home</i>
     <span class="text">Principal</span>
   </div>
-  <div class="sidenav-item">
+  <!-- <div class="sidenav-item">
     <i class="material-icons">view_list</i>
     <span class="text">Pedidos</span>
-  </div>
-  <div class="sidenav-item">
-    <i class="material-icons">chat</i>
-    <span class="text">Conversas</span>
-  </div>
-  <div class="sidenav-item" [routerLink]="['categorias']" routerLinkActive="active">
+  </div> -->
+  <div class="sidenav-item" [routerLink]="['categorias']" routerLinkActive="active" [permission]="'user_dev'">
     <i class="material-icons">view_module</i>
     <span class="text">Categorias</span>
   </div>
-  <div class="sidenav-item" [routerLink]="['usuarios']" routerLinkActive="active">
+  <div class="sidenav-item" [routerLink]="['usuarios']" routerLinkActive="active" [permission]="'user_dev'">
     <i class="material-icons">supervisor_account</i>
     <span class="text">Usuários</span>
   </div>
-  <div class="sidenav-item">
+  <!-- <div class="sidenav-item" >
     <i class="material-icons">info</i>
     <span class="text">Tenho dúvidas</span>
-  </div>
+  </div> -->
 
   <!-- Parte de baixo -->
 

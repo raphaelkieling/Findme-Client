@@ -1,3 +1,4 @@
+import { ClienteService } from './../../services/core/cliente.service';
 import { MapPedidosDirective } from './../../directives/map-pedidos.directive';
 import { PedidoRegisterComponent } from './pedido/pedido-register/pedido-register.component';
 import { ImgCropperModule } from '../../components/img-cropper/img-cropper.module';
@@ -37,6 +38,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PedidoService } from '../../services/core/pedido.service';
 import { PedidoComponent } from './pedido/pedido.component';
 import { MzDatepickerModule } from 'ng2-materialize'
+import { PermissionModule } from '../../directives/permission.module';
 
 @NgModule({
   imports: [
@@ -64,7 +66,8 @@ import { MzDatepickerModule } from 'ng2-materialize'
     ImgCropperModule,
     PasswordStrengthBarModule,
     MatIconModule,
-    MzDatepickerModule
+    MzDatepickerModule,
+    PermissionModule
   ],
   declarations: [
     PainelControleComponent,
@@ -83,6 +86,6 @@ import { MzDatepickerModule } from 'ng2-materialize'
     ImgCropperComponent,
     PedidoRegisterComponent
   ],
-  providers: [CategoriaService, ProfissionalService, PedidoService]
+  providers: [CategoriaService, ProfissionalService, PedidoService, ClienteService]
 })
 export class PainelControleModuleShared { }

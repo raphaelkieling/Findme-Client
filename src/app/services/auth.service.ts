@@ -1,3 +1,4 @@
+import { Permissao } from './../domain/permissao';
 import { Token } from './../domain/token';
 import { Injectable } from '@angular/core';
 import { JwtHelper } from 'angular2-jwt';
@@ -32,4 +33,19 @@ export class AuthService {
     return false;
   }
 
+  public hasPermission(roles) {
+    let tokenFiltrados = roles.filter((role) => {
+      if (!this.tokenDecoded) {
+        return false;
+      }
+
+      let hasPermissaoAtual = this.tokenDecoded.usuario.permissaos.filter((permissao: Permissao) => {
+        return permissao.nome === role;
+      }).length > 0;
+
+      if (hasPermissaoAtual) return role;
+    });
+
+    return tokenFiltrados.length == roles.length;
+  }
 }
