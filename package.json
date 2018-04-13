@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --aot -prod",
-    "start-angular":"ng serve"
+    "start-angular": "ng serve"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +28,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@types/graphql": "^0.13.0",
     "angular2-jwt": "^0.2.3",
     "apollo-angular": "^1.0.1",
     "apollo-angular-link-http": "^1.0.2-beta.0",
