@@ -1,4 +1,3 @@
-{{tipoPessoa}}
 <div [ngSwitch]="tipoPessoa">
     <div *ngSwitchCase="'cliente'">
         <div class="row">
@@ -33,7 +32,7 @@
     </div>
 
     <div *ngSwitchCase="'profissional'">
-        <agm-map #map [styles]="styles" [zoom]="7" class="full-map">
+        <agm-map #map [styles]="styles" [zoom]="15" class="full-map" [longitude]="centerLongitude" [latitude]="centerLatitude">
             <agm-marker *ngFor="let pedido of pedidos" [iconUrl]="pedido.cliente?.pessoa?.avatar?.marker" [title]="pedido.titulo" (markerClick)="markerPedidoClicado(pedido,infoWindow)"
                 [openInfoWindow]="true" [markerClickable]="true" [latitude]="pedido.latitude" [longitude]="pedido.longitude">
                 <agm-info-window #infoWindow>

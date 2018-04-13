@@ -7,6 +7,7 @@ export const ME_USUARIO = gql`
           pessoa{
             id
             nome
+            tipo
             avatar{
               id
               base64

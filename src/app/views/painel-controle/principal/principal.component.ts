@@ -1,3 +1,4 @@
+import { UsuarioService } from './../../../services/core/usuario.service';
 import { PedidoSocket } from './../../../domain/pedidoSocket';
 import { TipoUsuario } from './../../../domain/tipo';
 import { Pedido } from './../../../domain/pedido';
@@ -26,20 +27,34 @@ export class PrincipalComponent implements OnInit {
   styles: MapTypeStyle[] = [];
   infoWindowOpened: InfoWindow = null;
   pedidoSocketSubs: Subscription;
-
+  centerLatitude: number;
+  centerLongitude: number;
   constructor(
     private dialog: MatDialog,
     private pedidoService: PedidoService,
     private authService: AuthService,
     private markerManager: MarkerManager,
     private gmapsAPI: GoogleMapsAPIWrapper,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private usuarioService: UsuarioService
   ) { }
 
-  ngOnInit() {
-    this.tipoPessoa = this.authService.tokenDecoded.usuario.pessoa.tipo;
+  async ngOnInit() {
     this.defineEstiloMapa();
     this.carregarPedidos();
+    
+    this.usuarioService
+      .me()
+      .subscribe(({ data, loading }) => {
+        if (!data) {
+          return;
+        }
+
+        this.tipoPessoa = data.me.pessoa.tipo;
+        this.centerLatitude = data.me.pessoa.enderecos[0].latitude
+        this.centerLongitude = data.me.pessoa.enderecos[0].longitude
+      });
+      
 
     this.pedidoSocketSubs = this.pedidoService.pedidoSocket.subscribe((pedido: PedidoSocket) => {
       this.snack.open(`Opa opa! Pedido de categoria ${pedido.categoria.nome} acabou de sair do forno!`, 'UHUL!', {
@@ -279,6 +294,6 @@ export class PrincipalComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.pedidoSocketSubs.unsubscribe();
+    if (this.pedidoSocketSubs) this.pedidoSocketSubs.unsubscribe();
   }
 }
