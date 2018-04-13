@@ -1,3 +1,4 @@
+import { MapPedidosDirective } from './../../directives/map-pedidos.directive';
 import { PedidoRegisterComponent } from './pedido/pedido-register/pedido-register.component';
 import { ImgCropperModule } from '../../components/img-cropper/img-cropper.module';
 import { UsuariosComponent } from './usuarios/usuarios.component';
@@ -73,7 +74,8 @@ import { MzDatepickerModule } from 'ng2-materialize'
     CategoriaModalComponent,
     UsuariosComponent,
     PedidoComponent,
-    PedidoRegisterComponent
+    PedidoRegisterComponent,
+    MapPedidosDirective
   ],
   entryComponents: [
     CategoriaModalComponent,

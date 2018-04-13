@@ -32,14 +32,31 @@
 
     </div>
 
-    <div *ngSwitchCase="'profissional'" >
+    <div *ngSwitchCase="'profissional'">
         <agm-map #map [styles]="styles" [zoom]="7" class="full-map">
-            <agm-marker *ngFor="let pedido of pedidos" 
-            [title]="pedido.titulo" 
-            [markerClickable]="true" 
-            (markerClick)="markerClicked($event)"
-            [latitude]="pedido.latitude" 
-            [longitude]="pedido.longitude"></agm-marker>
+            <agm-marker *ngFor="let pedido of pedidos" [iconUrl]="pedido.cliente?.pessoa?.avatar?.marker" [title]="pedido.titulo" (markerClick)="markerPedidoClicado(pedido,infoWindow)"
+                [openInfoWindow]="true" [markerClickable]="true" [latitude]="pedido.latitude" [longitude]="pedido.longitude">
+                <agm-info-window #infoWindow>
+                    <div>
+                        <b>{{pedido.titulo}}</b>
+                        <br>
+                        <p>{{pedido.observacao}}</p>
+                        <p>
+                            <small>
+                                <b>Cliente</b>: {{pedido.cliente.pessoa.nome}} {{pedido.cliente.pessoa.sobrenome}}</small>
+                        </p>
+                    </div>
+                    <button mat-button disabled>
+                        <mat-icon>{{pedido.categoria.foto}}</mat-icon> {{pedido.categoria.nome}}
+                    </button>
+                    <button mat-button>
+                        <mat-icon>chat</mat-icon>
+                    </button>
+                    <button mat-button>
+                        <mat-icon>info</mat-icon>
+                    </button>
+                </agm-info-window>
+            </agm-marker>
         </agm-map>
     </div>
 </div>

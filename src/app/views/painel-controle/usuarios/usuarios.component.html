@@ -1,27 +1,24 @@
-<mat-card style="padding-bottom:0 !important;" class="animated fadeInDown">
-<div class="input-field">
-  <input (keyup)="filter($event.target.value)">
-  <label class="active">Filtro</label>
-</div>
-</mat-card>
-<br>
 <mat-card>
-<app-preloader *ngIf="loading;else table"></app-preloader>
+  <app-preloader *ngIf="loading;else table"></app-preloader>
 
-<ng-template #table>
-  <mat-table [dataSource]="usuarios">
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-    </ng-container>
+  <ng-template #table>
+    <div class="input-field">
+      <input (keyup)="filter($event.target.value)">
+      <label class="active">Filtro</label>
+    </div>
+    <mat-table [dataSource]="usuarios">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="usuario">
-      <mat-header-cell *matHeaderCellDef> Usuário </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.usuario}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="usuario">
+        <mat-header-cell *matHeaderCellDef> Usuário </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.usuario}} </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
-  </mat-table>
-</ng-template>
+      <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
+    </mat-table>
+  </ng-template>
 </mat-card>

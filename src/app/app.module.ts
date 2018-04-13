@@ -15,7 +15,7 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { AuthService } from './services/auth.service';
 import { HttpModule } from '@angular/http';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from '@agm/core';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
 const config: SocketIoConfig = { url: `${urlDomain}`, options: {} }
@@ -45,6 +45,8 @@ const config: SocketIoConfig = { url: `${urlDomain}`, options: {} }
       useClass: InterceptorService,
       multi: true
     },
+    MarkerManager,
+    GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent]
 })

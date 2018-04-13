@@ -9,7 +9,27 @@ import gql from 'graphql-tag';
 export const CRIAR_PEDIDO = gql`
     mutation criarPedido($pedidoCreateInput:PedidoCreateInput!){
         criarPedido(input:$pedidoCreateInput){
-            id
+            observacao
+            dataVencimento
+            latitude
+            longitude
+            titulo
+            categoria{
+                id
+                nome
+                foto
+            }
+            cliente{
+                usuario
+                pessoa{
+                    nome
+                    sobrenome
+                    avatar{
+                        base64
+                        marker
+                    }
+                }
+            }
         }
     }
 `;
@@ -32,6 +52,10 @@ export const ALL_PEDIDOS_CATEGORIA = gql`
                 pessoa{
                     nome
                     sobrenome
+                    avatar{
+                        base64
+                        marker
+                    }
                 }
             }
         }

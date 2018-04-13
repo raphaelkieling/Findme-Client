@@ -23,6 +23,7 @@ export class ImgCropperComponent implements OnInit {
     this.cropperSettings.croppedHeight = 300;
     this.cropperSettings.canvasWidth = 200;
     this.cropperSettings.canvasHeight = 200;
+    this.cropperSettings.rounded = true;
 
     this.dataImage = {};
   }

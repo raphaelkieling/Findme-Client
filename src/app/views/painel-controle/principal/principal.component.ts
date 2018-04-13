@@ -5,8 +5,10 @@ import { PedidoRegisterComponent } from './../pedido/pedido-register/pedido-regi
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../../services/auth.service';
-import { MapTypeStyle, AgmMap } from '@agm/core';
-import { MarkerOptions } from '@agm/core/services/google-maps-types';
+import { MapTypeStyle, AgmMap, MarkerManager, AgmMarker, GoogleMapsAPIWrapper } from '@agm/core';
+import { MarkerOptions, InfoWindow } from '@agm/core/services/google-maps-types';
+import { Subscription } from 'rxjs/Subscription';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-principal',
@@ -21,11 +23,16 @@ export class PrincipalComponent implements OnInit {
   pedidos: Pedido[] = [];
   tipoPessoa: TipoUsuario | string;
   styles: MapTypeStyle[] = [];
+  infoWindowOpened: InfoWindow = null;
+  pedidoSocketSubs: Subscription;
 
   constructor(
     private dialog: MatDialog,
     private pedidoService: PedidoService,
-    private authService: AuthService
+    private authService: AuthService,
+    private markerManager: MarkerManager,
+    private gmapsAPI: GoogleMapsAPIWrapper,
+    private snack: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -33,8 +40,9 @@ export class PrincipalComponent implements OnInit {
     this.defineEstiloMapa();
     this.carregarPedidos();
 
-    this.pedidoService.pedidoSocket.subscribe((pedido) => {
-      this.pedidos = [...this.pedidos, pedido]
+    this.pedidoSocketSubs = this.pedidoService.pedidoSocket.subscribe((pedido: Pedido) => {
+      this.snack.open(`Opa opa! Pedido de categoria ${pedido.categoria.nome} acabou de sair do forno!`);
+      this.carregarPedidos();
     })
   }
 
@@ -44,8 +52,14 @@ export class PrincipalComponent implements OnInit {
     });
   }
 
-  markerClicked(oi){
-    console.log(oi);
+  markerPedidoClicado(pedido: Pedido, infoWindow: InfoWindow) {
+    if (this.infoWindowOpened === infoWindow)
+      return;
+
+    if (this.infoWindowOpened !== null)
+      this.infoWindowOpened.close();
+
+    this.infoWindowOpened = infoWindow;
   }
 
   carregarPedidos() {
@@ -259,5 +273,9 @@ export class PrincipalComponent implements OnInit {
         ]
       }
     ]
+  }
+
+  ngOnDestroy() {
+    this.pedidoSocketSubs.unsubscribe();
   }
 }

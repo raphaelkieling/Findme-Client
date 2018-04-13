@@ -4,17 +4,15 @@
 </button>
 <br>
 <br>
-<mat-card style="padding-bottom:0 !important;" class="animated fadeInDown">
-  <div class="input-field">
-    <input (keyup)="filter($event.target.value)">
-    <label class="active">Filtro</label>
-  </div>
-</mat-card>
-<br>
 <mat-card>
   <app-preloader *ngIf="loadingCategorias;else table"></app-preloader>
 
   <ng-template #table>
+    <div class="input-field">
+      <input (keyup)="filter($event.target.value)">
+      <label class="active">Filtro</label>
+    </div>
+
     <mat-table [dataSource]="categorias">
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
