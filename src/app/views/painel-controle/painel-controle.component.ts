@@ -1,3 +1,4 @@
+import { PedidoSocket } from './../../domain/pedidoSocket';
 import { PedidoService } from './../../services/core/pedido.service';
 import { Categoria } from './../../domain/categoria';
 import { AuthService } from './../../services/auth.service';
@@ -23,10 +24,10 @@ export class PainelControleComponent implements OnInit {
     this.authS.tokenDecoded.usuario.pessoa.categorias.forEach((categoria: Categoria) => {
       console.log(`Escutando a categoria ${categoria.nome} - id ${categoria.id}`);
 
-      const sub = this.socket.fromEvent(`categoria-${categoria.id}`).subscribe(({ pedido }) => {
-        this.pedidoService.pedidoSocket.emit(pedido);
+      const sub = this.socket.fromEvent(`categoria-${categoria.id}`).subscribe((pedidoSocket: PedidoSocket) => {
+        this.pedidoService.pedidoSocket.emit(pedidoSocket);
       })
-      
+
       this.categoriasSubscriptions.push(sub);
 
     });

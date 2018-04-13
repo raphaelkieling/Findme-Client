@@ -1,3 +1,4 @@
+import { PedidoSocket } from './../../../domain/pedidoSocket';
 import { TipoUsuario } from './../../../domain/tipo';
 import { Pedido } from './../../../domain/pedido';
 import { PedidoService } from './../../../services/core/pedido.service';
@@ -40,8 +41,10 @@ export class PrincipalComponent implements OnInit {
     this.defineEstiloMapa();
     this.carregarPedidos();
 
-    this.pedidoSocketSubs = this.pedidoService.pedidoSocket.subscribe((pedido: Pedido) => {
-      this.snack.open(`Opa opa! Pedido de categoria ${pedido.categoria.nome} acabou de sair do forno!`);
+    this.pedidoSocketSubs = this.pedidoService.pedidoSocket.subscribe((pedido: PedidoSocket) => {
+      this.snack.open(`Opa opa! Pedido de categoria ${pedido.categoria.nome} acabou de sair do forno!`, 'UHUL!', {
+        duration: 3000
+      });
       this.carregarPedidos();
     })
   }

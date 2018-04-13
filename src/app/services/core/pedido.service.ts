@@ -1,3 +1,4 @@
+import { PedidoSocket } from './../../domain/pedidoSocket';
 import { GraphPolicy } from './../../domain/policy';
 import { CRIAR_PEDIDO, ALL_PEDIDOS, PEDIDOS_PROFISSIONAL, PEDIDOS_CLIENTE, ALL_PEDIDOS_CATEGORIA } from './../../graphql/pedido.querie';
 import { Pedido } from './../../domain/pedido';
@@ -7,7 +8,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 @Injectable()
 export class PedidoService {
 
-    pedidoSocket: EventEmitter<Pedido> = new EventEmitter<Pedido>();
+    pedidoSocket: EventEmitter<PedidoSocket> = new EventEmitter<PedidoSocket>();
 
     constructor(
         private apollo: Apollo
