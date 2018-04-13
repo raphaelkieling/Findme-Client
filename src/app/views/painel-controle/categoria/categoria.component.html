@@ -24,6 +24,13 @@
         <mat-cell *matCellDef="let element"> {{element.nome}} </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="foto">
+        <mat-header-cell *matHeaderCellDef> Ícone </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-icon>{{element.foto}}</mat-icon>
+        </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="acoes">
         <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
         <mat-cell *matCellDef="let element">

@@ -39,6 +39,7 @@ import { PedidoService } from '../../services/core/pedido.service';
 import { PedidoComponent } from './pedido/pedido.component';
 import { MzDatepickerModule } from 'ng2-materialize'
 import { PermissionModule } from '../../directives/permission.module';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
 @NgModule({
   imports: [
@@ -67,7 +68,8 @@ import { PermissionModule } from '../../directives/permission.module';
     PasswordStrengthBarModule,
     MatIconModule,
     MzDatepickerModule,
-    PermissionModule
+    PermissionModule,
+    AgmJsMarkerClustererModule
   ],
   declarations: [
     PainelControleComponent,

@@ -19,7 +19,7 @@ export class CategoriaComponent implements OnInit {
 
   loadingCategorias: boolean = false;
   categorias: MatTableDataSource<Categoria[]>;
-  colunas = ['id', 'nome', 'acoes'];
+  colunas = ['id', 'nome', 'foto','acoes'];
 
   constructor(
     public categoriaS: CategoriaService,
