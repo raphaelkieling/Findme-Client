@@ -29,6 +29,7 @@ export class PrincipalComponent implements OnInit {
   pedidoSocketSubs: Subscription;
   centerLatitude: number;
   centerLongitude: number;
+
   constructor(
     private dialog: MatDialog,
     private pedidoService: PedidoService,
@@ -66,7 +67,8 @@ export class PrincipalComponent implements OnInit {
 
   abrirModalPedido() {
     const dialog = this.dialog.open(PedidoRegisterComponent, {
-      width: '600px'
+      width: '600px',
+      height: '500px'
     });
   }
 
