@@ -46,11 +46,24 @@ export const MODIFICA_SENHA = gql`
   }
 `
 
+export const DESATIVA_USUARIO = gql`
+  mutation desativarUsuario($id:ID!){
+    desativarUsuario(id:$id)
+  }
+`
+
+export const ATIVA_USUARIO = gql`
+  mutation ativarUsuario($id:ID!){
+    ativarUsuario(id:$id)
+  }
+`
+
 export const TODOS_USUARIOS = gql`
   query{
     usuarios{
       id
       usuario
+      ativo
       pessoa{
         nome
       }

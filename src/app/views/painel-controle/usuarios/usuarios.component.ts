@@ -4,6 +4,7 @@ import { Usuario } from './../../../domain/usuario';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import 'rxjs/add/operator/do';
 
 @Component({
   selector: 'app-usuarios',
@@ -14,7 +15,7 @@ export class UsuariosComponent implements OnInit {
 
   loading: boolean = true;
   usuarios: MatTableDataSource<Usuario[]>;
-  colunas = ['id', 'usuario'];
+  colunas = ['id', 'usuario', 'acao'];
   usuariosSub: Subscription;
   constructor(
     private usuarioS: UsuarioService,
@@ -40,6 +41,58 @@ export class UsuariosComponent implements OnInit {
 
           snack.onAction().subscribe(() => {
             this.snack.dismiss();
+          })
+        })
+  }
+
+  desativarUsuario(idUsuario) {
+    this.usuarioS.desativarUsuario(idUsuario)
+      .subscribe(({ data }) => {
+        if (!data) return;
+
+        this.carregaUsuarios();
+
+        const snack = this.snack.open('Usuário desativado com sucesso!', 'Uhul!', {
+          duration: 5000
+        });
+
+        snack.onAction().subscribe(() => {
+          snack.dismiss();
+        })
+      },
+        err => {
+          const snack = this.snack.open('Problema ao desativar o usuário', 'Tentar Novamente', {
+            duration: 5000
+          });
+
+          snack.onAction().subscribe(() => {
+            this.desativarUsuario(idUsuario);
+          })
+        })
+  }
+
+  ativarUsuario(idUsuario) {
+    this.usuarioS.ativarUsuario(idUsuario)
+      .subscribe(({ data }) => {
+        if (!data) return;
+        
+        this.carregaUsuarios();
+
+        const snack = this.snack.open('Usuário ativado com sucesso!', 'Uhul!', {
+          duration: 5000
+        });
+
+        snack.onAction().subscribe(() => {
+          snack.dismiss();
+        })
+      },
+        err => {
+          const snack = this.snack.open('Problema ao ativar o usuário', 'Tentar Novamente', {
+            duration: 5000
+          });
+
+          snack.onAction().subscribe(() => {
+            this.ativarUsuario(idUsuario);
           })
         })
   }

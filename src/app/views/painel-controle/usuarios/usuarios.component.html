@@ -17,6 +17,14 @@
         <mat-cell *matCellDef="let element"> {{element.usuario}} </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="acao">
+        <mat-header-cell *matHeaderCellDef> Ação </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+            <button *ngIf="element.ativo" mat-button class="red-text" (click)="desativarUsuario(element.id)">Desativar</button> 
+            <button *ngIf="!element.ativo" mat-button class="green-text" (click)="ativarUsuario(element.id)">Ativar</button> 
+        </mat-cell>
+      </ng-container>
+
       <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
       <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
     </mat-table>

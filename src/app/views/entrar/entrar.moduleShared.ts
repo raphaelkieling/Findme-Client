@@ -5,6 +5,7 @@ import { EntrarComponent } from './entrar.component';
 import { LoginService } from '../../services/login.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PreloaderModule } from '../../components/preloader/preloader.module';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import { PreloaderModule } from '../../components/preloader/preloader.module';
         NavbarModule,
         FormsModule,
         ReactiveFormsModule,
-        PreloaderModule
+        PreloaderModule,
+        MatButtonModule
     ],
     declarations: [EntrarComponent],
     providers: [LoginService]

@@ -40,6 +40,7 @@ export class EntrarComponent {
       console.log(this.authS.tokenDecoded);
       this.router.navigate(['painel-controle']);
     }, err => {
+      console.dir(err);
       this.snack.open('Usuário ou senha incorretas','Tranquilo!');
       this.loading = false;
     });
