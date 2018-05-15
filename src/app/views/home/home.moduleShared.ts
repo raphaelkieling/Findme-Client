@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FlexModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
     imports: [
@@ -38,7 +39,8 @@ import { FlexModule } from '@angular/flex-layout';
         EnderecoModule,
         CategoriasSelectModule,
         MatCardModule,
-        FlexModule
+        FlexModule,
+        MatButtonModule
     ],
     declarations: [
         HomeComponent,

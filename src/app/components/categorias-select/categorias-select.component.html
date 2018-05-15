@@ -1,15 +1,17 @@
-<div class="row">
+<app-preloader *ngIf="loadingCategorias;else categoriasTemplate"></app-preloader>
 
-  <div class="col s12">
-    <app-preloader *ngIf="loadingCategorias;else categoriasTemplate"></app-preloader>
-    <ng-template #categoriasTemplate>
-      <div*ngFor="let categoria of categorias">
+<ng-template #categoriasTemplate>
+
+  <div fxLayout="row">
+    <mat-card *ngFor="let categoria of categorias" class="card-panel center" fxFlex="60%"
+      (click)="selecionarCategoria(categoria.id)" [class.purple]="estaSelecionado(categoria.id)" [class.white]="!estaSelecionado(categoria.id)">
+
+      <mat-card-content>
         <p>{{categoria.nome}}</p>
-        <div class="card-panel center" (click)="selecionarCategoria(categoria.id)" [class.purple]="estaSelecionado(categoria.id)"
-          [class.white]="!estaSelecionado(categoria.id)">
-          <i class="icon-categoria material-icons" [class.white-text]="estaSelecionado(categoria.id)">{{categoria.foto}}</i>
-        </div>
-    </ng-template>
+        <i class="icon-categoria material-icons" [class.white-text]="estaSelecionado(categoria.id)">{{categoria.foto}}</i>
+      </mat-card-content>
+
+    </mat-card>
   </div>
 
-</div>
+</ng-template>

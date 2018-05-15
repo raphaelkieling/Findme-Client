@@ -7,44 +7,45 @@
     <mat-step>
       <ng-template matStepLabel>Selecione sua categoria</ng-template>
       <br>
-      <div class="row">
-
-        <div class="col s12">
-          <app-categorias-select (selecteds)="profissional.pessoa.categorias = $event"></app-categorias-select>
-        </div>
-
-      </div>
-      <div>
-        <button mat-button matStepperNext class="btn purple right">Próximo!</button>
+      <app-categorias-select (selecteds)="profissional.pessoa.categorias = $event"></app-categorias-select>
+      <div fxLayout="row" fxLayoutAlign="end">
+        <button mat-raised-button color="primary" matStepperNext>Próximo!</button>
       </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Informações Pessoais</ng-template>
       <br>
       <app-info-pessoal [objeto]="profissional.pessoa"></app-info-pessoal>
-      <button mat-button matStepperNext class="btn purple right">Próximo!</button>
+      <div fxLayout="row" fxLayoutAlign="end">
+        <button mat-raised-button color="primary" matStepperNext>Próximo!</button>
+      </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Usuário</ng-template>
       <br>
       <app-usuario-form [objeto]="profissional"></app-usuario-form>
-      <button mat-button matStepperNext class="btn purple right">Próximo!</button>
+      <div fxLayout="row" fxLayoutAlign="end">
+        <button mat-raised-button color="primary" matStepperNext>Próximo!</button>
+      </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Endereço</ng-template>
       <br>
       <app-endereco [objeto]="endereco"></app-endereco>
-      <button mat-button matStepperNext class="btn purple right">Próximo!</button>
+      <div fxLayout="row" fxLayoutAlign="end">
+        <button mat-raised-button color="primary" matStepperNext>Próximo!</button>
+      </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Localização</ng-template>
-      <div class="row">
-        <div class="col s12 center">
-          <i class="material-icons purple-text" style="font-size:160px">location_on</i>
-          <p class="center">
-            Precisamos que tu ative sua localização para terminar o cadastro
-          </p>
-          <button class="center btn purple" (click)="ativarGEO()">ativar</button>
+      <div fxFlex="100%" fxLayout="column" fxLayoutAlign="center" style="text-align: center">
+        <i class="material-icons purple-text" style="font-size:160px">location_on</i>
+        <p class="center">
+          Precisamos que tu ative sua localização para terminar o cadastro
+        </p>
+        <div fxLayout="row" fxLayoutAlign="center">
+          <button mat-button color="primary" matStepperPrevious>Voltar</button>
+          <button mat-raised-button color="primary" (click)="ativarGEO()">Ativar!</button>
         </div>
       </div>
     </mat-step>
