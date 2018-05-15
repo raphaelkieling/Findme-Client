@@ -1,0 +1,11 @@
+<mat-toolbar color="primary" class="navbar-custom">
+  <mat-toolbar-row>
+    <span>FindME</span>
+    <span class="spacer"></span>
+    <mat-icon [routerLink]="['principal']" class="icon-navbar">home</mat-icon>
+    <mat-icon [routerLink]="['categorias']" class="icon-navbar">view_module</mat-icon>
+    <mat-icon [routerLink]="['usuarios']" class="icon-navbar">supervisor_account</mat-icon>
+    <mat-icon [routerLink]="['conta']" class="icon-navbar">account_circle</mat-icon>
+    <mat-icon class="icon-navbar" (click)="logout()">power_settings_new</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>

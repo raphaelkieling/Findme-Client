@@ -5,7 +5,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col m6 s12" *ngFor="let pedido of pedidos">
+            <div class="col m4 s12" *ngFor="let pedido of pedidos">
                 <mat-card class="animated fadeInDown">
                     <mat-card-header>
                         <div mat-card-avatar class="example-header-image">
@@ -32,7 +32,7 @@
     </div>
 
     <div *ngSwitchCase="'profissional'">
-        <agm-map #map [styles]="styles" [zoom]="15" class="full-map" [longitude]="centerLongitude" [latitude]="centerLatitude">
+        <agm-map #map [styles]="styles" [zoom]="15" [longitude]="centerLongitude" [latitude]="centerLatitude">
             <agm-marker *ngFor="let pedido of pedidos" [iconUrl]="pedido.cliente?.pessoa?.avatar?.marker" [title]="pedido.titulo" (markerClick)="markerPedidoClicado(pedido,infoWindow)"
                 [openInfoWindow]="true" [markerClickable]="true" [latitude]="pedido.latitude" [longitude]="pedido.longitude">
                 <agm-info-window #infoWindow>
@@ -57,5 +57,30 @@
                 </agm-info-window>
             </agm-marker>
         </agm-map>
+        <br>
+        <div class="row">
+            <div class="col m6 s12" *ngFor="let pedido of pedidos">
+                <mat-card class="animated fadeInDown">
+                    <mat-card-header>
+                        <div mat-card-avatar class="example-header-image">
+                            <mat-icon>{{pedido.categoria.foto}}</mat-icon>
+                        </div>
+                        <mat-card-title>{{pedido.categoria.nome}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>
+                            {{pedido.observacao}}
+                        </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button>
+                            <mat-icon>close</mat-icon>Cancelar</button>
+                        <button mat-button>
+                            <mat-icon>edit</mat-icon>Editar</button>
+                    </mat-card-actions>
+                </mat-card>
+
+            </div>
+        </div>
     </div>
 </div>

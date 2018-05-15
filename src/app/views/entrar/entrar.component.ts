@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class EntrarComponent {
   form: FormGroup;
   loading = false;
+  salvar = false;
 
   constructor(
     private loginS: LoginService,
@@ -22,16 +23,30 @@ export class EntrarComponent {
     private snack: MatSnackBar
   ) {
     this.buildForm();
+    this.salvar = this.checkSalvar();
+  }
+
+  checkSalvar(): boolean {
+    return !!this.getSalvo();
+  }
+
+  getSalvo() {
+    return localStorage.getItem('__username__');
   }
 
   buildForm() {
     this.form = this.formB.group({
-      usuario: ['', Validators.required],
-      senha: ['', Validators.required]
+      usuario: [this.getSalvo(), Validators.required],
+      senha: ['', Validators.required],
+      salvar: ['']
     })
   }
 
   submit() {
+    if (this.salvar) {
+      localStorage.setItem('__username__', this.form.get('usuario').value);
+    }
+
     this.loading = true;
 
     this.loginS.login(this.form.value).subscribe((res) => {
@@ -41,7 +56,7 @@ export class EntrarComponent {
       this.router.navigate(['painel-controle']);
     }, err => {
       console.dir(err);
-      this.snack.open('Usuário ou senha incorretas','Tranquilo!');
+      this.snack.open('Usuário ou senha incorretas', 'Tranquilo!');
       this.loading = false;
     });
   }

@@ -1,0 +1,13 @@
+.icon-navbar {
+    padding: 0 30px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.navbar-custom{
+    margin-bottom: 20px;
+}

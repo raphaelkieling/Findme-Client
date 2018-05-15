@@ -17,8 +17,11 @@ import { AuthService } from './services/auth.service';
 import { HttpModule } from '@angular/http';
 import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from '@agm/core';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { retiraPalavra } from './utils';
+import { FlexModule } from '@angular/flex-layout';
 
-const config: SocketIoConfig = { url: `${urlDomain}`, options: {} }
+const config: SocketIoConfig = { url: `${retiraPalavra(urlDomain, '/graphql')}`, options: {} };
+
 @NgModule({
   declarations: [
     AppComponent
@@ -36,7 +39,8 @@ const config: SocketIoConfig = { url: `${urlDomain}`, options: {} }
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAhDpLlU6jqo4aWEP26jG3RE_-OFktIyvQ'
     }),
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    FlexModule
   ],
   providers: [
     AuthService,

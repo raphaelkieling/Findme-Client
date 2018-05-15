@@ -1,8 +1,14 @@
-<nav class="transparent z-depth-0" [class.nav-background]="backgroundImage">
-  <div class="nav-wrapper">
-    <a href="#" style="margin-left:20px" class="brand-logo" [routerLink]="['/']" >FindMe</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <ng-content></ng-content>
-    </ul>
-  </div>
-</nav>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div fxLayout="row" fxFlex="100%" fxLayoutAlign="space-between">
+      <span [routerLink]="['/']" class="logo">FindME</span>
+      <span></span>
+      <div>
+        <button mat-raised-button color="accent" [routerLink]="['/home','cadastro-profissional']">Profissional</button>
+        <button mat-raised-button color="accent" [routerLink]="['/home','cadastro-cliente']">Cliente</button>
+        <button mat-button color="accent" [routerLink]="['/entrar']">Entrar</button>
+      </div>
+    </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>

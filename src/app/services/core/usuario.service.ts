@@ -3,7 +3,6 @@ import { ME_USUARIO, MODIFICA_SENHA, TODOS_USUARIOS, DESATIVA_USUARIO, ATIVA_USU
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Observable } from 'apollo-client/util/Observable';
 
 @Injectable()
@@ -13,7 +12,7 @@ export class UsuarioService {
         private apollo: Apollo
     ) { }
 
-    me(): Observable<any> {
+    me() {
         let query = ME_USUARIO;
 
         return this.apollo.watchQuery({
@@ -22,7 +21,7 @@ export class UsuarioService {
         }).valueChanges;
     }
 
-    meSenhaNova(senha): Observable<any> {
+    meSenhaNova(senha) {
         let mutation = MODIFICA_SENHA;
 
         return this.apollo.mutate({
@@ -33,7 +32,7 @@ export class UsuarioService {
         });
     }
 
-    usuarios(): Observable<any> {
+    usuarios() {
         let query = TODOS_USUARIOS;
 
         return this.apollo.watchQuery({
@@ -42,7 +41,7 @@ export class UsuarioService {
         }).valueChanges
     }
 
-    desativarUsuario(id): Observable<any> {
+    desativarUsuario(id) {
         let mutation = DESATIVA_USUARIO;
 
         return this.apollo.mutate({
@@ -53,7 +52,7 @@ export class UsuarioService {
         });
     }
 
-    ativarUsuario(id): Observable<any> {
+    ativarUsuario(id) {
         let mutation = ATIVA_USUARIO;
 
         return this.apollo.mutate({

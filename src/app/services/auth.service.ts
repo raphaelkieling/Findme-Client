@@ -2,9 +2,11 @@ import { Permissao } from './../domain/permissao';
 import { Token } from './../domain/token';
 import { Injectable } from '@angular/core';
 import { JwtHelper } from 'angular2-jwt';
+import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
 
+  constructor(private router: Router) { }
   // token
   public set token(token: string) {
     sessionStorage.setItem('token_', token);
@@ -20,6 +22,11 @@ export class AuthService {
 
   public get tokenDecoded(): Token {
     const jwtH = new JwtHelper();
+
+    if (!this.token) {
+      return undefined;
+    }
+
     return jwtH.decodeToken(this.token);
   }
 

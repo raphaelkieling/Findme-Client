@@ -40,6 +40,8 @@ import { PedidoComponent } from './pedido/pedido.component';
 import { MzDatepickerModule } from 'ng2-materialize'
 import { PermissionModule } from '../../directives/permission.module';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NavbarCustomModule } from '../../components/navbar-admin/navbar-custom.module';
 
 @NgModule({
   imports: [
@@ -49,7 +51,6 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
     RouterModule,
     InfoPessoalModule,
     UsuarioFormModule,
-    MatCardModule,
     PreloaderModule,
     EnderecoModule,
     FormsModule,
@@ -69,7 +70,8 @@ import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
     MatIconModule,
     MzDatepickerModule,
     PermissionModule,
-    AgmJsMarkerClustererModule
+    AgmJsMarkerClustererModule,
+    NavbarCustomModule
   ],
   declarations: [
     PainelControleComponent,

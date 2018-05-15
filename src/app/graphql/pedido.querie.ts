@@ -1,11 +1,5 @@
 import gql from 'graphql-tag';
 
-// {
-//     observacao:"123",
-//     dataVencimento:"1998-05-01",
-//     categoriaId:"1"
-// }
-
 export const CRIAR_PEDIDO = gql`
     mutation criarPedido($pedidoCreateInput:PedidoCreateInput!){
         criarPedido(input:$pedidoCreateInput){

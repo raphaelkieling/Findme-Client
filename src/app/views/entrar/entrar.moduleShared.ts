@@ -6,6 +6,10 @@ import { LoginService } from '../../services/login.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PreloaderModule } from '../../components/preloader/preloader.module';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardMdImage, MatCardModule } from '@angular/material/card';
+import { FlexModule } from '@angular/flex-layout';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
     imports: [
@@ -14,7 +18,11 @@ import { MatButtonModule } from '@angular/material/button';
         FormsModule,
         ReactiveFormsModule,
         PreloaderModule,
-        MatButtonModule
+        MatButtonModule,
+        MatInputModule,
+        MatCardModule,
+        FlexModule,
+        MatCheckboxModule
     ],
     declarations: [EntrarComponent],
     providers: [LoginService]

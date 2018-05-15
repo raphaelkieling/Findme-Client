@@ -1,3 +1,11 @@
 .nav-background{
     background-image: url('../../../assets/images/footer_lodyas.png');
 }
+
+#nav-mobile{
+    margin-top: 20px;
+}
+
+.logo{
+    cursor: pointer;
+}

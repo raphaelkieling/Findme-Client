@@ -1,0 +1,1 @@
+export const retiraPalavra = (palavra, retira) => palavra.replace(retira, '');

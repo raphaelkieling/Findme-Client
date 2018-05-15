@@ -50,9 +50,9 @@ export class PrincipalComponent implements OnInit {
         return;
       }
       
-      this.tipoPessoa = data.me.pessoa.tipo;
-      this.centerLatitude = data.me.pessoa.enderecos[0].latitude
-      this.centerLongitude = data.me.pessoa.enderecos[0].longitude
+      this.tipoPessoa = data['me'].pessoa.tipo;
+      this.centerLatitude = data['me'].pessoa.enderecos[0].latitude
+      this.centerLongitude = data['me'].pessoa.enderecos[0].longitude
       this.carregarPedidos();
       });
       

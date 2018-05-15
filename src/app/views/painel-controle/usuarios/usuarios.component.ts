@@ -32,7 +32,7 @@ export class UsuariosComponent implements OnInit {
         this.loading = loading;
         if (!data) return;
 
-        this.usuarios = new MatTableDataSource(data.usuarios);
+        this.usuarios = new MatTableDataSource(data['usuarios']);
       },
         err => {
           const snack = this.snack.open('Problema ao carregar os usuários', 'Tudo bem', {
