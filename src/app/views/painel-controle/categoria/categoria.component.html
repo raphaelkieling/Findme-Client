@@ -1,4 +1,4 @@
-<button mat-button class="purple white-text right" (click)="abrirAdicionarModal()">
+<button mat-raised-button color="primary" (click)="abrirAdicionarModal()">
   Adicionar
   <i class="material-icons">add</i>
 </button>
@@ -8,9 +8,10 @@
   <app-preloader *ngIf="loadingCategorias;else table"></app-preloader>
 
   <ng-template #table>
-    <div class="input-field">
-      <input (keyup)="filter($event.target.value)">
-      <label class="active">Filtro</label>
+    <div fxLayout="column">
+      <mat-form-field>
+        <input matInput placeholder="Filtro" (keyup)="filter($event.target.value)">
+      </mat-form-field>
     </div>
 
     <mat-table [dataSource]="categorias">

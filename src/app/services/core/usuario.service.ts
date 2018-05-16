@@ -1,5 +1,5 @@
 import { GraphPolicy } from './../../domain/policy';
-import { ME_USUARIO, MODIFICA_SENHA, TODOS_USUARIOS, DESATIVA_USUARIO, ATIVA_USUARIO } from './../../graphql/usuario.querie';
+import { ME_USUARIO, MODIFICA_SENHA, TODOS_USUARIOS, DESATIVA_USUARIO, ATIVA_USUARIO, USUARIO_ID } from './../../graphql/usuario.querie';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Injectable } from '@angular/core';
@@ -38,6 +38,18 @@ export class UsuarioService {
         return this.apollo.watchQuery({
             query,
             fetchPolicy: GraphPolicy.NETWORK_ONLY
+        }).valueChanges
+    }
+
+    usuario(id: any) {
+        let query = USUARIO_ID;
+
+        return this.apollo.watchQuery({
+            query,
+            fetchPolicy: GraphPolicy.NETWORK_ONLY,
+            variables: {
+                id
+            }
         }).valueChanges
     }
 

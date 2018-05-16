@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { UsuarioFormComponent } from './usuario-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexModule,
+    MatInputModule
   ],
   declarations: [UsuarioFormComponent],
   exports: [UsuarioFormComponent]

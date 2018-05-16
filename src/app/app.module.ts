@@ -19,8 +19,14 @@ import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from '@agm/core';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { retiraPalavra } from './utils';
 import { FlexModule } from '@angular/flex-layout';
+import { MAT_DATE_LOCALE, MatPaginatorIntl, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
 const config: SocketIoConfig = { url: `${retiraPalavra(urlDomain, '/graphql')}`, options: {} };
+
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [
@@ -50,7 +56,20 @@ const config: SocketIoConfig = { url: `${retiraPalavra(urlDomain, '/graphql')}`,
       multi: true
     },
     MarkerManager,
-    GoogleMapsAPIWrapper
+    GoogleMapsAPIWrapper,
+    {
+      provide: MAT_DATE_LOCALE, 
+      useValue: 'pt-br'
+    },
+    {
+      provide: DateAdapter, 
+      useClass: MomentDateAdapter, 
+      deps: [MAT_DATE_LOCALE]
+    },
+    {
+      provide: MAT_DATE_FORMATS, 
+      useValue: MAT_MOMENT_DATE_FORMATS
+    }
   ],
   bootstrap: [AppComponent]
 })

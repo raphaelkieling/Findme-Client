@@ -1,17 +1,17 @@
 <h2 mat-dialog-title>Categoria</h2>
 
 
-<form>
-  <mz-input-container>
-    <input mz-input [label]="'Nome'" id="nome" name="nome" type="text" [(ngModel)]="objeto.nome">
-  </mz-input-container>
+<form fxLayout="column">
+  <mat-form-field>
+    <input matInput placeholder="Nome" id="nome" name="nome" type="text" [(ngModel)]="objeto.nome">
+  </mat-form-field>
 
-  <mz-input-container>
-    <input mz-input [label]="'Ícone'" id="foto" name="foto" type="text" [(ngModel)]="objeto.foto">
-  </mz-input-container>
+  <mat-form-field>
+    <input matInput placeholder="Ícone" id="foto" name="foto" type="text" [(ngModel)]="objeto.foto">
+  </mat-form-field>
 </form>
 
 <mat-dialog-actions>
-  <button mat-button [disabled]="loading" class="purple white-text" (click)="submit()">Salvar</button>
+  <button mat-raised-button color="primary" [disabled]="loading" (click)="submit()">Salvar</button>
   <mat-progress-spinner mode="indeterminate" diameter="20" style="margin: 5px;" *ngIf="loading"></mat-progress-spinner>
 </mat-dialog-actions>

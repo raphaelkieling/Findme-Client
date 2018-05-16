@@ -1,14 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+:root{
+    --color-primary: #673AB7;
+}
+
 body{
     min-height: 100vh;
     background: url('./assets/images/doodles.png');
 }
 
-.purple{
-    background: #9b59b6 !important;
+.primary{
+    background: var(--color-primary) !important;
 }
-
+.white{
+    background: #FFF !important;    
+}
 .nav-btn{
     border-radius: 25px !important;
 }
@@ -45,4 +52,15 @@ agm-map.full-map{
 
 mat-card{
     margin-bottom:20px
+}
+
+.container{
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.title_section{
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
 }

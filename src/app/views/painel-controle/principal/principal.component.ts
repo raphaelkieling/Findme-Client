@@ -11,6 +11,7 @@ import { MapTypeStyle, AgmMap, MarkerManager, AgmMarker, GoogleMapsAPIWrapper } 
 import { MarkerOptions, InfoWindow } from '@agm/core/services/google-maps-types';
 import { Subscription } from 'rxjs/Subscription';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PerfilComponent } from '../../../components/perfil/perfil.component';
 
 @Component({
   selector: 'app-principal',
@@ -42,20 +43,20 @@ export class PrincipalComponent implements OnInit {
 
   async ngOnInit() {
     this.defineEstiloMapa();
-    
+
     this.usuarioService
-    .me()
-    .subscribe(({ data, loading }) => {
-      if (!data) {
-        return;
-      }
-      
-      this.tipoPessoa = data['me'].pessoa.tipo;
-      this.centerLatitude = data['me'].pessoa.enderecos[0].latitude
-      this.centerLongitude = data['me'].pessoa.enderecos[0].longitude
-      this.carregarPedidos();
+      .me()
+      .subscribe(({ data, loading }) => {
+        if (!data) {
+          return;
+        }
+
+        this.tipoPessoa = data['me'].pessoa.tipo;
+        this.centerLatitude = data['me'].pessoa.enderecos[0].latitude
+        this.centerLongitude = data['me'].pessoa.enderecos[0].longitude
+        this.carregarPedidos();
       });
-      
+
 
     this.pedidoSocketSubs = this.pedidoService.pedidoSocket.subscribe((pedido: PedidoSocket) => {
       this.snack.open(`Opa opa! Pedido de categoria ${pedido.categoria.nome} acabou de sair do forno!`, 'UHUL!', {
@@ -84,13 +85,12 @@ export class PrincipalComponent implements OnInit {
 
   carregarPedidos() {
     let categoriasUsadas = this.authService.tokenDecoded.usuario.pessoa.categorias.map((categoria) => categoria.id);
-    
+
     switch (this.tipoPessoa) {
       case TipoUsuario.CLIENTE:
         this.pedidoService
           .pedidosCliente()
           .subscribe(({ data, loading }) => {
-            console.log(data);
             this.loadingPedidos = loading;
             this.pedidos = data['pedidosCliente'];
           });
@@ -105,6 +105,14 @@ export class PrincipalComponent implements OnInit {
           });
         break;
     }
+  }
+
+  openPerfil(pedido: Pedido) {
+    this.dialog.open(PerfilComponent, {
+      data: pedido.cliente,
+      width: '600px',
+      height: '500px'
+    });
   }
 
   defineEstiloMapa() {

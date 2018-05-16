@@ -2,9 +2,14 @@
 
 <ng-template #categoriasTemplate>
 
-  <div fxLayout="row">
-    <mat-card *ngFor="let categoria of categorias" class="card-panel center" fxFlex="60%"
-      (click)="selecionarCategoria(categoria.id)" [class.purple]="estaSelecionado(categoria.id)" [class.white]="!estaSelecionado(categoria.id)">
+  <div fxLayout="row wrap">
+    <mat-card *ngFor="let categoria of categorias" 
+      class="card-panel center" 
+      fxFlex="20% 1 auto"
+      style="margin: 5px"
+      (click)="selecionarCategoria(categoria.id)" 
+      [class.card-selecionado]="estaSelecionado(categoria.id)" 
+      [class.white]="!estaSelecionado(categoria.id)">
 
       <mat-card-content>
         <p>{{categoria.nome}}</p>

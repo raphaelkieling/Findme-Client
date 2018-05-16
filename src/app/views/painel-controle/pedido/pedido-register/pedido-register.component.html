@@ -1,22 +1,23 @@
 <h2 mat-dialog-title>Pedido</h2>
 
 <app-categorias-select [apenasUm]="true" (selecteds)="objeto.categoriaId = $event[0]"></app-categorias-select>
-<form>
-  <mz-input-container>
-    <input mz-input [label]="'Título'" id="titulo" name="titulo" type="text" [(ngModel)]="objeto.titulo">
-  </mz-input-container>
+<form fxLayout="column">
+  <mat-form-field>
+    <input matInput [placeholder]="'Título'" id="titulo" name="titulo" type="text" [(ngModel)]="objeto.titulo">
+  </mat-form-field>
 
-  <mz-input-container>
-    <input mz-input [label]="'Observação'" id="observacao" name="observacao" type="text" [(ngModel)]="objeto.observacao">
-  </mz-input-container>
+  <mat-form-field>
+    <textarea matInput [placeholder]="'Observação'" id="observacao" name="observacao" type="text" [(ngModel)]="objeto.observacao"></textarea>
+  </mat-form-field>
 
-  <mz-datepicker-container class="col s12">
-    <input mz-datepicker [label]="'Data de Vencimento'" [options]="datepickerOptions" [(ngModel)]="objeto.dataVencimento" id="datepicker"
-      name="dataVencimento" placeholder="Data de Vencimento" type="text">
-  </mz-datepicker-container>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Data de Vencimento" (dateChange)="objeto.dataVencimento = setDate($event.value)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker color="primary"></mat-datepicker>
+  </mat-form-field>
 </form>
 
 <mat-dialog-actions>
-  <button mat-button [disabled]="loading" class="purple white-text" (click)="submit()">Salvar</button>
+  <button mat-raised-button color="primary" [disabled]="loading" (click)="submit()">Salvar</button>
   <mat-progress-spinner mode="indeterminate" diameter="20" style="margin: 5px;" *ngIf="loading"></mat-progress-spinner>
 </mat-dialog-actions>

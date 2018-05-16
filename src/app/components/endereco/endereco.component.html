@@ -1,42 +1,29 @@
-<form [formGroup]="form">
-    <div class="row">
-      <div class="input-field col s12 m6">
-        <input formControlName="cep" id="cep" name="cep" [(ngModel)]="objeto.cep" (blur)="pegaEnderecoPeloCep(objeto.cep)">
-        <label class="active">CEP</label>
-      </div>
+<form [formGroup]="form" fxLayout="column">
+  <mat-form-field>
+    <input matInput placeholder="CEP" formControlName="cep" id="cep" name="cep" [(ngModel)]="objeto.cep" (blur)="pegaEnderecoPeloCep(objeto.cep)">
+  </mat-form-field>
 
-      <div class="input-field col s12 m6">
-        <input formControlName="bairro" id="bairro" name="bairro" [(ngModel)]="objeto.bairro">
-        <label class="active">Bairro</label>
-      </div>
-    </div>
+  <mat-form-field>
+    <input matInput placeholder="Bairro" formControlName="bairro" id="bairro" name="bairro" [(ngModel)]="objeto.bairro">
+  </mat-form-field>
 
-    <div class="row">
-      <div class="input-field col s12 m4">
-        <input formControlName="logradouro" id="logradouro" name="logradouro" [(ngModel)]="objeto.logradouro">
-        <label class="active">Endereço</label>
-      </div>
+  <mat-form-field>
+    <input matInput placeholder="Logradouro" formControlName="logradouro" id="logradouro" name="logradouro" [(ngModel)]="objeto.logradouro">
+  </mat-form-field>
 
-      <div class="input-field col s12 m4">
-        <input formControlName="numero" id="numero" name="numero" [(ngModel)]="objeto.numero">
-        <label class="active">Número</label>
-      </div>
+  <mat-form-field>
+    <input matInput placeholder="Número" formControlName="numero" id="numero" name="numero" [(ngModel)]="objeto.numero">
+  </mat-form-field>
 
-      <div class="input-field col s12 m4">
-        <input formControlName="complemento" id="complemento" name="complemento" [(ngModel)]="objeto.complemento">
-        <label class="active">Complemento</label>
-      </div>
-    </div>
+  <mat-form-field>
+    <input matInput placeholder="Complemento" formControlName="complemento" id="complemento" name="complemento" [(ngModel)]="objeto.complemento">
+  </mat-form-field>
 
-    <div class="row">
-      <div class="input-field col s12 m4">
-        <input formControlName="cidade" id="cidade" name="cidade" [(ngModel)]="objeto.cidade">
-        <label class="active">Cidade</label>
-      </div>
+  <mat-form-field>
+    <input matInput placeholder="Cidade" formControlName="cidade" id="cidade" name="cidade" [(ngModel)]="objeto.cidade">
+  </mat-form-field>
 
-      <div class="input-field col s12 m4">
-        <input formControlName="estado" id="estado" name="estado" [(ngModel)]="objeto.estado">
-        <label class="active">Estado</label>
-      </div>
-    </div>
-  </form>
+  <mat-form-field>
+    <input matInput placeholder="Estado" formControlName="estado" id="estado" name="estado" [(ngModel)]="objeto.estado">
+  </mat-form-field>
+</form>

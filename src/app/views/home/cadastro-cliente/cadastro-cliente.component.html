@@ -7,30 +7,32 @@
     <mat-step>
       <ng-template matStepLabel>Informações Pessoais</ng-template>
       <br>
+      <p class="title_section">Informações Pessoais </p>
       <app-info-pessoal [objeto]="cliente.pessoa"></app-info-pessoal>
-      <button mat-button matStepperNext class="btn purple right">Próximo!</button>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Usuário</ng-template>
-      <br>
+      <p class="title_section">Usuário</p>
       <app-usuario-form [objeto]="cliente"></app-usuario-form>
-      <button mat-button matStepperNext class="btn purple right">Próximo!</button>
+      <div fxLayout="row" fxLayoutAlign="end">
+        <button mat-raised-button color="primary" matStepperNext>Próximo!</button>
+      </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Endereço</ng-template>
       <br>
       <app-endereco [objeto]="endereco"></app-endereco>
-      <button mat-button matStepperNext class="btn purple right">Próximo!</button>
+      <div fxLayout="row" fxLayoutAlign="end">
+        <button mat-raised-button color="primary" matStepperNext>Próximo!</button>
+      </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Localização</ng-template>
-      <div class="row">
-        <div class="col s12 center">
-          <i class="material-icons purple-text" style="font-size:160px">location_on</i>
-          <p class="center">
-            Precisamos que tu ative sua localização para terminar o cadastro
-          </p>
-          <button class="center btn purple" (click)="ativarGEO()">ativar</button>
+      <div fxFlex="100%" fxLayout="column" fxLayoutAlign="center" style="text-align: center">
+        <i class="material-icons purple-text" style="font-size:160px">location_on</i>
+        <p class="center">
+          Precisamos que tu ative sua localização para terminar o cadastro
+        </p>
+        <div fxLayout="row" fxLayoutAlign="center">
+          <button mat-button color="primary" matStepperPrevious>Voltar</button>
+          <button mat-raised-button color="primary" (click)="ativarGEO()">Ativar!</button>
         </div>
       </div>
     </mat-step>

@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LoginService } from '../../services/login.service';
 import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { PermissionModule } from '../../directives/permission.module';
 
 @NgModule({
   imports: [
@@ -13,7 +15,9 @@ import { RouterModule } from '@angular/router';
     MatToolbarModule,
     MatIconModule,
     MatTooltipModule,
-    RouterModule
+    RouterModule,
+    MatButtonModule,
+    PermissionModule
   ],
   declarations: [NavbarCustomComponent],
   exports: [NavbarCustomComponent],

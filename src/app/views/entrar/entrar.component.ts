@@ -14,6 +14,7 @@ export class EntrarComponent {
   form: FormGroup;
   loading = false;
   salvar = false;
+  hide = false;
 
   constructor(
     private loginS: LoginService,

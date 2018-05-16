@@ -16,8 +16,8 @@ export class NavbarCustomComponent implements OnInit {
     private authS: AuthService
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+  
   logout() {
     this.router.navigate(['/']);
     this.loginS.logout();

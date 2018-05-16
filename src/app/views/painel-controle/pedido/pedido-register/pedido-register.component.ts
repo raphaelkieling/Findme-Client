@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { PedidoService } from './../../../../services/core/pedido.service';
 import { Pedido } from './../../../../domain/pedido';
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-pedido-register',
@@ -20,31 +21,6 @@ export class PedidoRegisterComponent implements OnInit {
     'Modo problema solucionado ativado!'
   ];
 
-  public datepickerOptions: Pickadate.DateOptions = {
-    selectMonths: true,
-    selectYears: 15,
-    // Título dos botões de navegação
-    labelMonthNext: 'Próximo Mês',
-    labelMonthPrev: 'Mês Anterior',
-    // Título dos seletores de mês e ano
-    labelMonthSelect: 'Selecione o Mês',
-    labelYearSelect: 'Selecione o Ano',
-    // Meses e dias da semana
-    monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-    monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-    weekdaysFull: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-    weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-    // Letras da semana
-    weekdaysLetter: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-    //Botões
-    today: 'Hoje',
-    clear: 'Limpar',
-    close: 'Fechar',
-    // Formato da data que aparece no input
-    format: 'dd/mm/yyyy',
-    formatSubmit: 'yyyy-mm-dd'
-  };
-
   constructor(
     private pedidoService: PedidoService,
     private dialogRef: MatDialogRef<PedidoRegisterComponent>,
@@ -54,8 +30,10 @@ export class PedidoRegisterComponent implements OnInit {
   ngOnInit() { }
 
   submit() {
+    this.loading = true;
     this.pedidoService.criarPedido(this.objeto)
       .subscribe(() => {
+        this.loading = false
         const snack = this.snack.open(this.fraseAleatoriaDePedidos(), 'UHUl!', {
           duration: 3000
         })
@@ -67,6 +45,7 @@ export class PedidoRegisterComponent implements OnInit {
         this.dialogRef.close();
       },
         err => {
+          this.loading = false
           const snack = this.snack.open('Aff, desculpe, não foi possível cadastrar seu pedido, tenta mais tarde tá?', 'Ta bem', {
             duration: 5000
           });
@@ -75,6 +54,10 @@ export class PedidoRegisterComponent implements OnInit {
             snack.dismiss();
           });
         })
+  }
+
+  setDate(data) {
+    return moment(data).format('DD/MM/YYYY');
   }
 
 

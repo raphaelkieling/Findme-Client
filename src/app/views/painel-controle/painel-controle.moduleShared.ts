@@ -42,6 +42,10 @@ import { PermissionModule } from '../../directives/permission.module';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarCustomModule } from '../../components/navbar-admin/navbar-custom.module';
+import { FlexModule } from '@angular/flex-layout';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { PerfilComponent } from '../../components/perfil/perfil.component';
+import { PerfilModule } from '../../components/perfil/perfil.module';
 
 @NgModule({
   imports: [
@@ -71,7 +75,10 @@ import { NavbarCustomModule } from '../../components/navbar-admin/navbar-custom.
     MzDatepickerModule,
     PermissionModule,
     AgmJsMarkerClustererModule,
-    NavbarCustomModule
+    NavbarCustomModule,
+    FlexModule,
+    MatDatepickerModule,
+    PerfilModule
   ],
   declarations: [
     PainelControleComponent,
@@ -88,7 +95,8 @@ import { NavbarCustomModule } from '../../components/navbar-admin/navbar-custom.
     CategoriaModalComponent,
     DeleteComponent,
     ImgCropperComponent,
-    PedidoRegisterComponent
+    PedidoRegisterComponent,
+    PerfilComponent
   ],
   providers: [CategoriaService, ProfissionalService, PedidoService, ClienteService]
 })

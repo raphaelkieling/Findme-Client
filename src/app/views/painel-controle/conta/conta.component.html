@@ -25,7 +25,7 @@
   </mat-expansion-panel>
 
   <br [permission]="'user_profissional'">
-  
+
   <mat-expansion-panel class="animated fadeInUp" [permission]="'user_profissional'">
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -87,19 +87,20 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <form>
-      <div class="input-field">
-        <input type="password" [(ngModel)]="novaSenha" name="novaSenha">
-        <label class="active">Nova senha</label>
-        <ng2-password-strength-bar [passwordToCheck]="novaSenha" [barLabel]="'Força da senha:'" [barColors]="coresSenhaForca"></ng2-password-strength-bar>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <button mat-button [disabled]="novaSenha.length == 0" class="purple white-text right" (click)="modificarSenha(novaSenha)">Modificar senha</button>
-        </div>
+    <form fxLayout="column">
+      <mat-form-field>
+        <input matInput placeholder="Nova Senha" type="password" [(ngModel)]="novaSenha" name="novaSenha">
+      </mat-form-field>
+      <ng2-password-strength-bar [passwordToCheck]="novaSenha" [barLabel]="'Força da senha:'" [barColors]="coresSenhaForca"></ng2-password-strength-bar>
+
+      <div fxLayout="row" fxLayoutAlign="end">
+        <button mat-raised-button color="primary" [disabled]="novaSenha.length == 0" (click)="modificarSenha(novaSenha)">Modificar senha</button>
       </div>
     </form>
   </mat-expansion-panel>
   <br>
-  <button mat-button class="right purple white-text" (click)="submit()">Salvar</button>
+  <div fxLayout="row" fxLayoutAlign="end">
+    <button mat-raised-button color="primary" (click)="submit()">Salvar</button>
+  </div>
+  <br>
 </ng-template>

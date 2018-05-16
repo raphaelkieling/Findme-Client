@@ -15,15 +15,11 @@
     <mat-step>
       <ng-template matStepLabel>Informações Pessoais</ng-template>
       <br>
+      <p class="title_section">Informações Pessoais </p>
       <app-info-pessoal [objeto]="profissional.pessoa"></app-info-pessoal>
-      <div fxLayout="row" fxLayoutAlign="end">
-        <button mat-raised-button color="primary" matStepperNext>Próximo!</button>
-      </div>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Usuário</ng-template>
-      <br>
+      <p class="title_section">Usuário</p>
       <app-usuario-form [objeto]="profissional"></app-usuario-form>
+
       <div fxLayout="row" fxLayoutAlign="end">
         <button mat-raised-button color="primary" matStepperNext>Próximo!</button>
       </div>

@@ -13,7 +13,9 @@
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput autocomplete="new-password" type="password" name="senha" id="senha" formControlName="senha" placeholder="Senha">
+              <input matInput autocomplete="new-password" type="password" name="senha" id="senha" formControlName="senha" placeholder="Senha"
+                [type]="hide ? 'password' : 'text'">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             </mat-form-field>
 
             <mat-checkbox formControlName="salvar" [(ngModel)]="salvar">Salvar</mat-checkbox>

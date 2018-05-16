@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardMdImage, MatCardModule } from '@angular/material/card';
 import { FlexModule } from '@angular/flex-layout';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatInputModule,
         MatCardModule,
         FlexModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatIconModule
     ],
     declarations: [EntrarComponent],
     providers: [LoginService]

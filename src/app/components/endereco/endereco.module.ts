@@ -5,14 +5,16 @@ import { CommonModule } from '@angular/common';
 import { EnderecoComponent } from './endereco.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
-    CommonModule,
+  CommonModule,
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FlexModule
   ],
   declarations: [EnderecoComponent],
   exports: [EnderecoComponent],

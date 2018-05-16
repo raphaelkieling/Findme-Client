@@ -42,6 +42,7 @@ export const ALL_PEDIDOS_CATEGORIA = gql`
                 foto
             }
             cliente{
+                id
                 usuario
                 pessoa{
                     nome
@@ -69,6 +70,7 @@ export const ALL_PEDIDOS = gql`
                 foto
             }
             cliente{
+                id
                 usuario
                 pessoa{
                     nome

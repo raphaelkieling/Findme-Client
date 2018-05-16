@@ -1,39 +1,38 @@
 <form [formGroup]="form" *ngIf="objeto">
 
-  <div fxLayout="row" fxLayoutAlign="space-between">
-    <mat-form-field fxFlex="30%">
+  <div fxLayout="column" fxLayoutAlign="space-between">
+    <mat-form-field>
       <input matInput placeholder="Nome" formControlName="nome" id="nome" name="nome" autocomplete='given-name' [(ngModel)]="objeto.nome">
     </mat-form-field>
 
-    <mat-form-field fxFlex="30%">
+    <mat-form-field>
       <input matInput placeholder="Sobrenome" formControlName="sobrenome" id="sobrenome" name="sobrenome" [(ngModel)]="objeto.sobrenome">
     </mat-form-field>
 
-    <mat-form-field fxFlex="30%">
+    <mat-form-field>
       <input matInput placeholder="Nascimento" formControlName="nascimento" id="nascimento" name="nascimento" [(ngModel)]="objeto.nascimento">
     </mat-form-field>
   </div>
 
 
-  <div fxLayout="row" fxLayoutAlign="space-between">
-    <mat-form-field fxFlex="30%">
+  <div fxLayout="column" fxLayoutAlign="space-between">
+    <mat-form-field>
       <input matInput placeholder="Telefone" formControlName="telefone" id="telefone" name="telefone" [(ngModel)]="objeto.telefone">
     </mat-form-field>
 
-    <mat-form-field fxFlex="30%">
+    <mat-form-field>
       <input matInput placeholder="CPF" formControlName="cpf" id="cpf" name="cpf" [(ngModel)]="objeto.cpf">
     </mat-form-field>
 
-    <mat-form-field fxFlex="30%">
+    <mat-form-field>
       <input matInput placeholder="CNPJ" formControlName="cnpj" id="cnpj" name="cnpj" [(ngModel)]="objeto.cnpj">
     </mat-form-field>
   </div>
 
   <div fxLayout="column">
     <mat-form-field>
-      <textarea matInput placeholder="Sua observação!" rows="10" formControlName="observacao" id="observacao" name="observacao" class="materialize-textarea"
+      <textarea matInput placeholder="Sua observação!" rows="3" formControlName="observacao" id="observacao" name="observacao" class="materialize-textarea"
         [(ngModel)]="objeto.observacao"></textarea>
     </mat-form-field>
   </div>
-
 </form>

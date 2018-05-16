@@ -2,10 +2,12 @@
   <app-preloader *ngIf="loading;else table"></app-preloader>
 
   <ng-template #table>
-    <div class="input-field">
-      <input (keyup)="filter($event.target.value)">
-      <label class="active">Filtro</label>
+    <div fxLayout="column">
+      <mat-form-field>
+        <input matInput placeholder="Filtro" (keyup)="filter($event.target.value)">
+      </mat-form-field>
     </div>
+
     <mat-table [dataSource]="usuarios">
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
@@ -19,9 +21,9 @@
 
       <ng-container matColumnDef="acao">
         <mat-header-cell *matHeaderCellDef> Ação </mat-header-cell>
-        <mat-cell *matCellDef="let element"> 
-            <button *ngIf="element.ativo" mat-button class="red-text" (click)="desativarUsuario(element.id)">Desativar</button> 
-            <button *ngIf="!element.ativo" mat-button class="green-text" (click)="ativarUsuario(element.id)">Ativar</button> 
+        <mat-cell *matCellDef="let element">
+          <button *ngIf="element.ativo" mat-button color="warn" (click)="desativarUsuario(element.id)">Desativar</button>
+          <button *ngIf="!element.ativo" mat-button color="primary" (click)="ativarUsuario(element.id)">Ativar</button>
         </mat-cell>
       </ng-container>
 
