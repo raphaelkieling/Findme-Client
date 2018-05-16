@@ -11,3 +11,27 @@
 .navbar-custom{
     margin-bottom: 20px;
 }
+
+.badge{
+    position: absolute;
+    background: cadetblue;
+    width: 20px;
+    height: 20px;
+    right: 5px;
+    top: 0;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.menu_content{
+    padding: 10px;
+}

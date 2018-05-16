@@ -1,0 +1,53 @@
+mat-card{
+    padding: 10px;
+}
+
+mat-card-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.balao_other{
+    padding: 5px;
+    background: rebeccapurple;
+    color: #FFF;
+    clear: both;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.balao_me{
+    padding: 5px;
+    background: #c9c9c9;
+    clear: both;
+    float: right;
+    margin-bottom: 10px;
+}
+
+.conversation{
+    clear: both;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.notification-badge{
+    position: absolute;
+    background: var(--color-primary);
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 50%;
+    color: white;
+    left: -10px;
+    font-size: 17px;
+    top: -5px;
+}
+
+.send_button,.orcamento_button{
+    color: var(--color-primary);
+    cursor: pointer;
+}
+
+.pointer{
+    cursor: pointer;
+}

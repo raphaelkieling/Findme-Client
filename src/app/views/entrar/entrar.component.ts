@@ -14,7 +14,7 @@ export class EntrarComponent {
   form: FormGroup;
   loading = false;
   salvar = false;
-  hide = false;
+  hide = true;
 
   constructor(
     private loginS: LoginService,
@@ -53,7 +53,6 @@ export class EntrarComponent {
     this.loginS.login(this.form.value).subscribe((res) => {
       this.loading = false;
       this.authS.token = res.data.createToken.token;
-      console.log(this.authS.tokenDecoded);
       this.router.navigate(['painel-controle']);
     }, err => {
       console.dir(err);

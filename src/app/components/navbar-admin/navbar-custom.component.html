@@ -2,9 +2,30 @@
   <mat-toolbar-row>
     <button [routerLink]="['principal']" mat-button>FindMe</button>
     <span class="spacer"></span>
-    <button [routerLink]="['categorias']" [permission]="'user_dev'" mat-button>Categorias</button>
-    <button [routerLink]="['usuarios']" [permission]="'user_dev'" mat-button>Usuários</button>
-    <button [routerLink]="['conta']" mat-button>Conta</button>
-    <button mat-button (click)="logout()">Sair</button>
+    <button [routerLink]="['categorias']" [permission]="'user_dev'" mat-button matTooltip="Categorias do sistema">Categorias</button>
+    <button [routerLink]="['usuarios']" [permission]="'user_dev'" mat-button matTooltip="Usuários do sistema">Usuários</button>
+    <button [routerLink]="['conta']" mat-button>
+      Conta
+    </button>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <div class="badge">3</div>
+      Notificação
+    </button>
+    <button mat-button (click)="logout()" matTooltip="Sair do sistema">Sair</button>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <div class="menu_content">
+    <div class="menu_header">
+      <b>Notificações</b>
+      <i class="material-icons">
+        remove_red_eye
+      </i>
+    </div>
+    <button mat-menu-item>Usuário conectou-se na sua conta</button>
+    <button mat-menu-item>Mensagem enviada de geremeias</button>
+    <button mat-menu-item>Sua proposta foi cancelada</button>
+    <button mat-menu-item>Mensagem do pessoal do direito</button>
+  </div>
+</mat-menu>

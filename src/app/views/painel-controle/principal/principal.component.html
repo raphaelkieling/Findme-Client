@@ -48,11 +48,11 @@
                     <button mat-button disabled>
                         <mat-icon>{{pedido.categoria.foto}}</mat-icon> {{pedido.categoria.nome}}
                     </button>
-                    <button mat-button>
-                        <mat-icon>chat</mat-icon>
+                    <button mat-button (click)="abrirChat(pedido.cliente)">
+                        <mat-icon >chat</mat-icon>
                     </button>
-                    <button mat-button>
-                        <mat-icon>info</mat-icon>
+                    <button mat-button (click)="openPerfil(pedido)">
+                        <mat-icon>account_circle</mat-icon>
                     </button>
                 </agm-info-window>
             </agm-marker>
@@ -73,7 +73,7 @@
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-button>
-                        <mat-icon>chat</mat-icon>
+                        <mat-icon (click)="abrirChat(pedido.cliente)">chat</mat-icon>
                     </button>
                     <button mat-button>
                         <mat-icon>info</mat-icon>

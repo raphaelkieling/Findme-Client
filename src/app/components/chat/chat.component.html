@@ -1,0 +1,36 @@
+<mat-card>
+  <div class="notification-badge" *ngIf="notifications > 0">{{notifications}}</div>
+  <mat-card-header>
+    <img mat-card-avatar [src]="usuario?.pessoa?.avatar?.base64 || imageDefault">
+    <mat-card-title>{{usuario?.pessoa?.nome}}</mat-card-title>
+    <mat-card-subtitle>{{usuario?.pessoa?.tipo}}</mat-card-subtitle>
+    <div>
+      <i class="material-icons pointer" (click)="aberto = !aberto; notifications = 0" matTooltip="Minimizar / Maximizar">
+        {{aberto ? 'expand_more' : 'expand_less'}}
+      </i>
+      <i class="material-icons pointer" (click)="removeChat()" matTooltip="Fechar">
+        close
+      </i>
+    </div>
+  </mat-card-header>
+  <mat-card-content *ngIf="aberto">
+    <div #conversation class="conversation">
+      <div *ngFor="let mensagem of mensagens" [ngClass]="{
+        'balao_other': mensagem.usuario_enviou != idUsuarioLogado,
+        'balao_me': mensagem.usuario_enviou == idUsuarioLogado
+      }" [innerHTML]="mensagem.mensagem">
+      </div>
+    </div>
+    <div fxLayout="row" style="clear: both; align-items: center">
+      <mat-form-field fxFlex="80%">
+        <input type="text" matInput placeholder="Mensagem" [(ngModel)]="mensagem" (keyup.enter)="addMensagem(mensagem); mensagem = ''">
+      </mat-form-field>
+      <i fxFlex="10%" style="margin-left:5px" class="material-icons orcamento_button pointer" matTooltip="Criar orçamento para o usuário do chat">
+        attach_money
+      </i>
+      <i matTooltip="Enviar mensagem" fxFlex="10%" style="margin-left:5px" class="material-icons" [ngClass]="{'send_button': mensagem.length > 0}" (click)="addMensagem(mensagem); mensagem = ''">
+        send
+      </i>
+    </div>
+  </mat-card-content>
+</mat-card>

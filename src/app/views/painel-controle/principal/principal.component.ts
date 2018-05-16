@@ -12,6 +12,7 @@ import { MarkerOptions, InfoWindow } from '@agm/core/services/google-maps-types'
 import { Subscription } from 'rxjs/Subscription';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PerfilComponent } from '../../../components/perfil/perfil.component';
+import { ChatService } from '../../../services/chat.service';
 
 @Component({
   selector: 'app-principal',
@@ -23,12 +24,19 @@ export class PrincipalComponent implements OnInit {
   @ViewChild('map') agmMap: AgmMap;
 
   loadingPedidos = false;
+
   pedidos: Pedido[] = [];
+
   tipoPessoa: TipoUsuario | string;
+
   styles: MapTypeStyle[] = [];
+
   infoWindowOpened: InfoWindow = null;
+
   pedidoSocketSubs: Subscription;
+
   centerLatitude: number;
+
   centerLongitude: number;
 
   constructor(
@@ -38,25 +46,13 @@ export class PrincipalComponent implements OnInit {
     private markerManager: MarkerManager,
     private gmapsAPI: GoogleMapsAPIWrapper,
     private snack: MatSnackBar,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private chatService: ChatService
   ) { }
 
   async ngOnInit() {
     this.defineEstiloMapa();
-
-    this.usuarioService
-      .me()
-      .subscribe(({ data, loading }) => {
-        if (!data) {
-          return;
-        }
-
-        this.tipoPessoa = data['me'].pessoa.tipo;
-        this.centerLatitude = data['me'].pessoa.enderecos[0].latitude
-        this.centerLongitude = data['me'].pessoa.enderecos[0].longitude
-        this.carregarPedidos();
-      });
-
+    this.centralizaMapa();
 
     this.pedidoSocketSubs = this.pedidoService.pedidoSocket.subscribe((pedido: PedidoSocket) => {
       this.snack.open(`Opa opa! Pedido de categoria ${pedido.categoria.nome} acabou de sair do forno!`, 'UHUL!', {
@@ -64,6 +60,24 @@ export class PrincipalComponent implements OnInit {
       });
       this.carregarPedidos();
     })
+  }
+
+  private centralizaMapa() {
+    this.usuarioService
+      .me()
+      .subscribe(({ data, loading }) => {
+        if (!data) {
+          return;
+        }
+        this.tipoPessoa = data['me'].pessoa.tipo;
+        this.centerLatitude = data['me'].pessoa.enderecos[0].latitude;
+        this.centerLongitude = data['me'].pessoa.enderecos[0].longitude;
+        this.carregarPedidos();
+      });
+  }
+
+  abrirChat(usuario){
+    this.chatService.addChat(usuario);
   }
 
   abrirModalPedido() {
@@ -101,6 +115,7 @@ export class PrincipalComponent implements OnInit {
           .pedidosCategorias(categoriasUsadas)
           .subscribe(({ data, loading }) => {
             this.loadingPedidos = loading;
+            console.log(data);
             this.pedidos = data['pedidosCategorias'];
           });
         break;

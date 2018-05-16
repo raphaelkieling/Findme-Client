@@ -1,0 +1,13 @@
+.chat_container{
+    position: fixed;
+    bottom: -20px;
+    right: 20px;
+    display: flex;
+    z-index: 200;
+    align-items: flex-end;    
+}
+
+.chat_container > *{
+    margin-left: 20px;
+    width: 300px;
+}

@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ChatService } from '../../services/chat.service';
+import { Usuario } from '../../domain/usuario';
 
 @Component({
   selector: 'app-painel-controle',
@@ -24,12 +26,29 @@ export class PainelControleComponent implements OnInit {
     private pedidoService: PedidoService,
     private loginService: LoginService,
     private router: Router,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private chatService: ChatService
   ) { }
 
   ngOnInit() {
     this.escutaCategorias();
     this.escutaDesativacao();
+    this.escutaChat();
+  }
+
+  fechaChat(chat){
+    console.log(chat);
+    this.chatService.removeChat(chat.id);
+  }
+
+  get chats(){
+    return this.chatService.chats
+  }
+
+  private escutaChat(){
+    this.socket.fromEvent(`chat-send-${this.authS.tokenDecoded.usuario.id}`).subscribe((data) => {
+      this.chatService.addChatPeloId(data['usuario_enviou']);
+    })
   }
 
   private escutaDesativacao() {
@@ -37,7 +56,7 @@ export class PainelControleComponent implements OnInit {
     this.socket.fromEvent(`logout-user-${this.authS.tokenDecoded.usuario.id}`).subscribe(() => {
       const snack = this.snack.open('Você foi desativado do sistema, contate o suporte hehe', 'Chamar suporte!');
       snack.onAction().subscribe(() => console.log('indo até o suporte'));
-      
+
       this.loginService.logout();
       this.router.navigate(['/']);
     })

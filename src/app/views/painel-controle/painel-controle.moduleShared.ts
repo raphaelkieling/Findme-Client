@@ -46,6 +46,8 @@ import { FlexModule } from '@angular/flex-layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { PerfilComponent } from '../../components/perfil/perfil.component';
 import { PerfilModule } from '../../components/perfil/perfil.module';
+import { ChatModule } from '../../components/chat/chat.module';
+import { ChatService } from '../../services/chat.service';
 
 @NgModule({
   imports: [
@@ -78,7 +80,8 @@ import { PerfilModule } from '../../components/perfil/perfil.module';
     NavbarCustomModule,
     FlexModule,
     MatDatepickerModule,
-    PerfilModule
+    PerfilModule,
+    ChatModule
   ],
   declarations: [
     PainelControleComponent,
@@ -98,6 +101,6 @@ import { PerfilModule } from '../../components/perfil/perfil.module';
     PedidoRegisterComponent,
     PerfilComponent
   ],
-  providers: [CategoriaService, ProfissionalService, PedidoService, ClienteService]
+  providers: [CategoriaService, ProfissionalService, PedidoService, ClienteService,ChatService]
 })
 export class PainelControleModuleShared { }
