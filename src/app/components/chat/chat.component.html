@@ -25,7 +25,7 @@
       <mat-form-field fxFlex="80%">
         <input type="text" matInput placeholder="Mensagem" [(ngModel)]="mensagem" (keyup.enter)="addMensagem(mensagem); mensagem = ''">
       </mat-form-field>
-      <i fxFlex="10%" style="margin-left:5px" class="material-icons orcamento_button pointer" matTooltip="Criar orçamento para o usuário do chat">
+      <i *ngIf="isProfissional()" (click)="fazerOrcamento()" fxFlex="10%" style="margin-left:5px" class="material-icons orcamento_button pointer" matTooltip="Criar orçamento para o usuário do chat">
         attach_money
       </i>
       <i matTooltip="Enviar mensagem" fxFlex="10%" style="margin-left:5px" class="material-icons" [ngClass]="{'send_button': mensagem.length > 0}" (click)="addMensagem(mensagem); mensagem = ''">

@@ -48,6 +48,7 @@ import { PerfilComponent } from '../../components/perfil/perfil.component';
 import { PerfilModule } from '../../components/perfil/perfil.module';
 import { ChatModule } from '../../components/chat/chat.module';
 import { ChatService } from '../../services/chat.service';
+import { MensagensComponent } from './mensagens/mensagens.component';
 
 @NgModule({
   imports: [
@@ -92,7 +93,8 @@ import { ChatService } from '../../services/chat.service';
     UsuariosComponent,
     PedidoComponent,
     PedidoRegisterComponent,
-    MapPedidosDirective
+    MapPedidosDirective,
+    MensagensComponent
   ],
   entryComponents: [
     CategoriaModalComponent,
@@ -101,6 +103,6 @@ import { ChatService } from '../../services/chat.service';
     PedidoRegisterComponent,
     PerfilComponent
   ],
-  providers: [CategoriaService, ProfissionalService, PedidoService, ClienteService,ChatService]
+  providers: [CategoriaService, ProfissionalService, PedidoService, ClienteService, ChatService]
 })
 export class PainelControleModuleShared { }

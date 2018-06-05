@@ -7,25 +7,6 @@
     <button [routerLink]="['conta']" mat-button>
       Conta
     </button>
-    <button mat-button [matMenuTriggerFor]="menu">
-      <div class="badge">3</div>
-      Notificação
-    </button>
     <button mat-button (click)="logout()" matTooltip="Sair do sistema">Sair</button>
   </mat-toolbar-row>
 </mat-toolbar>
-
-<mat-menu #menu="matMenu">
-  <div class="menu_content">
-    <div class="menu_header">
-      <b>Notificações</b>
-      <i class="material-icons">
-        remove_red_eye
-      </i>
-    </div>
-    <button mat-menu-item>Usuário conectou-se na sua conta</button>
-    <button mat-menu-item>Mensagem enviada de geremeias</button>
-    <button mat-menu-item>Sua proposta foi cancelada</button>
-    <button mat-menu-item>Mensagem do pessoal do direito</button>
-  </div>
-</mat-menu>

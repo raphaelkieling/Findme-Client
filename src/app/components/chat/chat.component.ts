@@ -6,6 +6,8 @@ import { AuthService } from '../../services/auth.service';
 import { MensagemService } from '../../services/core/mensagem.service';
 import { Socket } from 'ng-socket-io';
 import { ChatService } from '../../services/chat.service';
+import { MatDialog } from '@angular/material/dialog';
+import { OrcamentoModalComponent } from '../orcamento/orcamento-modal/orcamento-modal.component';
 
 
 @Component({
@@ -31,7 +33,8 @@ export class ChatComponent implements OnInit {
     private authService: AuthService,
     private messageService: MensagemService,
     private socket: Socket,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private dialogModule: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -67,6 +70,10 @@ export class ChatComponent implements OnInit {
       });
   }
 
+  private isProfissional() {
+    return this.authService.tokenDecoded.usuario.pessoa.tipo === 'profissional'
+  }
+
   ngAfterViewChecked() {
     this.scrollToBottom();
   }
@@ -77,7 +84,7 @@ export class ChatComponent implements OnInit {
   }
 
   addMensagem(mensagem) {
-    if(mensagem.length == 0) return;
+    if (mensagem.length == 0) return;
 
     let nova_mensagem = new Mensagem();
     nova_mensagem.mensagem = mensagem;
@@ -91,6 +98,10 @@ export class ChatComponent implements OnInit {
 
         this.mensagens = [...this.mensagens, data['criarMensagem']];
       })
+  }
+
+  fazerOrcamento() {
+    this.dialogModule.open(OrcamentoModalComponent);
   }
 
   removeChat() {
