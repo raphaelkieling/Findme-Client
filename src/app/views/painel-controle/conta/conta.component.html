@@ -1,106 +1,108 @@
-<app-preloader *ngIf="loading;else usuarioTemplate"></app-preloader>
+<div class="container">
+  <app-preloader *ngIf="loading;else usuarioTemplate"></app-preloader>
 
-<ng-template #usuarioTemplate>
-  <div class="row center animated fadeInDown">
-    <div class="col-12 flex-center">
-      <div class="avatar-container">
-        <img [src]="imageUrl" alt="Imagem avatar" class="avatar">
-        <button mat-button class="btn-avatar" (click)="abrirCrooperFoto()">Editar Foto</button>
+  <ng-template #usuarioTemplate>
+    <div class="row center animated fadeInDown" *ngIf="usuario.pessoa">
+      <div class="col-12 flex-center">
+        <div class="avatar-container">
+          <img [src]="imageUrl" alt="Imagem avatar" class="avatar">
+          <button mat-button class="btn-avatar" (click)="abrirCrooperFoto()">Editar Foto</button>
+        </div>
       </div>
     </div>
-  </div>
-  <br>
-  <br>
-  <mat-expansion-panel class="animated fadeInUp">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Usuário
-      </mat-panel-title>
-      <mat-panel-description>
-        Informações do usuário
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <app-usuario-form [edit]="true" [objeto]="usuario"></app-usuario-form>
-  </mat-expansion-panel>
-
-  <br [permission]="'user_profissional'">
-
-  <mat-expansion-panel class="animated fadeInUp" [permission]="'user_profissional'">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Categorias
-      </mat-panel-title>
-      <mat-panel-description>
-        Categorias utilizadas pelo seu usuário
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <app-categorias-select [pessoaId]="usuario.pessoa.id" [preselects]="usuario.pessoa.categorias" (selecteds)="usuario.pessoa.categorias = $event"></app-categorias-select>
-  </mat-expansion-panel>
-
-  <br>
-
-  <mat-expansion-panel class="animated fadeInUp">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Informações
-      </mat-panel-title>
-      <mat-panel-description>
-        Informações de pessoa
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <app-info-pessoal [objeto]="usuario.pessoa"></app-info-pessoal>
-  </mat-expansion-panel>
-
-  <br>
-
-  <mat-expansion-panel class="animated fadeInUp">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Endereço
-      </mat-panel-title>
-      <mat-panel-description>
-        Endereço do usuário
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <app-endereco [objeto]="usuario.pessoa.enderecos[0]"></app-endereco>
-
     <br>
+    <br>
+    <mat-expansion-panel class="animated fadeInUp">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Usuário
+        </mat-panel-title>
+        <mat-panel-description>
+          Informações do usuário
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-    <agm-map [latitude]="usuario.pessoa.enderecos[0].latitude" [longitude]="usuario.pessoa.enderecos[0].longitude" [zoom]="16">
-      <agm-marker [latitude]="usuario.pessoa.enderecos[0].latitude" [longitude]="usuario.pessoa.enderecos[0].longitude"></agm-marker>
-    </agm-map>
-  </mat-expansion-panel>
+      <app-usuario-form [edit]="true" [objeto]="usuario"></app-usuario-form>
+    </mat-expansion-panel>
 
-  <br>
+    <br [permission]="'user_profissional'">
 
-  <mat-expansion-panel class="animated fadeInUp">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Senha
-      </mat-panel-title>
-      <mat-panel-description>
-        Modifica senha
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+    <mat-expansion-panel class="animated fadeInUp" [permission]="'user_profissional'" *ngIf="usuario.pessoa">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Categorias
+        </mat-panel-title>
+        <mat-panel-description>
+          Categorias utilizadas pelo seu usuário
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-    <form fxLayout="column">
-      <mat-form-field>
-        <input matInput placeholder="Nova Senha" type="password" [(ngModel)]="novaSenha" name="novaSenha">
-      </mat-form-field>
-      <ng2-password-strength-bar [passwordToCheck]="novaSenha" [barLabel]="'Força da senha:'" [barColors]="coresSenhaForca"></ng2-password-strength-bar>
+      <app-categorias-select [pessoaId]="usuario.pessoa.id" [preselects]="usuario.pessoa.categorias" (selecteds)="usuario.pessoa.categorias = $event"></app-categorias-select>
+    </mat-expansion-panel>
 
-      <div fxLayout="row" fxLayoutAlign="end">
-        <button mat-raised-button color="primary" [disabled]="novaSenha.length == 0" (click)="modificarSenha(novaSenha)">Modificar senha</button>
-      </div>
-    </form>
-  </mat-expansion-panel>
-  <br>
-  <div fxLayout="row" fxLayoutAlign="end">
-    <button mat-raised-button color="primary" (click)="submit()">Salvar</button>
-  </div>
-  <br>
-</ng-template>
+    <br *ngIf="usuario.pessoa">
+
+    <mat-expansion-panel class="animated fadeInUp" *ngIf="usuario.pessoa">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Informações
+        </mat-panel-title>
+        <mat-panel-description>
+          Informações de pessoa
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <app-info-pessoal [objeto]="usuario.pessoa"></app-info-pessoal>
+    </mat-expansion-panel>
+
+    <br *ngIf="usuario.pessoa">
+
+    <mat-expansion-panel class="animated fadeInUp" *ngIf="usuario.pessoa">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Endereço
+        </mat-panel-title>
+        <mat-panel-description>
+          Endereço do usuário
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <app-endereco [objeto]="usuario.pessoa.enderecos[0]"></app-endereco>
+
+      <br>
+
+      <agm-map [latitude]="usuario.pessoa.enderecos[0].latitude" [longitude]="usuario.pessoa.enderecos[0].longitude" [zoom]="16">
+        <agm-marker [latitude]="usuario.pessoa.enderecos[0].latitude" [longitude]="usuario.pessoa.enderecos[0].longitude"></agm-marker>
+      </agm-map>
+    </mat-expansion-panel>
+
+    <br *ngIf="usuario.pessoa">
+
+    <mat-expansion-panel class="animated fadeInUp">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Senha
+        </mat-panel-title>
+        <mat-panel-description>
+          Modifica senha
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <form fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Nova Senha" type="password" [(ngModel)]="novaSenha" name="novaSenha">
+        </mat-form-field>
+        <ng2-password-strength-bar [passwordToCheck]="novaSenha" [barLabel]="'Força da senha:'" [barColors]="coresSenhaForca"></ng2-password-strength-bar>
+
+        <div fxLayout="row" fxLayoutAlign="end">
+          <button mat-raised-button color="primary" [disabled]="novaSenha.length == 0" (click)="modificarSenha(novaSenha)">Modificar senha</button>
+        </div>
+      </form>
+    </mat-expansion-panel>
+    <br>
+    <div fxLayout="row" fxLayoutAlign="end">
+      <button mat-raised-button color="primary" (click)="submit()">Salvar</button>
+    </div>
+    <br>
+  </ng-template>
+</div>

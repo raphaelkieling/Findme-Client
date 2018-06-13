@@ -1,16 +1,24 @@
 <app-preloader *ngIf="loading;else perfil"></app-preloader>
 
 <ng-template #perfil>
-  <div fxLayout="column" fxLayoutAlign="center" style="text-align: center">
+  <div fxLayout="column" fxLayoutAlign="center center" style="text-align: center;margin-top: 50px;">
     <img class="perfil_img" [src]="usuario?.pessoa?.avatar?.base64 || imageUrl" alt="Imagem de perfil do usuário">
-    <p>
-      <b>{{usuario?.pessoa?.nome}}</b>
-    </p>
+    <bar-rating [(rate)]="rate" [max]="5" [theme]="'stars'"></bar-rating>
   </div>
   <mat-tab-group>
     <mat-tab label="Perfil">
-      <div class="list_perfil">{{usuario?.pessoa?.nome}}</div>
-      <div class="list_perfil"> {{usuario?.pessoa?.enderecos[0].bairro}}</div>
+      <div class="list_perfil">
+        <div class="list_perfil__title">Nome</div>
+        <div class="list_perfil__content">
+          {{usuario?.pessoa?.nome}}  {{usuario?.pessoa?.sobrenome}}
+        </div>
+      </div>
+      <div class="list_perfil">
+        <div class="list_perfil__title">Observação</div>
+        <div class="list_perfil__content">
+          {{usuario?.pessoa?.observacao}}
+        </div>
+      </div>
     </mat-tab>
     <mat-tab label="Comentários">
 
@@ -18,7 +26,7 @@
         <mat-form-field>
           <input matInput placeholder="Seu comentário" [disabled]="loadingComentario" (keyup.enter)="criarComentario(comentario)" [(ngModel)]="comentario">
         </mat-form-field>
-        
+
         <mat-progress-bar mode="indeterminate" *ngIf="loadingComentario;else comentarioList"></mat-progress-bar>
 
         <ng-template #comentarioList>

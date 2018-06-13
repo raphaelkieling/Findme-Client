@@ -4,6 +4,4 @@
   <app-chat *ngFor="let chat of chats" [usuario]="chat" (close)="fechaChat(chat)"></app-chat>
 </div>
 
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>

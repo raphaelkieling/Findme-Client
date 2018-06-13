@@ -1,0 +1,43 @@
+<div class="container">
+  <mat-card>
+    <app-preloader *ngIf="loading;else table"></app-preloader>
+
+    <ng-template #table>
+      <div fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Filtro" (keyup)="filter($event.target.value)">
+        </mat-form-field>
+      </div>
+    </ng-template>
+  </mat-card>
+
+  <div class="container-users">
+    <mat-card *ngFor="let usuario of usuariosFiltrados" class="card-usuarios">
+      <img [src]="usuario?.pessoa?.avatar?.base64 || 'assets/images/avatar.jpg'" class="user_info_avatar" alt="Imagem do Usuários">
+      <div style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 20px;
+      margin-top: -40px;
+      margin-bottom: 20px;
+      ">
+        <span class="user_info_nome">{{usuario.pessoa?.nome}}</span>
+        <span class="user_info_distancia">{{usuario.pessoa?.distanceToMe}} km</span>
+      </div>
+
+      <mat-card-actions>
+        <div style="display: flex;justify-content: flex-end;">
+          <button mat-button color="primary" (click)="openPerfil(usuario)">
+            <mat-icon>account_circle</mat-icon> Perfil
+          </button>
+          <button mat-button color="primary" (click)="abrirChat(usuario)">
+            <mat-icon>chat</mat-icon> Conversar
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

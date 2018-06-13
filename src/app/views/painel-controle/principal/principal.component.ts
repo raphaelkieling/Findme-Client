@@ -39,6 +39,10 @@ export class PrincipalComponent implements OnInit {
 
   centerLongitude: number;
 
+  cardSelecionado: Pedido;
+
+  menuAberto: Boolean = true;
+
   constructor(
     private dialog: MatDialog,
     private pedidoService: PedidoService,
@@ -52,6 +56,8 @@ export class PrincipalComponent implements OnInit {
 
   async ngOnInit() {
     this.defineEstiloMapa();
+    if (!this.authService.tokenDecoded.usuario.pessoa) return;
+
     this.centralizaMapa();
 
     this.pedidoSocketSubs = this.pedidoService.pedidoSocket.subscribe((pedido: PedidoSocket) => {
@@ -66,7 +72,7 @@ export class PrincipalComponent implements OnInit {
     this.usuarioService
       .me()
       .subscribe(({ data, loading }) => {
-        if (!data) {
+        if (!data || !data['me'].pessoa) {
           return;
         }
         this.tipoPessoa = data['me'].pessoa.tipo;
@@ -76,7 +82,7 @@ export class PrincipalComponent implements OnInit {
       });
   }
 
-  abrirChat(usuario){
+  abrirChat(usuario) {
     this.chatService.addChat(usuario);
   }
 
@@ -98,6 +104,7 @@ export class PrincipalComponent implements OnInit {
   }
 
   carregarPedidos() {
+    this.loadingPedidos = true;
     let categoriasUsadas = this.authService.tokenDecoded.usuario.pessoa.categorias.map((categoria) => categoria.id);
 
     switch (this.tipoPessoa) {
@@ -105,7 +112,8 @@ export class PrincipalComponent implements OnInit {
         this.pedidoService
           .pedidosCliente()
           .subscribe(({ data, loading }) => {
-            this.loadingPedidos = loading;
+            this.loadingPedidos = false;
+            console.log(data)
             this.pedidos = data['pedidosCliente'];
           });
         break;
@@ -114,7 +122,7 @@ export class PrincipalComponent implements OnInit {
         this.pedidoService
           .pedidosCategorias(categoriasUsadas)
           .subscribe(({ data, loading }) => {
-            this.loadingPedidos = loading;
+            this.loadingPedidos = false;
             console.log(data);
             this.pedidos = data['pedidosCategorias'];
           });
@@ -132,6 +140,17 @@ export class PrincipalComponent implements OnInit {
 
   defineEstiloMapa() {
     this.styles = []
+  }
+
+  isCardAberto(pedido: Pedido) {
+    return this.cardSelecionado === pedido;
+  }
+
+  selecionarCard(pedido: Pedido) {
+    if (this.cardSelecionado === pedido)
+      this.cardSelecionado = undefined;
+    else
+      this.cardSelecionado = pedido;
   }
 
   ngOnDestroy() {

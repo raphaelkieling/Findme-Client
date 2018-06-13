@@ -107,6 +107,23 @@ export const TODOS_USUARIOS = gql`
       ativo
       pessoa{
         nome
+        tipo
+        avatar{
+          id
+          base64
+        }
+        sobrenome
+        distanceToMe
+        nascimento
+        cpf
+        cnpj
+        telefone
+        observacao
+        categorias{
+          id
+          nome
+          foto
+        }
       }
     }
   }

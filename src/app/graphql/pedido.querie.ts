@@ -47,6 +47,7 @@ export const ALL_PEDIDOS_CATEGORIA = gql`
                 pessoa{
                     nome
                     sobrenome
+                    distanceToMe
                     avatar{
                         base64
                         marker
@@ -75,6 +76,7 @@ export const ALL_PEDIDOS = gql`
                 pessoa{
                     nome
                     sobrenome
+                    distanceToMe
                 }
             }
         }
@@ -98,6 +100,7 @@ export const PEDIDOS_PROFISSIONAL = gql`
                 pessoa{
                     nome
                     sobrenome
+                    distanceToMe
                 }
             }
         }
@@ -121,6 +124,7 @@ export const PEDIDOS_CLIENTE = gql`
                 pessoa{
                     nome
                     sobrenome
+                    distanceToMe
                 }
             }
         }

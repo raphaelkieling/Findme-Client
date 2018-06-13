@@ -4,6 +4,5 @@
 }
 
 .card-selecionado{
-    color: white;
-    background: var(--color-primary);
+    border: solid 3px var(--color-primary);
 }

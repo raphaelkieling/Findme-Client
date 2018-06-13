@@ -1,34 +1,36 @@
-<mat-card>
-  <app-preloader *ngIf="loading;else table"></app-preloader>
+<div class="container">
+  <mat-card>
+    <app-preloader *ngIf="loading;else table"></app-preloader>
 
-  <ng-template #table>
-    <div fxLayout="column">
-      <mat-form-field>
-        <input matInput placeholder="Filtro" (keyup)="filter($event.target.value)">
-      </mat-form-field>
-    </div>
+    <ng-template #table>
+      <div fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Filtro" (keyup)="filter($event.target.value)">
+        </mat-form-field>
+      </div>
 
-    <mat-table [dataSource]="usuarios">
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-      </ng-container>
+      <mat-table [dataSource]="usuarios">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="usuario">
-        <mat-header-cell *matHeaderCellDef> Usuário </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.usuario}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="usuario">
+          <mat-header-cell *matHeaderCellDef> Usuário </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.usuario}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="acao">
-        <mat-header-cell *matHeaderCellDef> Ação </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <button *ngIf="element.ativo" mat-button color="warn" (click)="desativarUsuario(element.id)">Desativar</button>
-          <button *ngIf="!element.ativo" mat-button color="primary" (click)="ativarUsuario(element.id)">Ativar</button>
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="acao">
+          <mat-header-cell *matHeaderCellDef> Ação </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button *ngIf="element.ativo" mat-button color="warn" (click)="desativarUsuario(element.id)">Desativar</button>
+            <button *ngIf="!element.ativo" mat-button color="primary" (click)="ativarUsuario(element.id)">Ativar</button>
+          </mat-cell>
+        </ng-container>
 
-      <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
-    </mat-table>
-  </ng-template>
-</mat-card>
+        <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
+      </mat-table>
+    </ng-template>
+  </mat-card>
+</div>

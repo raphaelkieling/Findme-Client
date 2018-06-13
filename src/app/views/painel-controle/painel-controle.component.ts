@@ -63,6 +63,7 @@ export class PainelControleComponent implements OnInit {
   }
 
   private escutaCategorias() {
+    if(!this.authS.tokenDecoded.usuario.pessoa) return;
     this.authS.tokenDecoded.usuario.pessoa.categorias.forEach((categoria: Categoria) => {
       console.log(`Escutando a categoria ${categoria.nome} - id ${categoria.id}`);
       const sub = this.socket.fromEvent(`categoria-${categoria.id}`).subscribe((pedidoSocket: PedidoSocket) => {

@@ -3,4 +3,16 @@
     width: 130px;
     height: 130px;
     margin: 0 auto;
+    position: fixed;
+    top: 20px;
+    z-index: 9;
+}
+
+.list_perfil{
+    padding: 5px 0;
+    border-bottom: solid 1px #d8d8d8;
+}
+
+.list_perfil__title{
+    font-weight: bold;
 }

@@ -2,10 +2,18 @@
   <mat-toolbar-row>
     <button [routerLink]="['principal']" mat-button>FindMe</button>
     <span class="spacer"></span>
-    <button [routerLink]="['categorias']" [permission]="'user_dev'" mat-button matTooltip="Categorias do sistema">Categorias</button>
-    <button [routerLink]="['usuarios']" [permission]="'user_dev'" mat-button matTooltip="Usuários do sistema">Usuários</button>
+    <button [routerLink]="['categorias']" [permission]="'user_dev'" mat-button matTooltip="Categorias do sistema">
+      <i class="material-icons">category</i>Categorias</button>
+    <button [routerLink]="['usuarios']" [permission]="'user_dev'" mat-button matTooltip="Usuários do sistema">
+      <i class="material-icons">supervisor_account</i> Usuários</button>
+    <button [routerLink]="['usuarios-publicos']" mat-button matTooltip="Usuários do sistema">
+      <i class="material-icons">search</i>Encontrar um usuário
+    </button>
+    <button [routerLink]="['mensagens']" mat-button matTooltip="Mensagens recebidas">
+      <i class="material-icons">chat</i>Mensagens
+    </button>
     <button [routerLink]="['conta']" mat-button>
-      Conta
+        <i class="material-icons">account_circle</i>Conta
     </button>
     <button mat-button (click)="logout()" matTooltip="Sair do sistema">Sair</button>
   </mat-toolbar-row>

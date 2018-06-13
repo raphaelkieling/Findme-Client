@@ -1,47 +1,49 @@
-<button mat-raised-button color="primary" (click)="abrirAdicionarModal()">
-  Adicionar
-  <i class="material-icons">add</i>
-</button>
-<br>
-<br>
-<mat-card>
-  <app-preloader *ngIf="loadingCategorias;else table"></app-preloader>
+<div class="container">
+  <button mat-raised-button color="primary" (click)="abrirAdicionarModal()">
+    Adicionar
+    <i class="material-icons">add</i>
+  </button>
+  <br>
+  <br>
+  <mat-card>
+    <app-preloader *ngIf="loadingCategorias;else table"></app-preloader>
 
-  <ng-template #table>
-    <div fxLayout="column">
-      <mat-form-field>
-        <input matInput placeholder="Filtro" (keyup)="filter($event.target.value)">
-      </mat-form-field>
-    </div>
+    <ng-template #table>
+      <div fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Filtro" (keyup)="filter($event.target.value)">
+        </mat-form-field>
+      </div>
 
-    <mat-table [dataSource]="categorias">
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-      </ng-container>
+      <mat-table [dataSource]="categorias">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="nome">
-        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.nome}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="nome">
+          <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.nome}} </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="foto">
-        <mat-header-cell *matHeaderCellDef> Ícone </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <mat-icon>{{element.foto}}</mat-icon>
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="foto">
+          <mat-header-cell *matHeaderCellDef> Ícone </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <img [src]="element.foto" alt="Foto da categoria" style="width: 50px;margin: 10px;">
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="acoes">
-        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <mat-icon class="aux-pointer" (click)="abrirEditarModal(element)">edit</mat-icon>
-          <mat-icon class="aux-pointer" (click)="abrirDeleteModal(element)">delete_forever</mat-icon>
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="acoes">
+          <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-icon class="aux-pointer" (click)="abrirEditarModal(element)">edit</mat-icon>
+            <mat-icon class="aux-pointer" (click)="abrirDeleteModal(element)">delete_forever</mat-icon>
+          </mat-cell>
+        </ng-container>
 
-      <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
-    </mat-table>
-  </ng-template>
-</mat-card>
+        <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
+      </mat-table>
+    </ng-template>
+  </mat-card>
+</div>

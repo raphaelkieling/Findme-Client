@@ -18,6 +18,8 @@ export class PerfilComponent implements OnInit {
   comentario: string = '';
   comentarios: Comentario[];
 
+  rate: any = 0;
+
   public imageUrl = 'assets/images/avatar.jpg';
 
   constructor(

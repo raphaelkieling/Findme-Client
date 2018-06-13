@@ -1,6 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+@import '~ngx-bar-rating/themes/br-default-theme.css';
+@import '~ngx-bar-rating/themes/br-bootstrap-theme.css';
+@import '~ngx-bar-rating/themes/br-fontawesome-theme.css';
+@import '~ngx-bar-rating/themes/br-fontawesome-o-theme.css';
+@import '~ngx-bar-rating/themes/br-horizontal-theme.css';
+@import '~ngx-bar-rating/themes/br-vertical-theme.css';
+@import '~ngx-bar-rating/themes/br-stars-theme.css';
+@import '~ngx-bar-rating/themes/br-movie-theme.css';
+@import '~ngx-bar-rating/themes/br-square-theme.css';
+
+
 :root{
     --color-primary: #673AB7;
 }
@@ -43,7 +54,7 @@ agm-map.full-map{
     height: 100%;
     position: fixed;
     width: 100%;
-    top: 0px;
+    top: 60px;
     right: 0px;
 }
 .aux-pointer{

@@ -1,0 +1,52 @@
+mat-card.card-usuarios{
+    width: 180px;
+    margin-right: 10px;
+    margin-top: 10px;
+    display:  flex;
+    flex-direction:  column;
+    align-items:  center;
+}
+
+mat-card.card-usuarios img.user_info_avatar{
+    width:  160px;
+    border-radius:  50%;
+    position:  relative;
+    top:  -60px;
+    margin-top: 20px;
+    
+}
+
+.container-users{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.user_info_nome{
+    display:  block;
+    font-size:  24px;
+}
+
+.user_info_tipo{
+    background: #3498db;
+    color:  white;
+    position: absolute;
+    left: 40px;
+    top: -10px;
+    width: 20px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.user_info_distancia{
+    margin-top:  10px;
+}
+
+.container-category{
+    display:  flex;
+    justify-content:  space-around;
+}
+.container-category img{
+    width: 50px;
+    height: 40px;
+}

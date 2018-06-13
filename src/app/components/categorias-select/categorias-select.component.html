@@ -13,7 +13,7 @@
 
       <mat-card-content>
         <p>{{categoria.nome}}</p>
-        <i class="icon-categoria material-icons" [class.white-text]="estaSelecionado(categoria.id)">{{categoria.foto}}</i>
+        <img [src]="categoria.foto" alt="Foto da categoria">
       </mat-card-content>
 
     </mat-card>

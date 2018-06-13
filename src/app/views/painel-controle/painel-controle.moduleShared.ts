@@ -49,6 +49,8 @@ import { PerfilModule } from '../../components/perfil/perfil.module';
 import { ChatModule } from '../../components/chat/chat.module';
 import { ChatService } from '../../services/chat.service';
 import { MensagensComponent } from './mensagens/mensagens.component';
+import { LoaderCustomModule } from '../../components/loader-custom/loader-custom.module';
+import { UsuariosPublicosComponent } from './usuarios-publicos/usuarios-publicos.component';
 
 @NgModule({
   imports: [
@@ -82,7 +84,8 @@ import { MensagensComponent } from './mensagens/mensagens.component';
     FlexModule,
     MatDatepickerModule,
     PerfilModule,
-    ChatModule
+    ChatModule,
+    LoaderCustomModule
   ],
   declarations: [
     PainelControleComponent,
@@ -94,7 +97,8 @@ import { MensagensComponent } from './mensagens/mensagens.component';
     PedidoComponent,
     PedidoRegisterComponent,
     MapPedidosDirective,
-    MensagensComponent
+    MensagensComponent,
+    UsuariosPublicosComponent
   ],
   entryComponents: [
     CategoriaModalComponent,

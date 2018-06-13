@@ -32,7 +32,82 @@
     </div>
 
     <div *ngSwitchCase="'profissional'">
-        <agm-map #map [styles]="styles" [zoom]="15" [longitude]="centerLongitude" [latitude]="centerLatitude">
+
+
+        <span class="button-menu" (click)="menuAberto = true">
+            <i class="material-icons">
+                view_module
+            </i>
+        </span>
+
+        <div class="cards" [class.closed]="!menuAberto">
+            <div style="display: flex;justify-content: flex-end;">
+                <button mat-button (click)="menuAberto = false">
+                    <i class="material-icons">
+                        trending_flat
+                    </i>
+                </button>
+                <button mat-button (click)="carregarPedidos()">
+                    <i class="material-icons">
+                        refresh
+                    </i>
+                </button>
+            </div>
+
+            <app-loader-custom *ngIf="loadingPedidos; else pedidosContainer"></app-loader-custom>
+
+            <ng-template #pedidosContainer>
+                <div class="card-scroll" *ngIf="pedidos && pedidos.length > 0; else notHasPedidos">
+                    <div class="card-wrapper" *ngFor="let pedido of pedidos" [class.open]="isCardAberto(pedido)">
+                        <div class="card-header" (click)="selecionarCard(pedido)">
+                            <div class="card-header__container_image">
+                                <img [src]="pedido?.cliente?.pessoa?.avatar?.base64" alt="" class="card-header__avatar">
+                                <div class="card-header__category">
+                                    <img [src]="pedido.categoria.foto" alt="">
+                                </div>
+                            </div>
+                            <div class="card-header__info">
+                                <span class="card-header__title">{{pedido.titulo}}</span>
+                                <span class="card-header__description">{{pedido.cliente.pessoa.nome}} {{pedido.cliente.pessoa.sobrenome}}</span>
+                            </div>
+                        </div>
+                        <div class="card-container">
+                            <span class="card-header__addons">
+                                <span class="card-header__addons__tag">
+                                    <i class="material-icons">location_on</i>
+                                    <span class="location_number">
+                                        {{pedido?.cliente?.pessoa?.distanceToMe}} km
+                                    </span>
+                                </span>
+                            </span>
+                            <p>{{pedido.observacao}}</p>
+
+                            <div style="display: flex;justify-content: flex-end;">
+                                <button mat-button color="accent" (click)="openPerfil(pedido)">
+                                    <mat-icon>account_circle</mat-icon> Perfil
+                                </button>
+                                <button mat-button color="accent" (click)="abrirChat(pedido.cliente)">
+                                    <mat-icon>chat</mat-icon> Conversar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </ng-template>
+
+            <ng-template #notHasPedidos>
+                <div class="card-pedido-vazio">
+                    <img src="assets/images/coffe.png" alt="Pedido vazio">
+                    <span class="card-pedido-vazio-message">
+                        Pode ir tomar um cafézinho. Por enquanto não tem pedidos pra suas categorias.
+                    </span>
+                    <button mat-raised-button color="primary" (click)="menuAberto = false">Esconder</button>
+                </div>
+            </ng-template>
+        </div>
+
+        <agm-map #map [styles]="styles" [zoom]="15" [longitude]="centerLongitude" [latitude]="centerLatitude" class="full-map">
             <agm-marker *ngFor="let pedido of pedidos" [iconUrl]="pedido.cliente?.pessoa?.avatar?.marker" [title]="pedido.titulo" (markerClick)="markerPedidoClicado(pedido,infoWindow)"
                 [openInfoWindow]="true" [markerClickable]="true" [latitude]="pedido.latitude" [longitude]="pedido.longitude">
                 <agm-info-window #infoWindow>
@@ -45,11 +120,9 @@
                                 <b>Cliente</b>: {{pedido.cliente.pessoa.nome}} {{pedido.cliente.pessoa.sobrenome}}</small>
                         </p>
                     </div>
-                    <button mat-button disabled>
-                        <mat-icon>{{pedido.categoria.foto}}</mat-icon> {{pedido.categoria.nome}}
-                    </button>
+                    <img class="info-window-category" [src]="pedido.categoria.foto" alt="">
                     <button mat-button (click)="abrirChat(pedido.cliente)">
-                        <mat-icon >chat</mat-icon>
+                        <mat-icon>chat</mat-icon>
                     </button>
                     <button mat-button (click)="openPerfil(pedido)">
                         <mat-icon>account_circle</mat-icon>
@@ -57,33 +130,5 @@
                 </agm-info-window>
             </agm-marker>
         </agm-map>
-        <br>
-        <div fxLayout="row wrap">
-            <mat-card fxFlex="33%" class="animated fadeInDown" *ngFor="let pedido of pedidos" style="margin: 10px;">
-                <mat-card-header>
-                    <div mat-card-avatar>
-                        <mat-icon>{{pedido.categoria.foto}}</mat-icon>
-                    </div>
-                    <mat-card-title>{{pedido.categoria.nome}}</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>
-                        {{pedido.observacao}}
-                    </p>
-                </mat-card-content>
-                <mat-card-actions>
-                    <button mat-button>
-                        <mat-icon (click)="abrirChat(pedido.cliente)">chat</mat-icon>
-                    </button>
-                    <button mat-button>
-                        <mat-icon>info</mat-icon>
-                    </button>
-                    <button mat-button>
-                        <mat-icon (click)="openPerfil(pedido)">account_circle</mat-icon>
-                    </button>
-                </mat-card-actions>
-            </mat-card>
-
-        </div>
     </div>
 </div>

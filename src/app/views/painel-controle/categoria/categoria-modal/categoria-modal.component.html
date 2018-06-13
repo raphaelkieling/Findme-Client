@@ -9,6 +9,8 @@
   <mat-form-field>
     <input matInput placeholder="Ícone" id="foto" name="foto" type="text" [(ngModel)]="objeto.foto">
   </mat-form-field>
+
+  <img [src]="objeto.foto" alt="">
 </form>
 
 <mat-dialog-actions>
