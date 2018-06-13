@@ -24,7 +24,11 @@ import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-mo
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
-const config: SocketIoConfig = { url: `${retiraPalavra(urlDomain, '/graphql')}`, options: {} };
+const config: SocketIoConfig = {
+  url: `${retiraPalavra(urlDomain, '/graphql')}`, options: {
+    transports: ['websocket']
+  }
+};
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -58,16 +62,16 @@ registerLocaleData(localePt, 'pt-BR');
     MarkerManager,
     GoogleMapsAPIWrapper,
     {
-      provide: MAT_DATE_LOCALE, 
+      provide: MAT_DATE_LOCALE,
       useValue: 'pt-br'
     },
     {
-      provide: DateAdapter, 
-      useClass: MomentDateAdapter, 
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE]
     },
     {
-      provide: MAT_DATE_FORMATS, 
+      provide: MAT_DATE_FORMATS,
       useValue: MAT_MOMENT_DATE_FORMATS
     }
   ],
