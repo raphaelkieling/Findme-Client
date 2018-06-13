@@ -64,6 +64,14 @@
   margin-bottom:10px;
 }
 
+.title_card{
+  font-size: 30px;
+  display: block;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+
 .button-menu{
   position: fixed;
   right: 0;

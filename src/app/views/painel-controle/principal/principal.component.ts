@@ -26,6 +26,7 @@ export class PrincipalComponent implements OnInit {
   loadingPedidos = false;
 
   pedidos: Pedido[] = [];
+  pedidosFinalizados: Pedido[] = [];
 
   tipoPessoa: TipoUsuario | string;
 
@@ -86,10 +87,13 @@ export class PrincipalComponent implements OnInit {
     this.chatService.addChat(usuario);
   }
 
-  abrirModalPedido() {
+  abrirModalPedido(pedido) {
     const dialog = this.dialog.open(PedidoRegisterComponent, {
       width: '600px',
-      height: '500px'
+      height: '500px',
+      data: {
+        pedido
+      }
     });
   }
 
@@ -113,8 +117,14 @@ export class PrincipalComponent implements OnInit {
           .pedidosCliente()
           .subscribe(({ data, loading }) => {
             this.loadingPedidos = false;
-            console.log(data)
             this.pedidos = data['pedidosCliente'];
+          });
+
+        this.pedidoService
+          .pedidosClienteFinalizados()
+          .subscribe(({ data, loading }) => {
+            this.loadingPedidos = false;
+            this.pedidosFinalizados = data['pedidosClienteFinalizados'];
           });
         break;
 
@@ -123,7 +133,6 @@ export class PrincipalComponent implements OnInit {
           .pedidosCategorias(categoriasUsadas)
           .subscribe(({ data, loading }) => {
             this.loadingPedidos = false;
-            console.log(data);
             this.pedidos = data['pedidosCategorias'];
           });
         break;
@@ -151,6 +160,12 @@ export class PrincipalComponent implements OnInit {
       this.cardSelecionado = undefined;
     else
       this.cardSelecionado = pedido;
+  }
+
+  cancelarPedido(pedidoId) {
+    this.pedidoService
+      .cancelarPedido(pedidoId)
+      .subscribe(console.log)
   }
 
   ngOnDestroy() {

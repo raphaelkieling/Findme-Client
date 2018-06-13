@@ -36,7 +36,11 @@ export class UsuariosPublicosComponent implements OnInit {
   }
 
   filter(value: string) {
-    this.usuarios.filter((usuario: Usuario) => usuario.pessoa.nome.toLowerCase().includes(value.toLowerCase()));
+    this.usuariosFiltrados = this.usuarios.filter((usuario: Usuario) => {
+      if (!usuario.pessoa) return false;
+      
+      return usuario.pessoa.nome.toLowerCase().includes(value.toLowerCase())
+    });
   }
 
   openPerfil(usuario: Usuario) {

@@ -51,6 +51,7 @@ import { ChatService } from '../../services/chat.service';
 import { MensagensComponent } from './mensagens/mensagens.component';
 import { LoaderCustomModule } from '../../components/loader-custom/loader-custom.module';
 import { UsuariosPublicosComponent } from './usuarios-publicos/usuarios-publicos.component';
+import { MatSelectModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -85,7 +86,8 @@ import { UsuariosPublicosComponent } from './usuarios-publicos/usuarios-publicos
     MatDatepickerModule,
     PerfilModule,
     ChatModule,
-    LoaderCustomModule
+    LoaderCustomModule,
+    MatSelectModule
   ],
   declarations: [
     PainelControleComponent,

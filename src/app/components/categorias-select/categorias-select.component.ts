@@ -63,7 +63,6 @@ export class CategoriasSelectComponent implements OnInit {
 
       this.adicionaCategoriaNaListagem(id);
     }
-
     this.selecteds.emit(this.categoriasSelecionadas);
   }
 
@@ -87,6 +86,7 @@ export class CategoriasSelectComponent implements OnInit {
         this.snack.open('Problema ao adicionar categora, tenta mais tarde!', 'Aff', {
           duration: 3000
         });
+
         this.retiraCategoriaDaListagem(idCategoria);
       });
   }

@@ -1,6 +1,5 @@
 <h2 mat-dialog-title>Pedido</h2>
-
-<app-categorias-select [apenasUm]="true" (selecteds)="objeto.categoriaId = $event[0]"></app-categorias-select>
+<app-categorias-select [preselects]="[objeto?.categoria?.id]" [apenasUm]="true" (selecteds)="setCategoria($event[0])"></app-categorias-select>
 <form fxLayout="column">
   <mat-form-field>
     <input matInput [placeholder]="'Título'" id="titulo" name="titulo" type="text" [(ngModel)]="objeto.titulo">

@@ -74,6 +74,11 @@ export class ChatComponent implements OnInit {
     return this.authService.tokenDecoded.usuario.pessoa.tipo === 'profissional'
   }
 
+  private isMaster() {
+    return this.authService.tokenDecoded.usuario.pessoa.tipo === 'master'
+  }
+
+
   ngAfterViewChecked() {
     this.scrollToBottom();
   }

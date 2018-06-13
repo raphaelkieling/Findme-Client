@@ -17,12 +17,12 @@ import { AuthService } from './services/auth.service';
 import { HttpModule } from '@angular/http';
 import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from '@agm/core';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
-import { retiraPalavra } from './utils';
 import { FlexModule } from '@angular/flex-layout';
 import { MAT_DATE_LOCALE, MatPaginatorIntl, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const config: SocketIoConfig = {
   url: urlDomain, options: {
@@ -50,7 +50,8 @@ registerLocaleData(localePt, 'pt-BR');
       apiKey: 'AIzaSyAhDpLlU6jqo4aWEP26jG3RE_-OFktIyvQ'
     }),
     SocketIoModule.forRoot(config),
-    FlexModule
+    FlexModule,
+    ServiceWorkerModule.register('/ngsw-worker.js')
   ],
   providers: [
     AuthService,
@@ -90,5 +91,6 @@ export class AppModule {
       connectToDevTools: true
     });
   }
+
 
 }
