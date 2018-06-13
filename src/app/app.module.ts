@@ -25,7 +25,7 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
 const config: SocketIoConfig = {
-  url: `${retiraPalavra(urlDomain, '/graphql')}`, options: {
+  url: urlDomain, options: {
     transports: ['websocket']
   }
 };
