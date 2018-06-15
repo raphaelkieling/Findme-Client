@@ -16,7 +16,7 @@ import { Usuario } from '../../domain/usuario';
   templateUrl: './painel-controle.component.html',
   styleUrls: ['./painel-controle.component.css']
 })
-export class PainelControleComponent implements OnInit {
+export class PainelControleComponent {
 
   categoriasSubscriptions: Subscription[] = [];
 
@@ -28,31 +28,28 @@ export class PainelControleComponent implements OnInit {
     private router: Router,
     private snack: MatSnackBar,
     private chatService: ChatService
-  ) { }
-
-  ngOnInit() {
+  ) {
     this.escutaCategorias();
     this.escutaDesativacao();
     this.escutaChat();
   }
 
-  fechaChat(chat){
-    console.log(chat);
+  fechaChat(chat) {
     this.chatService.removeChat(chat.id);
   }
 
-  get chats(){
+  get chats() {
     return this.chatService.chats
   }
 
-  private escutaChat(){
+  private escutaChat() {
     this.socket.fromEvent(`chat-send-${this.authS.tokenDecoded.usuario.id}`).subscribe((data) => {
       this.chatService.addChatPeloId(data['usuario_enviou']);
     })
   }
 
   private escutaDesativacao() {
-    console.log(`logout-user-${this.authS.tokenDecoded.usuario.id}`);
+    // console.log(`logout-user-${this.authS.tokenDecoded.usuario.id}`);
     this.socket.fromEvent(`logout-user-${this.authS.tokenDecoded.usuario.id}`).subscribe(() => {
       const snack = this.snack.open('Você foi desativado do sistema, contate o suporte hehe', 'Chamar suporte!');
       snack.onAction().subscribe(() => console.log('indo até o suporte'));
@@ -63,9 +60,9 @@ export class PainelControleComponent implements OnInit {
   }
 
   private escutaCategorias() {
-    if(!this.authS.tokenDecoded.usuario.pessoa) return;
+    if (!this.authS.tokenDecoded.usuario.pessoa) return;
     this.authS.tokenDecoded.usuario.pessoa.categorias.forEach((categoria: Categoria) => {
-      console.log(`Escutando a categoria ${categoria.nome} - id ${categoria.id}`);
+      // console.log(`Escutando a categoria ${categoria.nome} - id ${categoria.id}`);
       const sub = this.socket.fromEvent(`categoria-${categoria.id}`).subscribe((pedidoSocket: PedidoSocket) => {
         this.pedidoService.pedidoSocket.emit(pedidoSocket);
       });

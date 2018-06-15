@@ -19,3 +19,37 @@ query mensagemsUsuario($id: ID!){
     }
 }
 `
+
+export const MENSAGENS_LISTA_POR_USUARIO = gql`
+    query{
+        mensagemsLista{
+            mensagem,
+            usuario_recebeu{
+              id
+              usuario
+              pessoa{
+                id
+                nome
+                sobrenome
+                avatar{
+                  base64
+                }
+                id
+              }
+            },
+            usuario_enviou{
+              id
+              usuario
+              pessoa{
+                id
+                nome
+                sobrenome
+                avatar{
+                  base64
+                }
+                id
+              }
+            }
+          } 
+    }
+`

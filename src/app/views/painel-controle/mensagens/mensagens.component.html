@@ -1,3 +1,33 @@
-<p>
-  mensagens works!
-</p>
+<div class="container">
+  <mat-card>
+    <mat-list>
+      <mat-list-item *ngFor="let message of messages">
+        <img matListAvatar *ngIf="message.usuario_enviou.id != idLogged" [src]="message.usuario_enviou.pessoa.avatar ? message.usuario_enviou.pessoa.avatar.base64 : 'assets/images/avatar.jpg'"
+          alt="...">
+        <img matListAvatar *ngIf="message.usuario_recebeu.id != idLogged" [src]="message.usuario_recebeu.pessoa.avatar ? message.usuario_recebeu.pessoa.avatar.base64 : 'assets/images/avatar.jpg'"
+          alt="...">
+        <h3 matLine>
+          <b *ngIf="message.usuario_enviou.id != idLogged">{{message.usuario_enviou.pessoa.nome}}</b>
+          <b *ngIf="message.usuario_recebeu.id != idLogged">{{message.usuario_recebeu.pessoa.nome}}</b>
+        </h3>
+        <p matLine>
+          <span> {{message.mensagem}} </span>
+        </p>
+        <button *ngIf="message.usuario_enviou.id != idLogged" mat-button (click)="openPerfil(message.usuario_enviou)">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <button *ngIf="message.usuario_enviou.id != idLogged" mat-button (click)="abrirChat(message.usuario_enviou)">
+          <mat-icon>chat</mat-icon>
+        </button>
+
+        <button *ngIf="message.usuario_recebeu.id != idLogged" mat-button (click)="openPerfil(message.usuario_recebeu)">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <button *ngIf="message.usuario_recebeu.id != idLogged" mat-button (click)="abrirChat(message.usuario_recebeu)">
+          <mat-icon>chat</mat-icon>
+        </button>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+</div>

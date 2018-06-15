@@ -1,3 +1,4 @@
+import { MENSAGENS_LISTA_POR_USUARIO } from './../../graphql/mensagem.querie';
 import { Injectable } from '@angular/core';
 import { Comentario } from '../../domain/comentario';
 import { Apollo } from 'apollo-angular';
@@ -37,5 +38,12 @@ export class MensagemService {
     }).valueChanges;
   }
 
+  mensagensLista() {
+    let query = MENSAGENS_LISTA_POR_USUARIO;
 
+    return this.apollo.watchQuery({
+      query,
+      fetchPolicy: GraphPolicy.NETWORK_ONLY
+    }).valueChanges;
+  }
 }

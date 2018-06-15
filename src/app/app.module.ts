@@ -23,6 +23,8 @@ import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-mo
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
 
 const config: SocketIoConfig = {
   url: urlDomain, options: {
@@ -51,7 +53,8 @@ registerLocaleData(localePt, 'pt-BR');
     }),
     SocketIoModule.forRoot(config),
     FlexModule,
-    ServiceWorkerModule.register('/ngsw-worker.js')
+    ServiceWorkerModule.register('/ngsw-worker.js'),
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     AuthService,

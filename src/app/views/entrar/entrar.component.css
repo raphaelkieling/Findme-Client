@@ -1,3 +1,21 @@
 main{
     margin-top: 60px;
 }
+
+.btn-social{
+    width: 100%;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: aliceblue;
+    padding: 10px;
+    box-sizing: border-box;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.btn-social img{
+    width: 30px;
+}

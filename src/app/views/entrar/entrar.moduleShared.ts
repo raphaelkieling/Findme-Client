@@ -7,10 +7,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PreloaderModule } from '../../components/preloader/preloader.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatCardMdImage, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { FlexModule } from '@angular/flex-layout';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
     imports: [
@@ -24,9 +26,13 @@ import { MatIconModule } from '@angular/material/icon';
         MatCardModule,
         FlexModule,
         MatCheckboxModule,
-        MatIconModule
+        MatIconModule,
+        AngularFireModule,
+        AngularFireAuthModule
     ],
     declarations: [EntrarComponent],
-    providers: [LoginService]
+    providers: [
+        LoginService
+    ]
 })
 export class entrarModuleShared { }
