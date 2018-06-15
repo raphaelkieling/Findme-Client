@@ -53,8 +53,7 @@ registerLocaleData(localePt, 'pt-BR');
     }),
     SocketIoModule.forRoot(config),
     FlexModule,
-    ServiceWorkerModule.register('/ngsw-worker.js'),
-    AngularFireModule.initializeApp(environment.firebase)
+    ServiceWorkerModule.register('/ngsw-worker.js')
   ],
   providers: [
     AuthService,
