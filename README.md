@@ -1,27 +1,31 @@
-# Frontend
+# Findme
+O findme nasceu de uma ideia. Gerar empregos.
 
-Project Client to [Findme-API](https://github.com/raphaelkieling/Findme-API)
+Hoje cada vez mais a taxa de desemprego no Brasil, a ideia é ajudar as pessoas conectando a outras através de uma aplicação sem foco em lucros. Eu sou bom em algo? Vou prestar meu serviço pra quem vai precisar dele.
 
-## Development server
+Inicialmente temos apenas as categorias de "marido de aluguel". Com o tempo irá aumentar o número de pessoas, feedbacks e saberemos onde focalizar os esforços. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+> O Findme hoje está em desenvolvimento. Espero de verdade que queira contribuir, precisamos de ajuda.
 
-## Code scaffolding
+### Cliente
+Este é o frontend do projeto findme. O projeto está sendo feito com Angular.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```js
+//instalar as dependencias
+npm install
+//iniciar
+npm start
+```
+- Dentro do arquivo config tem a url da api. Mantenha a url do heroku caso queira apenas consumir.
+- Na pasta GRAPHQL temos as querys e mutations para utilizar. Caso precise de mais um item pode verificar a documentação criada pelo graphql da api. (Documentação)[https://findmeapi.herokuapp.com/graphql]
 
-## Build
+### Como contribuir?
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+- Faça um fork do projeto
+- Crie um branch com o que você quer mudar ou trabalhar
+- Faça um pull request.
 
-## Running unit tests
+Simples não?
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### API
+[Link para api](https://github.com/raphaelkieling/Findme-API)
