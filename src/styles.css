@@ -75,3 +75,12 @@ mat-card{
     margin: 0;
     font-weight: bold;
 }
+
+.bar-rating > .br > .br-units > * {
+    height: 20px;
+    width: 20px;
+}
+
+.bar-rating > .br {
+    margin: 0 !important;
+}

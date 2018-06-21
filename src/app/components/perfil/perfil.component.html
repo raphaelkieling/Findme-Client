@@ -21,31 +21,7 @@
       </div>
     </mat-tab>
     <mat-tab label="Comentários">
-
-      <div fxLayout="column" style="margin-top: 20px">
-        <mat-form-field>
-          <input matInput placeholder="Seu comentário" [disabled]="loadingComentario" (keyup.enter)="criarComentario(comentario)" [(ngModel)]="comentario">
-        </mat-form-field>
-
-        <mat-progress-bar mode="indeterminate" *ngIf="loadingComentario;else comentarioList"></mat-progress-bar>
-
-        <ng-template #comentarioList>
-          <mat-list role="list">
-            <mat-list-item *ngFor="let coment of comentarios" role="listitem">
-              <img matListAvatar [src]="coment?.usuario_criador?.pessoa?.avatar?.base64 || imageUrl" alt="Imagem do usuário que comentou">
-              <span matLine>
-                <b>{{coment?.usuario_criador?.pessoa?.nome}}</b>
-              </span>
-              <p matLine>
-                <span class="demo-2"> {{coment.mensagem}} </span>
-              </p>
-              <mat-divider></mat-divider>
-            </mat-list-item>
-
-          </mat-list>
-        </ng-template>
-      </div>
-
+      <app-comentario [idUsuario]="data.id"></app-comentario>
     </mat-tab>
   </mat-tab-group>
 </ng-template>

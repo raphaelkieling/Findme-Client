@@ -1,0 +1,15 @@
+<div style="display: flex;flex-direction: column;">
+  <mat-progress-bar mode="indeterminate" *ngIf="loading;else formulario"></mat-progress-bar>
+  
+  <ng-template #formulario>
+    <bar-rating [(rate)]="nota" [max]="5" [theme]="'stars'"></bar-rating>
+    <mat-form-field>
+
+      <textarea matInput placeholder="Seu comentário" [disabled]="loadingComentario" (keyup.enter)="criarComentario(comentario)"
+        [(ngModel)]="comentario"></textarea>
+
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="criarComentario()">Comentar</button>
+  </ng-template>
+</div>

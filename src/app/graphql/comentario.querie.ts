@@ -4,6 +4,8 @@ export const COMENTARIOS = gql`
     query comentariosUsuario($id:ID=1){
         comentariosUsuario(id:$id){
           mensagem,
+          nota,
+          createdAt,
           usuario_criador{
             id
             usuario

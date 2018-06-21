@@ -14,9 +14,6 @@ export class PerfilComponent implements OnInit {
 
   usuario: Usuario;
   loading: boolean = false;
-  loadingComentario: boolean = false;
-  comentario: string = '';
-  comentarios: Comentario[];
 
   rate: any = 0;
 
@@ -26,12 +23,10 @@ export class PerfilComponent implements OnInit {
     public dialogRef: MatDialogRef<PerfilComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Usuario,
     private usuarioService: UsuarioService,
-    private comentarioService: ComentarioService
   ) { }
 
   ngOnInit() {
     this.carregaPerfil();
-    this.carregaComentarios();
   }
 
 
@@ -44,25 +39,5 @@ export class PerfilComponent implements OnInit {
         this.usuario = data['usuario'];
         console.log(this.usuario);
       });
-  }
-
-  private carregaComentarios() {
-    this.loadingComentario = true;
-    this.comentarioService
-      .comentarioUsuario(this.data.id)
-      .subscribe(({ data, loading }) => {
-        this.loadingComentario = loading;
-        this.comentarios = data['comentariosUsuario'];
-      });
-  }
-
-  criarComentario(message) {
-    let comentario: Comentario = new Comentario(message, this.data.id);
-    this.comentarioService
-      .criarComentario(comentario)
-      .subscribe((data) => {
-        this.carregaComentarios();
-        this.comentario = '';
-      })
   }
 }
