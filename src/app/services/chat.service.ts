@@ -1,25 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../domain/usuario';
+import { Chat } from '../domain/chat';
 
 @Injectable()
 export class ChatService {
-  chats: Usuario[] = [];
+  chats: Chat[] = [];
 
   constructor() { }
 
-  addChat(novo_usuario: Usuario) {
-    let chat = this.chats.filter((usuario: Usuario) => {
-      return usuario.id == novo_usuario.id;
+  addChat(new_chat: Chat) {
+    console.log(new_chat);
+    let chat = this.chats.filter((chat_unique: Chat) => {
+      return chat_unique.usuario.id == new_chat.usuario.id;
     });
 
     if (chat.length != 0) return;
 
-    this.chats.push(novo_usuario);
+    this.chats.push(new_chat);
   }
 
   addChatPeloId(id: string) {
-    let chat = this.chats.filter((usuario: Usuario) => {
-      return usuario.id == id
+    let chat = this.chats.filter((chat_unique: Chat) => {
+      return chat_unique.usuario.id == id
     });
 
     if (chat.length != 0) return;
@@ -27,12 +29,12 @@ export class ChatService {
     let novo_usuario = new Usuario();
     novo_usuario.id = id;
 
-    this.chats.push(novo_usuario);
+    this.chats.push(new Chat(novo_usuario, null));
   }
 
-  removeChat(id){
-    this.chats = this.chats.filter((usuario: Usuario) => {
-      return usuario.id != id
+  removeChat(chat: Chat) {
+    this.chats = this.chats.filter((chat_unique: Chat) => {
+      return chat_unique.usuario.id != chat.usuario.id
     });
 
   }

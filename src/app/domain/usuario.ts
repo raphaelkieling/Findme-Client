@@ -1,6 +1,7 @@
 import { Base } from './base';
 import { Permissao } from './permissao';
 import { Pessoa } from './pessoa';
+import { Pedido } from './pedido';
 
 export class Usuario extends Base {
     usuario: string;
@@ -9,6 +10,8 @@ export class Usuario extends Base {
     permissaos: Array<Permissao | number>;
     pessoa: Pessoa;
     ativo: boolean;
+
+    pedido: Pedido;
 
     constructor() {
         super();

@@ -5,7 +5,7 @@
     <mat-card-title>{{usuario?.pessoa?.nome}}</mat-card-title>
     <mat-card-subtitle>{{usuario?.pessoa?.tipo}}</mat-card-subtitle>
     <div>
-      <i class="material-icons pointer" (click)="aberto = !aberto; notifications = 0" matTooltip="Minimizar / Maximizar">
+      <i class="material-icons pointer" (click)="aberto = !aberto; notifications = 0">
         {{aberto ? 'expand_more' : 'expand_less'}}
       </i>
       <i class="material-icons pointer" (click)="removeChat()" matTooltip="Fechar">
@@ -25,7 +25,7 @@
       <mat-form-field fxFlex="80%">
         <input type="text" matInput placeholder="Mensagem" [(ngModel)]="mensagem" (keyup.enter)="addMensagem(mensagem); mensagem = ''">
       </mat-form-field>
-      <i *ngIf="isProfissional()" (click)="fazerOrcamento()" fxFlex="10%" style="margin-left:5px" class="material-icons orcamento_button pointer" matTooltip="Criar orçamento para o usuário do chat">
+      <i *ngIf="isProfissional() && pedidoId" (click)="fazerOrcamento()" fxFlex="10%" style="margin-left:5px" class="material-icons orcamento_button pointer" matTooltip="Criar orçamento para o usuário do chat">
         attach_money
       </i>
       <i matTooltip="Enviar mensagem" fxFlex="10%" style="margin-left:5px" class="material-icons" [ngClass]="{'send_button': mensagem.length > 0}" (click)="addMensagem(mensagem); mensagem = ''">

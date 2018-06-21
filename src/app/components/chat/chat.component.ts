@@ -18,12 +18,18 @@ import { OrcamentoModalComponent } from '../orcamento/orcamento-modal/orcamento-
 export class ChatComponent implements OnInit {
   @ViewChild('conversation') conversation: ElementRef;
   @Input() usuario: Usuario;
+  @Input() pedidoId: string;
+
   @Output() close = new EventEmitter();
+
   aberto = true;
+
   notifications = 0;
+
   idUsuarioLogado;
 
   imageDefault = 'assets/images/avatar.jpg';
+
   mensagens: Mensagem[] = [];
 
   mensagem = '';
@@ -75,7 +81,7 @@ export class ChatComponent implements OnInit {
   }
 
   private isMaster() {
-    return this.authService.tokenDecoded.usuario.pessoa.tipo === 'master'
+    return this.authService.tokenDecoded.usuario.pessoa.tipo === 'admin'
   }
 
 
@@ -96,17 +102,22 @@ export class ChatComponent implements OnInit {
     nova_mensagem.usuario_recebeu = this.usuario.id;
     nova_mensagem.usuario_enviou = this.idUsuarioLogado;
 
+    console.log(nova_mensagem)
     this.messageService
       .criarMensagem(nova_mensagem)
       .subscribe(({ data }) => {
-        console.log(data);
-
         this.mensagens = [...this.mensagens, data['criarMensagem']];
       })
   }
 
   fazerOrcamento() {
-    this.dialogModule.open(OrcamentoModalComponent);
+    this.dialogModule.open(OrcamentoModalComponent, {
+      data: {
+        cliente: this.usuario.id,
+        pedido: this.pedidoId,
+        criaMensagemDeConclusao: this.addMensagem.bind(this)
+      }
+    });
   }
 
   removeChat() {

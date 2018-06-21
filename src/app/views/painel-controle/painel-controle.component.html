@@ -1,7 +1,7 @@
 <app-navbar-admin></app-navbar-admin>
 
 <div class="chat_container">
-  <app-chat *ngFor="let chat of chats" [usuario]="chat" (close)="fechaChat(chat)"></app-chat>
+  <app-chat *ngFor="let chat of chats" [usuario]="chat.usuario" (close)="fechaChat(chat)" [pedidoId]="chat?.pedido?.id"></app-chat>
 </div>
 
 <router-outlet></router-outlet>

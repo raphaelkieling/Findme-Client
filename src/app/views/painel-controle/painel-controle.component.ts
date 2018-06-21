@@ -35,7 +35,7 @@ export class PainelControleComponent {
   }
 
   fechaChat(chat) {
-    this.chatService.removeChat(chat.id);
+    this.chatService.removeChat(chat);
   }
 
   get chats() {

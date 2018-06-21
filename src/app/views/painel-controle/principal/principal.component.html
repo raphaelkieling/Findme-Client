@@ -5,6 +5,20 @@
                 <button mat-raised-button color="primary" (click)="abrirModalPedido()">Fazer um pedido</button>
             </mat-card>
 
+            <mat-card>
+                <div class="card-orcamento-container">
+                    <div class="card-orcamento" *ngFor="let orcamento of orcamentos">
+                        <div class="avatar-profissional" (click)="openPerfil(orcamento.cliente)">
+                            <img [src]="orcamento?.profissional?.pessoa?.avatar?.base64  || imageDefault">
+                            <span>{{orcamento?.profissional?.pessoa?.nome}}</span>
+                        </div>
+                        <p class="nome-pedido">{{orcamento?.pedido?.titulo}}</p>
+                        <button mat-raised-button color="primary">Aceitar</button>
+                        <button mat-button color="warn">Cancelar</button>
+                    </div>
+                </div>
+            </mat-card>
+
             <div style="display: flex;justify-content: space-between;">
                 <mat-card style="    
                         display: flex;
@@ -27,7 +41,7 @@
                     <div class="card-wrapper" *ngFor="let pedido of pedidos" [class.open]="isCardAberto(pedido)">
                         <div class="card-header" (click)="selecionarCard(pedido)">
                             <div class="card-header__container_image">
-                                <img [src]="pedido?.categoria?.foto" alt="" class="card-header__avatar">
+                                <img [src]="pedido?.categoria?.foto || imageDefault" alt="" class="card-header__avatar">
                             </div>
                             <div class="card-header__info">
                                 <span class="card-header__title">{{pedido.titulo}}</span>
@@ -63,7 +77,7 @@
                     <div class="card-wrapper" *ngFor="let pedido of pedidosFinalizados" [class.open]="isCardAberto(pedido)">
                         <div class="card-header" (click)="selecionarCard(pedido)">
                             <div class="card-header__container_image">
-                                <img [src]="pedido?.categoria?.foto" alt="" class="card-header__avatar">
+                                <img [src]="pedido?.categoria?.foto || imageDefault" alt="" class="card-header__avatar">
                             </div>
                             <div class="card-header__info">
                                 <span class="card-header__title">{{pedido.titulo}}</span>
@@ -108,7 +122,7 @@
                     <div class="card-wrapper" *ngFor="let pedido of pedidos" [class.open]="isCardAberto(pedido)">
                         <div class="card-header" (click)="selecionarCard(pedido)">
                             <div class="card-header__container_image">
-                                <img [src]="pedido?.cliente?.pessoa?.avatar?.base64" alt="" class="card-header__avatar">
+                                <img [src]="pedido?.cliente?.pessoa?.avatar?.base64 || imageDefault" alt="" class="card-header__avatar">
                                 <div class="card-header__category">
                                     <img [src]="pedido.categoria.foto" alt="">
                                 </div>
@@ -130,10 +144,10 @@
                             <p>{{pedido.observacao}}</p>
 
                             <div style="display: flex;justify-content: flex-end;">
-                                <button mat-button color="accent" (click)="openPerfil(pedido)">
+                                <button mat-button color="accent" (click)="openPerfil(pedido.cliente)">
                                     <mat-icon>account_circle</mat-icon> Perfil
                                 </button>
-                                <button mat-button color="accent" (click)="abrirChat(pedido.cliente)">
+                                <button mat-button color="accent" (click)="abrirChat(pedido.cliente,pedido)">
                                     <mat-icon>chat</mat-icon> Conversar
                                 </button>
                             </div>
@@ -162,20 +176,24 @@
                         <b>{{pedido.titulo}}</b>
                         <br>
                         <p>{{pedido.observacao}}</p>
-                        <p (click)="openPerfil(pedido)">
+                        <p (click)="openPerfil(pedido.cliente)">
                             <small>
                                 <b>Cliente</b>: {{pedido.cliente.pessoa.nome}} {{pedido.cliente.pessoa.sobrenome}}</small>
                         </p>
                     </div>
                     <img class="info-window-category" [src]="pedido.categoria.foto" alt="">
-                    <button mat-button (click)="abrirChat(pedido.cliente)">
+                    <button mat-button (click)="abrirChat(pedido.cliente,pedido)">
                         <mat-icon>chat</mat-icon>
                     </button>
-                    <button mat-button (click)="openPerfil(pedido)">
+                    <button mat-button (click)="openPerfil(pedido.cliente)">
                         <mat-icon>account_circle</mat-icon>
                     </button>
                 </agm-info-window>
             </agm-marker>
         </agm-map>
+    </div>
+
+    <div *ngSwitchCase="'admin'">
+        Você é uma admin
     </div>
 </div>

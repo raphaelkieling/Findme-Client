@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const COMENTARIOS = gql`
-    query comentariosUsuario($id:ID=1){
+    query comentariosUsuario($id:ID){
         comentariosUsuario(id:$id){
           mensagem,
           nota,

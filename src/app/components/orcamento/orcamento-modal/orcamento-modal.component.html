@@ -1,3 +1,10 @@
-<p>
-  orcamento-modal works!
-</p>
+<div class="container-orcamento">
+    <img class="icon-orcamento" src="https://image.flaticon.com/icons/svg/453/453564.svg" alt="Ferramenta representando os pedidos">
+    <p>Deseja realmente solicitar o pedido?</p>
+
+    <button mat-raised-button color="primary" (click)="criarOrcamento()" style="display: flex;justify-content: center;">
+        <span *ngIf="!loading">Sim!</span>
+        <mat-progress-spinner color="accent" mode="indeterminate" diameter="20" style="margin: 5px;" *ngIf="loading"></mat-progress-spinner>
+    </button>
+    <button mat-button (click)="fechar()">Agora não</button>
+</div>

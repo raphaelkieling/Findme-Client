@@ -1,0 +1,13 @@
+.container-orcamento{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-orcamento{
+    width: 140px;
+    margin-bottom: 15px;
+}

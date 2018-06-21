@@ -13,6 +13,10 @@ import { Subscription } from 'rxjs/Subscription';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PerfilComponent } from '../../../components/perfil/perfil.component';
 import { ChatService } from '../../../services/chat.service';
+import { Usuario } from '../../../domain/usuario';
+import { Chat } from '../../../domain/chat';
+import { OrcamentoPedidoService } from '../../../services/core/orcamentoPedido.service';
+import { OrcamentoPedido } from '../../../domain/orcamentoPedido';
 
 @Component({
   selector: 'app-principal',
@@ -26,7 +30,10 @@ export class PrincipalComponent implements OnInit {
   loadingPedidos = false;
 
   pedidos: Pedido[] = [];
+
   pedidosFinalizados: Pedido[] = [];
+
+  orcamentos: OrcamentoPedido[] = [];
 
   tipoPessoa: TipoUsuario | string;
 
@@ -44,22 +51,25 @@ export class PrincipalComponent implements OnInit {
 
   menuAberto: Boolean = true;
 
+  imageDefault = 'assets/images/avatar.jpg';
+
   constructor(
     private dialog: MatDialog,
     private pedidoService: PedidoService,
     private authService: AuthService,
-    private markerManager: MarkerManager,
-    private gmapsAPI: GoogleMapsAPIWrapper,
     private snack: MatSnackBar,
     private usuarioService: UsuarioService,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private orcamentoService: OrcamentoPedidoService
   ) { }
 
   async ngOnInit() {
     this.defineEstiloMapa();
     if (!this.authService.tokenDecoded.usuario.pessoa) return;
 
-    this.centralizaMapa();
+    await this.buscaUsuario();
+    this.carregarPedidos();
+    this.carregarPedidoPendentesOrcamento();
 
     this.pedidoSocketSubs = this.pedidoService.pedidoSocket.subscribe((pedido: PedidoSocket) => {
       this.snack.open(`Opa opa! Pedido de categoria ${pedido.categoria.nome} acabou de sair do forno!`, 'UHUL!', {
@@ -69,22 +79,28 @@ export class PrincipalComponent implements OnInit {
     })
   }
 
-  private centralizaMapa() {
-    this.usuarioService
-      .me()
-      .subscribe(({ data, loading }) => {
-        if (!data || !data['me'].pessoa) {
-          return;
-        }
-        this.tipoPessoa = data['me'].pessoa.tipo;
-        this.centerLatitude = data['me'].pessoa.enderecos[0].latitude;
-        this.centerLongitude = data['me'].pessoa.enderecos[0].longitude;
-        this.carregarPedidos();
-      });
+  private buscaUsuario() {
+    return new Promise((resolve, reject) => {
+      this.usuarioService
+        .me()
+        .subscribe(({ data, loading }) => {
+          if (!data || !data['me'].pessoa) {
+            return;
+          }
+          this.tipoPessoa = data['me'].pessoa.tipo;
+          if (data['me'].pessoa.enderecos.length > 0) {
+            this.centerLatitude = data['me'].pessoa.enderecos[0].latitude;
+            this.centerLongitude = data['me'].pessoa.enderecos[0].longitude;
+          }
+
+          resolve()
+        });
+    })
   }
 
-  abrirChat(usuario) {
-    this.chatService.addChat(usuario);
+  abrirChat(usuario: Usuario, pedido: Pedido) {
+    let chat = new Chat(usuario, pedido)
+    this.chatService.addChat(chat);
   }
 
   abrirModalPedido(pedido) {
@@ -95,6 +111,14 @@ export class PrincipalComponent implements OnInit {
         pedido
       }
     });
+  }
+
+  carregarPedidoPendentesOrcamento() {
+    this.orcamentoService
+      .orcamentosPendentes()
+      .subscribe(({ data, loading }) => {
+        this.orcamentos = data['orcamentosPendentes']
+      })
   }
 
   markerPedidoClicado(pedido: Pedido, infoWindow: InfoWindow) {
@@ -139,9 +163,9 @@ export class PrincipalComponent implements OnInit {
     }
   }
 
-  openPerfil(pedido: Pedido) {
+  openPerfil(cliente: Usuario) {
     this.dialog.open(PerfilComponent, {
-      data: pedido.cliente,
+      data: cliente,
       width: '600px',
       height: '500px'
     });

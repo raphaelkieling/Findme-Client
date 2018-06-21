@@ -4,6 +4,7 @@ import { Usuario } from './../../../domain/usuario';
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../services/core/usuario.service';
 import { PerfilComponent } from '../../../components/perfil/perfil.component';
+import { Chat } from '../../../domain/chat';
 
 @Component({
   selector: 'app-usuarios-publicos',
@@ -38,7 +39,7 @@ export class UsuariosPublicosComponent implements OnInit {
   filter(value: string) {
     this.usuariosFiltrados = this.usuarios.filter((usuario: Usuario) => {
       if (!usuario.pessoa) return false;
-      
+
       return usuario.pessoa.nome.toLowerCase().includes(value.toLowerCase())
     });
   }
@@ -52,7 +53,7 @@ export class UsuariosPublicosComponent implements OnInit {
   }
 
   abrirChat(usuario) {
-    this.chatService.addChat(usuario);
+    this.chatService.addChat(new Chat(usuario, null));
   }
 
 }

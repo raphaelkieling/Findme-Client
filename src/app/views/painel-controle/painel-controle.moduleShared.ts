@@ -40,7 +40,6 @@ import { PedidoComponent } from './pedido/pedido.component';
 import { MzDatepickerModule } from 'ng2-materialize'
 import { PermissionModule } from '../../directives/permission.module';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarCustomModule } from '../../components/navbar-admin/navbar-custom.module';
 import { FlexModule } from '@angular/flex-layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -52,6 +51,7 @@ import { MensagensComponent } from './mensagens/mensagens.component';
 import { LoaderCustomModule } from '../../components/loader-custom/loader-custom.module';
 import { UsuariosPublicosComponent } from './usuarios-publicos/usuarios-publicos.component';
 import { MatSelectModule, MatListModule } from '@angular/material';
+import { OrcamentoPedidoService } from '../../services/core/orcamentoPedido.service';
 
 @NgModule({
   imports: [
@@ -110,6 +110,6 @@ import { MatSelectModule, MatListModule } from '@angular/material';
     PedidoRegisterComponent,
     PerfilComponent
   ],
-  providers: [CategoriaService, ProfissionalService, PedidoService, ClienteService, ChatService]
+  providers: [CategoriaService, ProfissionalService, PedidoService, ClienteService, ChatService, OrcamentoPedidoService]
 })
 export class PainelControleModuleShared { }
