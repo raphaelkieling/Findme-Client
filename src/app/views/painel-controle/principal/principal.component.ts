@@ -192,6 +192,18 @@ export class PrincipalComponent implements OnInit {
       .subscribe(console.log)
   }
 
+  aceitarOrcamento(pedidoId) {
+    this.orcamentoService
+      .aceitarOrcamento(pedidoId)
+      .subscribe(console.log)
+  }
+
+  cancelaOrcamento(pedidoId) {
+    this.orcamentoService
+      .cancelarOrcamento(pedidoId)
+      .subscribe(console.log)
+  }
+
   ngOnDestroy() {
     if (this.pedidoSocketSubs) this.pedidoSocketSubs.unsubscribe();
   }

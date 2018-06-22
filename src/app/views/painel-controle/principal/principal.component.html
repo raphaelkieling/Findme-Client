@@ -6,89 +6,74 @@
             </mat-card>
 
             <mat-card>
-                <div class="card-orcamento-container">
-                    <div class="card-orcamento" *ngFor="let orcamento of orcamentos">
-                        <div class="avatar-profissional" (click)="openPerfil(orcamento.cliente)">
-                            <img [src]="orcamento?.profissional?.pessoa?.avatar?.base64  || imageDefault">
-                            <span>{{orcamento?.profissional?.pessoa?.nome}}</span>
+                <mat-tab-group dynamicHeight>
+                    <mat-tab label="Orçamento">
+                        <div class="body-tab">
+                            <div class="card-orcamento" *ngFor="let orcamento of orcamentos">
+                                <div class="avatar-profissional" (click)="openPerfil(orcamento.cliente)">
+                                    <img [src]="orcamento?.profissional?.pessoa?.avatar?.base64  || imageDefault">
+                                    <span>{{orcamento?.profissional?.pessoa?.nome}}</span>
+                                </div>
+                                <p class="nome-pedido">{{orcamento?.pedido?.titulo}}</p>
+                                <div>
+                                    <button mat-button color="accent" (click)="abrirChat(orcamento.cliente,orcamento.pedido)">
+                                        <mat-icon>chat</mat-icon>
+                                    </button>
+                                    <button mat-button color="accent" (click)="aceitarOrcamento(orcamento.pedido.id)">
+                                        <mat-icon>check</mat-icon>
+                                    </button>
+                                    <button mat-button color="accent" (click)="cancelaOrcamento(orcamento.pedido.id)">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <p class="nome-pedido">{{orcamento?.pedido?.titulo}}</p>
-                        <button mat-raised-button color="primary">Aceitar</button>
-                        <button mat-button color="warn">Cancelar</button>
-                    </div>
-                </div>
+                    </mat-tab>
+                    <mat-tab label="Pendentes">
+                        <div class="body-tab">
+                            <div class="card-wrapper" *ngFor="let pedido of pedidos" [class.open]="isCardAberto(pedido)">
+                                <div class="card-header" (click)="selecionarCard(pedido)">
+                                    <div class="card-header__container_image">
+                                        <img [src]="pedido?.categoria?.foto || imageDefault" alt="" class="card-header__avatar">
+                                    </div>
+                                    <div class="card-header__info">
+                                        <span class="card-header__title">{{pedido.titulo}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-container">
+                                    <p>{{pedido.observacao}}</p>
+
+                                    <div style="display: flex;justify-content: flex-end;">
+                                        <button mat-button color="accent" (click)="abrirModalPedido(pedido)">
+                                            <mat-icon>edit</mat-icon> Editar
+                                        </button>
+                                        <button mat-button color="accent" (click)="cancelarPedido(pedido.id)">
+                                            <mat-icon>cancel</mat-icon> Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Finalizados">
+                        <div class="body-tab">
+                            <div class="card-wrapper" *ngFor="let pedido of pedidosFinalizados" [class.open]="isCardAberto(pedido)">
+                                <div class="card-header" (click)="selecionarCard(pedido)">
+                                    <div class="card-header__container_image">
+                                        <img [src]="pedido?.categoria?.foto || imageDefault" alt="" class="card-header__avatar">
+                                    </div>
+                                    <div class="card-header__info">
+                                        <span class="card-header__title">{{pedido.titulo}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-container">
+                                    <p>{{pedido.observacao}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
             </mat-card>
-
-            <div style="display: flex;justify-content: space-between;">
-                <mat-card style="    
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        width: 100%;
-                        margin-right: 20px;
-                        flex: 6;">
-                    <div style="
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;">
-                        <span class="title_card">
-                            <i class="material-icons">
-                                dns
-                            </i>
-                            Pendentes
-                        </span>
-                    </div>
-                    <div class="card-wrapper" *ngFor="let pedido of pedidos" [class.open]="isCardAberto(pedido)">
-                        <div class="card-header" (click)="selecionarCard(pedido)">
-                            <div class="card-header__container_image">
-                                <img [src]="pedido?.categoria?.foto || imageDefault" alt="" class="card-header__avatar">
-                            </div>
-                            <div class="card-header__info">
-                                <span class="card-header__title">{{pedido.titulo}}</span>
-                            </div>
-                        </div>
-                        <div class="card-container">
-                            <p>{{pedido.observacao}}</p>
-
-                            <div style="display: flex;justify-content: flex-end;">
-                                <button mat-button color="accent" (click)="abrirModalPedido(pedido)">
-                                    <mat-icon>edit</mat-icon> Editar
-                                </button>
-                                <button mat-button color="accent" (click)="cancelarPedido(pedido.id)">
-                                    <mat-icon>cancel</mat-icon> Cancelar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </mat-card>
-
-                <mat-card style=" 
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    width: 100%;
-                    flex: 4;">
-                    <span class="title_card">
-                        <i class="material-icons">
-                            done
-                        </i>
-                        Finalizados
-                    </span>
-                    <div class="card-wrapper" *ngFor="let pedido of pedidosFinalizados" [class.open]="isCardAberto(pedido)">
-                        <div class="card-header" (click)="selecionarCard(pedido)">
-                            <div class="card-header__container_image">
-                                <img [src]="pedido?.categoria?.foto || imageDefault" alt="" class="card-header__avatar">
-                            </div>
-                            <div class="card-header__info">
-                                <span class="card-header__title">{{pedido.titulo}}</span>
-                            </div>
-                        </div>
-                        <div class="card-container">
-                            <p>{{pedido.observacao}}</p>
-                        </div>
-                    </div>
-                </mat-card>
-            </div>
         </div>
     </div>
 

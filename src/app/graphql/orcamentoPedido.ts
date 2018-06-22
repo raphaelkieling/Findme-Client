@@ -35,3 +35,16 @@ export const CRIAR_ORCAMENTO = gql`
         }
     }
 `
+
+export const ACEITAR_ORCAMENTO = gql`
+    mutation aceitarOrcamentoPedido($idPedido:ID!){
+        aceitarOrcamentoPedido(idPedido:$idPedido)
+    }
+`
+
+export const CANCELAR_ORCAMENTO = gql`
+    mutation cancelarOrcamentoPedido($idPedido:ID!){
+        cancelarOrcamentoPedido(idPedido:$idPedido)
+    }
+`
+
